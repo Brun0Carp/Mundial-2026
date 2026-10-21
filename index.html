@@ -183,6 +183,15 @@ body.deskH #app{max-width:min(100%,177.8vh)}
 #app.land #titlewrap{display:none}
 #app.land #s-title .menu{flex:none}
 #app.land #penpad{position:absolute;left:0;right:0;bottom:0;background:transparent;z-index:4}
+#s-name,#s-name *{box-sizing:border-box}
+#s-name{align-items:stretch;justify-content:center;gap:14px;max-width:420px;margin-inline:auto;width:100%}
+.nmtitle{font-size:clamp(16px,5vw,22px);color:var(--gold);text-shadow:3px 3px 0 var(--line);text-align:center}
+input.namein{-webkit-user-select:text;user-select:text;font-family:var(--px);font-size:16px;padding:14px 12px;border:0;background:var(--bg);color:var(--ink);box-shadow:0 0 0 3px var(--panel2);border-radius:0;width:100%;min-width:0}
+input.namein:focus{outline:3px solid var(--cyan);outline-offset:2px}
+.nametag{border:0;background:none;color:var(--ink);font-family:var(--mono);font-size:20px;cursor:pointer;padding:4px 8px}
+.nametag .edit{color:var(--dim);font-size:16px}
+.nametag:focus-visible,.kb .nametag:focus{outline:3px solid var(--cyan)}
+.slot .who{color:var(--gold)}
 #stam .bar i{display:block;height:100%;width:100%;background:var(--gold)}
 #stam.run .bar i{background:var(--cyan)}
 #stam.tired .bar i{background:var(--red)}
@@ -221,6 +230,7 @@ body.deskH #app{max-width:min(100%,177.8vh)}
     <button class="sndbtn" id="b-snd" aria-pressed="true" aria-label="Sonido activado"></button>
     <h1 class="logo"><span class="l1">MUNDIAL</span><span class="l2">26</span></h1>
     <p class="px dim" style="font-size:9px;line-height:1.8">NORTEAMÉRICA · 48 SELECCIONES · 3D</p>
+    <button class="nametag" id="nametag"></button>
     <div id="titlewrap"></div>
     <div class="menu">
       <button class="btn" id="b-play">▶ Jugar</button>
@@ -337,11 +347,23 @@ body.deskH #app{max-width:min(100%,177.8vh)}
     <button class="btn alt" id="off-back">↻ Volver a jugar</button>
   </section>
 
+  <!-- NOMBRE -->
+  <section class="screen" id="s-name" hidden>
+    <h2 class="nmtitle">¿CÓMO TE LLAMAS?</h2>
+    <p class="dim">Tu rival lo verá en las partidas multijugador.</p>
+    <label class="dim" for="nm-in" style="font-size:18px">Nombre de jugador (2 a 14 letras)</label>
+    <input id="nm-in" class="namein" maxlength="14" autocomplete="nickname" spellcheck="false" placeholder="Tu nombre">
+    <p class="errline" id="nm-err" role="alert"></p>
+    <button class="btn" id="nm-ok">Listo</button>
+    <button class="btn ghost" id="nm-back">◀ Volver</button>
+  </section>
+
   <!-- MULTIJUGADOR -->
   <section class="screen" id="s-mp" hidden></section>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
 <script>
 (()=>{
 'use strict';
@@ -527,7 +549,7 @@ function moveFocus(root,dir){
 }
 addEventListener('pointerdown',()=>{if(kbNav){kbNav=false;document.body.classList.remove('kb')}},true);
 addEventListener('keydown',e=>{
-  if(e.target&&e.target.tagName==='INPUT'){if(e.key==='Enter'){e.preventDefault();const j=$('#mp-join');if(j)j.click()}return}
+  if(e.target&&e.target.tagName==='INPUT'){if(e.key==='Enter'){e.preventDefault();const j=e.target.id==='nm-in'?$('#nm-ok'):$('#mp-join');if(j)j.click()}return}
   const root=navRoot();if(!root)return;
   const dirs={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right'};
   if(dirs[e.key]){e.preventDefault();e.stopImmediatePropagation();if(!kbNav){kbNav=true;document.body.classList.add('kb')}ac();moveFocus(root,dirs[e.key]);return}
@@ -564,7 +586,10 @@ function refreshMenu(){
   const sv=store.get('m26_tour');$('#b-cont').hidden=!(sv&&sv.stage!=='done');
 }
 $('#b-play').onclick=()=>{ac();SFX.sel();openSelect('tour')};
-$('#b-mp').onclick=()=>{ac();SFX.sel();if(MPS.nr)renderLobby();else openSelect('mp')};
+$('#b-mp').onclick=()=>{ac();SFX.sel();if(MPS.nr)renderLobby();else if(!NAME)openName(()=>openSelect('mp'));else openSelect('mp')};
+$('#nametag').onclick=()=>{ac();SFX.tick();openName()};
+$('#nm-ok').onclick=()=>{ac();saveName()};
+$('#nm-back').onclick=()=>{SFX.tick();nameNext=null;show('s-title');refreshMenu()};
 $('#b-cont').onclick=()=>{ac();SFX.sel();TT=store.get('m26_tour');if(TT)renderHub()};
 $('#b-dur').onclick=()=>{DUR=DUR%4+1;store.set('m26_dur',DUR);SFX.tick();refreshMenu()};
 function spkSvg(on){const px=a=>a.map(([x,y,w,h])=>`<rect x="${x}" y="${y}" width="${w}" height="${h}"/>`).join('');
@@ -983,6 +1008,79 @@ function ceremony(cv,champ,runner,third,quiet){
 
 
 /* ================= MULTIJUGADOR (SALAS) ================= */
+/* ---- transporte P2P con PeerJS (fuera de claude.ai, sin cuentas) ---- */
+const P2P_PREFIX='mundial26-sala-';
+const PeerCls=()=>window.Peer||(window.peerjs&&(window.peerjs.Peer||window.peerjs.default));
+const p2pAvailable=()=>typeof PeerCls()==='function';
+function peerRoom(code,role){
+  return new Promise((resolve,reject)=>{
+    let done=false,peer=null,conn=null,other=null,pend=null,tmr=null,emitT=null;
+    const me={},hs=[];let chg={joined:[],left:[],updated:[]};
+    const fail=c=>{if(done)return;done=true;try{peer&&peer.destroy()}catch(e){}reject({code:c})};
+    const selfP=()=>({peer:'yo',by:null,isMe:true,sameTab:true,kind:'viewer',guest:false,presence:Object.freeze({...me}),updatedAt:Date.now()});
+    const list=()=>other?[selfP(),other]:[selfP()];
+    const emitCh=(k,p)=>{chg[k].push(p);if(!emitT)emitT=setTimeout(()=>{emitT=null;const c={peers:list(),...chg};chg={joined:[],left:[],updated:[]};hs.slice().forEach(h=>{try{h(c)}catch(e){}})},16)};
+    const flush=()=>{tmr=null;if(pend&&conn&&conn.open){try{conn.send({p:pend})}catch(e){}}pend=null};
+    const attach=c=>{
+      conn=c;
+      c.on('open',()=>{try{c.send({p:{...me},full:1})}catch(e){}if(role==='guest'&&!done){done=true;resolve(api)}});
+      c.on('data',d=>{
+        if(conn!==c||!d||typeof d!=='object'||!d.p||typeof d.p!=='object')return;
+        const base=d.full||!other?{}:{...other.presence};
+        for(const k of Object.keys(d.p)){if(k==='__proto__'||k==='constructor')continue;const v=d.p[k];if(v===null)delete base[k];else base[k]=v}
+        const fresh=!other;other={peer:'rival',by:null,isMe:false,sameTab:false,kind:'viewer',guest:false,presence:Object.freeze(base),updatedAt:Date.now()};
+        emitCh(fresh?'joined':'updated',other);
+      });
+      const gone=()=>{if(conn!==c)return;conn=null;if(other){const o=other;other=null;emitCh('left',o)}};
+      c.on('close',gone);c.on('error',gone);
+    };
+    try{
+      const PC=PeerCls();peer=role==='host'?new PC(P2P_PREFIX+code.toLowerCase(),{debug:0}):new PC({debug:0});
+    }catch(e){fail('unavailable');return}
+    peer.on('open',()=>{
+      if(role==='host'){done=true;resolve(api)}
+      else attach(peer.connect(P2P_PREFIX+code.toLowerCase(),{reliable:true,serialization:'json'}));
+    });
+    peer.on('connection',c=>{
+      if(conn&&conn.open){c.on('open',()=>{try{c.send({full:1,p:{r:'llena'}})}catch(e){}setTimeout(()=>{try{c.close()}catch(e){}},400)});return}
+      attach(c);
+    });
+    peer.on('error',e=>{const t=e&&e.type;if(!done)fail(t==='unavailable-id'?'id_taken':t==='peer-unavailable'?'no_room':'unavailable')});
+    setTimeout(()=>fail('timeout'),15000);
+    const api={
+      presence(patch){
+        for(const k of Object.keys(patch)){const v=patch[k];if(v===null||v===undefined)delete me[k];else me[k]=v}
+        const clean={};for(const k of Object.keys(patch))clean[k]=patch[k]===undefined?null:patch[k];
+        pend=Object.assign(pend||{},clean);if(!tmr)tmr=setTimeout(flush,30);return Promise.resolve();
+      },
+      peers:list,
+      onPeers(h){hs.push(h);setTimeout(()=>{try{h({peers:list(),joined:list(),left:[],updated:[]})}catch(e){}},0);return()=>{const i=hs.indexOf(h);if(i>=0)hs.splice(i,1)}},
+      leave(){hs.length=0;try{if(conn)conn.close()}catch(e){}try{peer.destroy()}catch(e){}conn=null;return Promise.resolve()},
+      connected:()=>!!(conn&&conn.open)
+    };
+  });
+}
+
+/* ---- nombre del jugador ---- */
+let NAME=String(store.get('m26_name')||'').slice(0,14);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const BADCH=new RegExp('['+[[0,31],[127,159],[8203,8207],[8232,8238],[8288,8303],[65279,65279]].map(([a,b])=>String.fromCharCode(a)+'-'+String.fromCharCode(b)).join('')+']','g');
+const cleanName=s=>String(s||'').replace(BADCH,'').replace(/\s+/g,' ').trim().slice(0,14).trim();
+const peerName=o=>cleanName(o&&o.presence&&o.presence.n)||'Rival';
+let nameNext=null;
+function openName(next){
+  nameNext=next||null;show('s-name');const i=$('#nm-in');i.value=NAME;$('#nm-err').textContent='';$('#nm-back').hidden=!NAME;
+  requestAnimationFrame(()=>{try{i.focus({preventScroll:true})}catch(e){}});
+}
+function saveName(){
+  const v=cleanName($('#nm-in').value);
+  if(v.length<2){$('#nm-err').textContent='Escribe al menos 2 letras.';SFX.bad();return}
+  NAME=v;store.set('m26_name',NAME);SFX.sel();updNameTag();
+  if(MPS.nr)mpPresence({n:NAME});
+  const n=nameNext;nameNext=null;if(n)n();else{show('s-title');refreshMenu()}
+}
+function updNameTag(){const t=$('#nametag');if(t)t.innerHTML=NAME?`Jugador: <span class="gold">${esc(NAME)}</span> <span class="edit">✎ cambiar</span>`:'Elegir nombre'}
+
 let ROOM=null,roomP=null;
 const MPS={nr:null,code:null,role:null,unsub:[],lastGo:0,seenHost:false,err:'',busy:false};
 function getRoom(){if(!roomP)roomP=(window.claude&&typeof window.claude.use==='function'?window.claude.use('room'):Promise.resolve(null)).catch(()=>null).then(r=>(ROOM=r));return roomP}
@@ -996,31 +1094,42 @@ function mpPresence(patch){if(MPS.nr)MPS.nr.presence(patch).catch(()=>{})}
 
 /* ---- sala ---- */
 function openMp(){selMode='mp';confF='ALL';openSelect()}
+const NET_ERR={no_room:null,id_taken:'No se pudo reservar un código. Prueba de nuevo.',timeout:'No se pudo conectar con el servidor de salas. Revisa tu conexión a internet e intenta de nuevo.',unavailable:'No se pudo conectar con el servidor de salas. Revisa tu conexión a internet e intenta de nuevo.'};
 async function mpCreate(){
-  if(MPS.busy)return;MPS.busy=true;MPS.err='';renderLobby();
+  if(MPS.busy)return;MPS.busy=true;MPS.role='host';MPS.err='';renderLobby();
   const r=await getRoom();
-  if(!r){MPS.busy=false;MPS.err='El multijugador solo funciona con el juego abierto en claude.ai con tu sesión iniciada.';renderLobby();return}
-  await mpEnter(genCode(),'host');
+  if(r){await mpEnterRoom(genCode(),'host');return}
+  if(!p2pAvailable()){MPS.busy=false;MPS.err='No se pudo cargar el multijugador. Revisa tu conexión a internet y recarga la página.';renderLobby();return}
+  for(let i=0;i<3;i++){const code=genCode();
+    try{const nr=await peerRoom(code,'host');await mpSetup(nr,code,'host');return}
+    catch(e){if(e.code!=='id_taken'){MPS.busy=false;MPS.err=NET_ERR[e.code]||NET_ERR.unavailable;renderLobby();return}}}
+  MPS.busy=false;MPS.err=NET_ERR.id_taken;renderLobby();
 }
 async function mpJoin(){
   if(MPS.busy)return;const inp=$('#mp-code');const code=(inp?inp.value:'').toUpperCase().replace(/[^A-Z0-9]/g,'');
   if(code.length!==4){MPS.err='El código tiene 4 caracteres, letras o números.';renderLobby();return}
-  MPS.busy=true;MPS.err='';renderLobby();
+  MPS.busy=true;MPS.role='guest';MPS.err='';renderLobby();
+  const noRoom='No hay ninguna sala abierta con el código '+code+'. Revisa que esté bien escrito.';
   const r=await getRoom();
-  if(!r){MPS.busy=false;MPS.err='El multijugador solo funciona con el juego abierto en claude.ai con tu sesión iniciada.';renderLobby();return}
-  await mpEnter(code,'guest');
-  if(MPS.nr)setTimeout(()=>{if(MPS.nr&&MPS.role==='guest'&&!MPS.seenHost&&MPS.code===code){mpLeave();MPS.err='No hay ninguna sala abierta con el código '+code+'. Revisa que esté bien escrito.';renderLobby()}},4500);
+  if(r){await mpEnterRoom(code,'guest')}
+  else{
+    if(!p2pAvailable()){MPS.busy=false;MPS.err='No se pudo cargar el multijugador. Revisa tu conexión a internet y recarga la página.';renderLobby();return}
+    try{const nr=await peerRoom(code,'guest');await mpSetup(nr,code,'guest')}
+    catch(e){MPS.busy=false;MPS.role=null;MPS.err=e.code==='no_room'?noRoom:(NET_ERR[e.code]||NET_ERR.unavailable);renderLobby();return}
+  }
+  if(MPS.nr)setTimeout(()=>{if(MPS.nr&&MPS.role==='guest'&&!MPS.seenHost&&MPS.code===code){const o=MPS.nr.peers().find(p=>!p.sameTab);const full=o&&o.presence&&o.presence.r==='llena';mpLeave();MPS.err=full?'Esa sala ya tiene dos jugadores.':noRoom;renderLobby()}},4500);
 }
-async function mpEnter(code,role){
-  try{
-    const nr=await ROOM.join('m26-'+code.toLowerCase());
-    Object.assign(MPS,{nr,code,role,seenHost:false,lastGo:0,busy:false,err:''});
-    await nr.presence({r:role,t:picked,st:null,go:null,in:null,lv:null}).catch(()=>{});
-    MPS.unsub.push(nr.onPeers(onMpPeers,()=>{mpLeave();MPS.err='Se perdió la conexión con la sala.';if(mode!=='match')renderLobby()}));
-  }catch(e){MPS.busy=false;MPS.err=e&&e.code==='limit_reached'?'Hay demasiadas salas abiertas ahora. Prueba de nuevo en un momento.':'No se pudo entrar a la sala. Prueba de nuevo.';}
+async function mpSetup(nr,code,role){
+  Object.assign(MPS,{nr,code,role,seenHost:false,lastGo:0,busy:false,err:''});
+  await nr.presence({r:role,t:picked,n:NAME,st:null,go:null,in:null,lv:null}).catch(()=>{});
+  MPS.unsub.push(nr.onPeers(onMpPeers,()=>{mpLeave();MPS.err='Se perdió la conexión con la sala.';if(mode!=='match')renderLobby()}));
   renderLobby();
 }
-function mpLeave(){MPS.unsub.forEach(f=>{try{f()}catch(e){}});MPS.unsub=[];if(MPS.nr){MPS.nr.leave().catch(()=>{})}Object.assign(MPS,{nr:null,code:null,role:null,seenHost:false,busy:false})}
+async function mpEnterRoom(code,role){
+  try{const nr=await ROOM.join('m26-'+code.toLowerCase());await mpSetup(nr,code,role)}
+  catch(e){MPS.busy=false;MPS.role=null;MPS.err=e&&e.code==='limit_reached'?'Hay demasiadas salas abiertas ahora. Prueba de nuevo en un momento.':'No se pudo entrar a la sala. Prueba de nuevo.';renderLobby()}
+}
+function mpLeave(){MPS.unsub.forEach(f=>{try{f()}catch(e){}});MPS.unsub=[];if(MPS.nr){try{MPS.nr.leave().catch(()=>{})}catch(e){}}Object.assign(MPS,{nr:null,code:null,role:null,seenHost:false,busy:false})}
 function onMpPeers(ch){
   const o=findOther();
   if(MPS.role==='guest'&&o){
@@ -1050,16 +1159,16 @@ function renderLobby(){
     <div class="row"><input id="mp-code" class="codein" maxlength="4" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="A1B2" inputmode="text"><button class="btn alt" id="mp-join"${MPS.busy?' disabled':''}>Unirse</button></div></div>`;
   }else{
     const o=findOther();const host=MPS.role==='host';
-    const slot=(code,label,me)=>code&&TEAMS[code]?`<div class="slot">${FL(code,24,16)}<span style="min-width:0"><span class="dim" style="font-size:16px;display:block">${label}${me?' · tú':''}</span><span class="nm">${TEAMS[code].name}</span></span></div>`:`<div class="slot"><span class="dim blink">Esperando rival…</span></div>`;
+    const slot=(code,label,me,nm)=>code&&TEAMS[code]?`<div class="slot">${FL(code,24,16)}<span style="min-width:0"><span class="dim" style="font-size:16px;display:block">${label} · <span class="who">${esc(nm)}</span>${me?' (tú)':''}</span><span class="nm">${TEAMS[code].name}</span></span></div>`:`<div class="slot"><span class="dim blink">Esperando rival…</span></div>`;
     const hostCode=host?picked:o&&o.presence.t,guestCode=host?o&&o.presence.t:picked;
     h+=`<div class="box stack" style="align-items:center;text-align:center"><p class="px dim" style="font-size:8px">CÓDIGO DE LA SALA</p><p class="roomcode">${MPS.code}</p><p class="dim">${host?'Pásale este código a tu rival.':'Estás en la sala.'}</p></div>
-    <div class="box stack">${slot(hostCode,'Local',host)}${slot(guestCode,'Visitante',!host)}</div>`;
+    <div class="box stack">${slot(hostCode,'Local',host,host?NAME:peerName(o))}${slot(guestCode,'Visitante',!host,host?peerName(o):NAME)}</div>`;
     if(host)h+=`<button class="btn" id="mp-start"${o?'':' disabled'}>▶ Empezar partido · ${DUR} min</button>`;
     else h+=`<p class="dim" style="text-align:center">${o?'Esperando a que el anfitrión empiece el partido…':'Buscando la sala…'}</p>`;
     h+=`<button class="btn alt" id="mp-leave">Salir de la sala</button>`;
   }
   if(MPS.err)h+=`<p class="errline">${MPS.err}</p>`;
-  h+=`<p class="dim" style="font-size:17px">Los dos jugadores necesitan tener este juego abierto en claude.ai con su cuenta. Sirve en dos dispositivos de la misma casa o en dos pestañas.</p>`;
+  h+=ROOM?`<p class="dim" style="font-size:17px">En claude.ai los dos jugadores necesitan su cuenta. Para jugar sin cuenta, usen la página del juego en GitHub.</p>`:`<p class="dim" style="font-size:17px">No hace falta cuenta: cada uno abre esta página en su dispositivo, con internet. Uno crea la sala y el otro escribe el código.</p>`;
   const focused=document.activeElement&&document.activeElement.id==='mp-code',val=$('#mp-code')?$('#mp-code').value:'';
   el.innerHTML=h;hydrate(el);
   const ci=$('#mp-code');if(ci){ci.value=val;if(focused)ci.focus();ci.oninput=()=>{const p=ci.selectionStart;ci.value=ci.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,4);try{ci.setSelectionRange(p,p)}catch(e){}}}
@@ -1082,13 +1191,15 @@ function hostSend(){
 }
 function remoteInput(){
   const mp=G.mp,o=findOther(),v=o&&o.presence.in;
+  if(o&&o.updatedAt)mp.seenAt=Math.max(mp.seenAt||0,o.updatedAt);if(!mp.seenAt)mp.seenAt=Date.now();
+  if(Date.now()-mp.seenAt>9000&&!G.over){mpAbort('SIN CONEXIÓN CON EL RIVAL');return{jx:0,jy:0,a:false,b:false,run:false}}
   if(!Array.isArray(v)){mp.lastSeen=mp.lastSeen||performance.now();return{jx:0,jy:0,a:false,b:false,run:false}}
   const a=+v[2]||0,b=+v[3]||0;const I={jx:clamp(+v[0]||0,-1,1),jy:clamp(+v[1]||0,-1,1),a:a!==mp.la,b:b!==mp.lb,run:!!v[4]};mp.la=a;mp.lb=b;return I;
 }
 function guestStep(){
   const g=G,mp=g.mp;
   const I=readLocalInput();INPUT.a=INPUT.b=false;if(I.a)mp.ac++;if(I.b)mp.bc++;
-  mpPresence({in:[r2(I.jx),r2(I.jy),mp.ac,mp.bc,I.run?1:0]});
+  mpPresence({in:[r2(I.jx),r2(I.jy),mp.ac,mp.bc,I.run?1:0],hb:Math.floor(performance.now()/1000)});
   if(g.msgT>0){g.msgT--;if(g.msgT===0)$('#msg').textContent=''}
   g.players.forEach(p=>{if(p.kickT>0)p.kickT--});
   const o=findOther(),S=o&&o.presence.st;
@@ -1123,7 +1234,7 @@ function mpResult(){
   <div class="box stack" style="align-items:center">
     <div class="row" style="justify-content:center;gap:18px">${FL(g.codes[0],36,24)}<span class="big">${g.score[0]}-${g.score[1]}</span>${FL(g.codes[1],36,24)}</div>
     <p class="verdict" style="color:${col}">${v}</p>
-    <p class="dim">${TEAMS[g.codes[0]].name} (local) vs ${TEAMS[g.codes[1]].name} (visitante)</p>
+    <p class="dim"><span class="gold">${esc((g.names||[])[0]||'Local')}</span> · ${TEAMS[g.codes[0]].name} vs <span class="gold">${esc((g.names||[])[1]||'Visitante')}</span> · ${TEAMS[g.codes[1]].name}</p>
   </div>
   <div class="sticky-foot"><button class="btn" id="r-next">${MPS.nr?'Volver a la sala':'Menú'}</button></div>`;
   hydrate(el);if(a>c)SFX.goal();else if(a<c)SFX.bad();
@@ -1419,7 +1530,9 @@ function startMatch(ua,ob,ko,mp){
   G.first=mp?mp.go.f:(rnd()<.5?0:1);
   kickoff(G.first);
   G.freeze=80;showMsg('¡A JUGAR!',70,true);sfx('whistle');if(mp&&mp.role==='guest')mpPresence({in:[0,0,0,0,0]});
-  $('#sb-a').innerHTML=FL(ua,24,16)+' '+ua;$('#sb-b').innerHTML=ob+' '+FL(ob,24,16);hydrate($('.scorebar'));
+  if(mp){const o=findOther(),nh=mp.role==='host'?NAME:peerName(o),ng=mp.role==='host'?peerName(o):NAME;G.names=[nh,ng];$('#sb-a').innerHTML=FL(ua,24,16)+' '+esc(nh.slice(0,9));$('#sb-b').innerHTML=esc(ng.slice(0,9))+' '+FL(ob,24,16)}
+  else{$('#sb-a').innerHTML=FL(ua,24,16)+' '+ua;$('#sb-b').innerHTML=ob+' '+FL(ob,24,16)}
+  hydrate($('.scorebar'));
   updateScore();$('#sb-min').textContent="0'";
   show('s-match');mode='match';paused=false;$('#pause').hidden=true;
   $('#pentally').hidden=true;$('#penprompt').hidden=true;
@@ -1954,7 +2067,7 @@ function penRender(){
 
 /* ================= INICIO ================= */
 applyOri();
-refreshMenu();show('s-title');
+updNameTag();refreshMenu();show('s-title');if(!NAME)openName();
 })();
 </script>
 
