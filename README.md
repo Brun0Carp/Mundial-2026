@@ -19,3 +19,20 @@ Las salas con código de 4 caracteres funcionan solo cuando el juego se abre com
 ## Publicarlo con GitHub Pages
 
 En el repositorio: **Settings → Pages → Build and deployment → Deploy from a branch**, rama `main`, carpeta `/ (root)`. El juego queda en `https://<usuario>.github.io/mundial-26-3d/`. En cuentas gratis, GitHub Pages requiere que el repositorio sea público.
+
+---
+
+# Crónicas de Valdoria (RPG medieval)
+
+Un pequeño juego de rol en pixel art ambientado en la Edad Media. Está entero en `rpg-medieval.html`: los gráficos, los mapas y la música chiptune se generan en el propio archivo, sin imágenes externas (solo usa internet para la fuente pixelada; sin conexión usa una fuente de respaldo).
+
+**Historia:** el dragón Ignaroth ha despertado en la Cueva de Ceniza. Aldren, un escudero de la aldea de Robledal, debe cruzar el Bosque Umbrío, encontrar la llave de la reja y derrotarlo.
+
+- **Mundo:** aldea con herrería y posada, bosque con río y encuentros aleatorios, cueva con lava y el dragón.
+- **Combate por turnos:** atacar, magia (Fuego, Curación y, desde el nivel 5, Rayo), objetos y huir. Siete enemigos distintos con ataques especiales y un jefe final.
+- **Progresión:** niveles y experiencia, oro, armas y armaduras, pociones y elixires, cofres y una espada legendaria escondida.
+- **Guardado:** en la posada o desde el menú (se guarda en el navegador). Si caes, despiertas en la posada con la mitad del oro.
+
+**Controles:** flechas o WASD para moverte, Z / Enter / Espacio para hablar y aceptar, X / Esc para el menú y volver, M para la música. En el celular aparecen una cruceta y los botones A y B.
+
+Con GitHub Pages activado, queda en `https://<usuario>.github.io/<repositorio>/rpg-medieval.html`.
