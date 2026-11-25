@@ -12,11 +12,12 @@
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { margin:0; height:100%; background:var(--bg); color:var(--fg); overflow:hidden;
     font-family:"Press Start 2P", monospace; touch-action:none; user-select:none; -webkit-user-select:none; }
-  body { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; }
+  body { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding-top:env(safe-area-inset-top); }
   #game { display:block; image-rendering:pixelated; image-rendering:crisp-edges; background:#000;
     box-shadow:0 0 0 2px #2a2238, 0 0 0 4px var(--gold), 0 8px 40px rgba(0,0,0,.6); }
   #help { font-size:8px; color:var(--muted); text-align:center; line-height:1.8; padding:0 16px; }
-  #pad { display:none; width:100%; max-width:520px; padding:0 16px 12px; justify-content:space-between; align-items:center; }
+  #pad { display:none; width:100%; max-width:520px; justify-content:space-between; align-items:center;
+    padding:0 max(16px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
   body.touch #pad { display:flex; }
   body.touch #help { display:none; }
   .dpad { position:relative; width:150px; height:150px; }
@@ -569,13 +570,16 @@ function theName(e){ if(!e.art) return e.name; return (e.art==='una'?'la ':'el '
 function dmgCalc(atk, def, mult=1){ let d = atk*mult*12/(12+Math.max(0,def)); d *= 0.9 + Math.random()*0.2; return Math.max(1, Math.round(d)); }
 
 // ---------- audio (Web Audio, chiptune) ----------
-let AC=null, master=null, sfxBus=null, musBus=null, noiseBuf=null, muted=false, pendingMusic=null;
+let AC=null, master=null, sfxBus=null, musBus=null, musDuck=null, noiseBuf=null, muted=false, pendingMusic=null;
 function initAudio(){
   if(AC){ if(AC.state==='suspended') AC.resume(); return; }
   try { AC = new (window.AudioContext||window.webkitAudioContext)(); } catch(e){ AC=null; return; }
   master=AC.createGain(); master.gain.value = muted?0:0.6; master.connect(AC.destination);
-  sfxBus=AC.createGain(); sfxBus.gain.value=0.5; sfxBus.connect(master);
-  musBus=AC.createGain(); musBus.gain.value=0.32; musBus.connect(master);
+  // Buses (audio-design): Master <- Música <- Atenuación, y Efectos. Los ajustes actúan sobre los buses.
+  sfxBus=AC.createGain(); sfxBus.connect(master);
+  musBus=AC.createGain(); musBus.connect(master);
+  musDuck=AC.createGain(); musDuck.connect(musBus);
+  applyVolumes();
   noiseBuf=AC.createBuffer(1,AC.sampleRate,AC.sampleRate); const d=noiseBuf.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1;
   if(pendingMusic) playMusic(pendingMusic, true);
 }
@@ -610,15 +614,15 @@ const SFX = {
   breath(){ noise(1.1,{vol:0.55,freq:350,slide:2500}); tone(90,1.0,{type:'sawtooth',vol:0.15,slide:200}); },
   thunder(){ noise(0.08,{vol:0.6,freq:6000,type:'highpass'}); noise(0.9,{vol:0.55,freq:500,slide:80,delay:0.05}); },
   heal(){ [0,4,7,12,16].forEach((s,i)=>tone(NF(72+s),0.12,{type:'triangle',vol:0.16,delay:i*0.06})); },
-  levelup(){ [0,4,7,12,7,12,16,19].forEach((s,i)=>tone(NF(67+s),0.1,{vol:0.09,delay:i*0.07})); },
+  levelup(){ duckMusic(1.0); [0,4,7,12,7,12,16,19].forEach((s,i)=>tone(NF(67+s),0.1,{vol:0.09,delay:i*0.07})); },
   victory(){ const seq=[[67,1],[72,1],[76,1],[79,3],[76,1],[79,4]]; let t=0; for(const [n,d] of seq){ tone(NF(n),d*0.11,{vol:0.11,delay:t}); tone(NF(n-12),d*0.11,{type:'triangle',vol:0.16,delay:t}); t+=d*0.12; } },
-  chest(){ [0,4,7,11,12].forEach((s,i)=>tone(NF(76+s),0.09,{vol:0.09,delay:i*0.07})); },
+  chest(){ duckMusic(0.8); [0,4,7,11,12].forEach((s,i)=>tone(NF(76+s),0.09,{vol:0.09,delay:i*0.07})); },
   encounter(){ for(let i=0;i<8;i++) tone(NF(86-i*3),0.05,{vol:0.09,delay:i*0.035}); noise(0.35,{vol:0.2,freq:3000,slide:300}); },
   flee(){ for(let i=0;i<5;i++) tone(NF(60+i*4),0.05,{vol:0.09,delay:i*0.04}); },
   steal(){ tone(1500,0.05,{vol:0.09}); tone(1800,0.05,{vol:0.09,delay:0.06}); tone(1300,0.08,{vol:0.09,delay:0.12}); },
   gate(){ noise(0.7,{vol:0.35,freq:300,slide:1200,type:'bandpass'}); tone(220,0.5,{type:'sawtooth',vol:0.06,slide:330}); },
   roar(){ tone(110,1.0,{type:'sawtooth',vol:0.22,slide:50}); noise(1.0,{vol:0.45,freq:500,slide:150}); },
-  rest(){ [60,64,67,72].forEach((n,i)=>tone(NF(n),0.35,{type:'triangle',vol:0.16,delay:i*0.2})); },
+  rest(){ duckMusic(1.2); [60,64,67,72].forEach((n,i)=>tone(NF(n),0.35,{type:'triangle',vol:0.16,delay:i*0.2})); },
   gameover(){ [64,63,62,59].forEach((n,i)=>tone(NF(n-12),0.45,{type:'triangle',vol:0.2,delay:i*0.38})); },
   coin(){ tone(NF(88),0.05,{vol:0.08}); tone(NF(95),0.14,{vol:0.08,delay:0.05}); },
 };
@@ -656,7 +660,7 @@ function playMusic(name, force){
   if(mus.gain){ const g=mus.gain; g.gain.setTargetAtTime(0,AC.currentTime,0.08); setTimeout(()=>{ try{ g.disconnect(); }catch(e){} },700); }
   mus = { name, gain:null, tracks:[], spu:0.1 };
   if(!name) return;
-  const s=SONGS[name]; mus.gain=AC.createGain(); mus.gain.connect(musBus);
+  const s=SONGS[name]; mus.gain=AC.createGain(); mus.gain.connect(musDuck);
   mus.spu = 60/s.bpm/(s.unit/4);
   const t0=AC.currentTime+0.1;
   mus.tracks = s.tracks.map(tr=>({ wave:tr.wave, vol:tr.vol, notes:tr.notes, i:0, t:t0 }));
@@ -680,11 +684,52 @@ function musicTick(){
 }
 function toggleMute(){ muted=!muted; if(master) master.gain.value = muted?0:0.6; }
 
+// ---------- ajustes del jugador (se guardan aparte de la partida) ----------
+const SETTINGS_KEY = 'cronicas-valdoria-ajustes';
+const settings = { music:0.75, sfx:0.75, shake:1, flash:true, text:1 };
+try { Object.assign(settings, JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}')); } catch(e){}
+function saveSettings(){ try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch(e){} }
+// audio-design: el control va de 0 a 1 y se eleva al cuadrado antes de aplicarlo a la ganancia del bus,
+// así el cambio se reparte por todo el recorrido; en 0 hay silencio real.
+function applyVolumes(){
+  if(!AC) return; const t=AC.currentTime;
+  sfxBus.gain.setTargetAtTime(0.6*settings.sfx*settings.sfx, t, 0.02);
+  musBus.gain.setTargetAtTime(0.42*settings.music*settings.music, t, 0.02);
+}
+// Baja la música mientras suena una fanfarria (subir de nivel, cofre, descanso) y la recupera después.
+function duckMusic(sec){
+  if(!AC || !musDuck) return; const t=AC.currentTime;
+  musDuck.gain.cancelScheduledValues(t); musDuck.gain.setTargetAtTime(0.25, t, 0.03); musDuck.gain.setTargetAtTime(1, t+sec, 0.25);
+}
+
 // ---------- entrada ----------
 const KEYMAP = { ArrowUp:'up', KeyW:'up', ArrowDown:'down', KeyS:'down', ArrowLeft:'left', KeyA:'left', ArrowRight:'right', KeyD:'right',
   KeyZ:'ok', Enter:'ok', Space:'ok', KeyX:'cancel', Escape:'cancel', Backspace:'cancel', KeyM:'mute' };
 const held = {}, pressed = {};
-function press(a, repeat){ if(repeat && (a==='ok'||a==='cancel'||a==='mute')) return; pressed[a]=true; held[a]=true; }
+function press(a, repeat){ if(repeat && (a==='ok'||a==='cancel'||a==='mute')) return; pressed[a]=true; held[a]=true; bufferPress(a); }
+// input-systems: búfer de pulsaciones. Una Z pulsada mientras el héroe termina un paso no se pierde:
+// se guarda unos fotogramas (0,15 s) y se usa en cuanto la acción es posible.
+const BUF_WINDOW = 9, buf = { ok:-99, cancel:-99 };
+function bufferPress(a){ if(a in buf) buf[a]=frame; }
+function consume(a){ if(frame-buf[a]<=BUF_WINDOW){ buf[a]=-99; return true; } return false; }
+function clearBuffer(){ buf.ok=buf.cancel=-99; }
+// input-systems: mando (API Gamepad). Zona muerta RADIAL sobre la longitud del vector, no por eje,
+// y repetición automática de las direcciones para moverse por los menús.
+const padHeld = {}, padRep = {};
+function deadzone(x,y,dead=0.25){ const m=Math.hypot(x,y); if(m<=dead) return [0,0]; const k=Math.min((m-dead)/(1-dead),1); return [x/m*k, y/m*k]; }
+function pollPad(){
+  const pads = navigator.getGamepads ? navigator.getGamepads() : [];
+  let gp=null; for(const p of pads) if(p && p.connected){ gp=p; break; }
+  const b = i => !!(gp && gp.buttons[i] && gp.buttons[i].pressed);
+  const [sx,sy] = gp ? deadzone(gp.axes[0]||0, gp.axes[1]||0) : [0,0];
+  const now = { up:b(12)||sy<-0.5, down:b(13)||sy>0.5, left:b(14)||sx<-0.5, right:b(15)||sx>0.5, ok:b(0), cancel:b(1)||b(8)||b(9) };
+  for(const a in now){
+    if(now[a] && !padHeld[a]){ pressed[a]=true; bufferPress(a); padRep[a]=0; }
+    else if(now[a] && a!=='ok' && a!=='cancel'){ padRep[a]++; if(padRep[a]>18 && padRep[a]%6===0) pressed[a]=true; }
+    padHeld[a]=now[a];
+  }
+}
+addEventListener('gamepadconnected', ()=>initAudio());
 addEventListener('keydown', e=>{ const a=KEYMAP[e.code]; if(!a) return; e.preventDefault(); initAudio(); press(a, e.repeat); });
 addEventListener('keyup', e=>{ const a=KEYMAP[e.code]; if(a) held[a]=false; });
 addEventListener('blur', ()=>{ for(const k in held) held[k]=false; });
@@ -701,7 +746,12 @@ if(matchMedia('(pointer: coarse)').matches) document.body.classList.add('touch')
 function resize(){
   const touch=document.body.classList.contains('touch');
   const availW = innerWidth - 16, availH = innerHeight - (touch?190:40);
-  let s = Math.min(availW/W, availH/H); if(s>=2) s=Math.floor(s); s=Math.max(s,0.5);
+  // Pixel art: escala entera en píxeles FÍSICOS de la pantalla (también en móviles con devicePixelRatio 3),
+  // para que cada píxel del juego mida lo mismo y no haya bordes desiguales.
+  const dpr = window.devicePixelRatio || 1;
+  let s = Math.min(availW/W, availH/H);
+  if(s*dpr >= 2) s = Math.floor(s*dpr)/dpr;
+  s=Math.max(s,0.5);
   cv.style.width = Math.round(W*s)+'px'; cv.style.height = Math.round(H*s)+'px';
 }
 addEventListener('resize', resize);
@@ -749,7 +799,7 @@ class Dialog {
   update(){
     const pg=this.pages[this.p], total=pg.reduce((a,l)=>a+l.length,0);
     if(this.c<total){
-      const before=Math.floor(this.c); this.c=Math.min(total,this.c+(this.opts.speed||1.6));
+      const before=Math.floor(this.c); this.c=Math.min(total,this.c+(this.opts.speed||1.6*settings.text));
       if(Math.floor(this.c)!==before && Math.floor(this.c)%4===0) SFX.text();
       if(pressed.ok){ this.c=total; pressed.ok=false; }
       this.t=0; return;
@@ -830,10 +880,38 @@ const SWIRL = (()=>{ const cells=[]; for(let y=0;y<15;y++) for(let x=0;x<20;x++)
 // ---------- estado global ----------
 let scene='loading', frame=0, playFrames=0;
 let hero=null, flags=null, map=null, grid=null, ents=[], pl=null, steps=0, busy=0;
-let banner=null, battle=null, shake=0, hurtFlash=0, whiteFlash=0, ending=null;
+let banner=null, battle=null, trauma=0, shakeT=0, hitStop=0, hurtFlash=0, whiteFlash=0, ending=null, saveIcon=0;
+const flashTimes = [], wparts = [];
 const popups = [];
 let titleSel=0;
 const DIRS = { up:[0,-1], down:[0,1], left:[-1,0], right:[1,0] };
+
+// ---------- sensación de impacto (game-feel) ----------
+// El temblor sale de un "trauma" que se suma con cada golpe y decae en tiempo real; el desplazamiento
+// es trauma² con senos sumados (nada de ruido aleatorio por fotograma, que vibra como estática).
+function addTrauma(a){ trauma=clamp(trauma+a,0,1); }
+// Destellos limitados a 3 por segundo (WCAG 2.3.1). Con "Destellos: No" se usa un tinte suave.
+function canFlash(){ while(flashTimes.length && frame-flashTimes[0]>60) flashTimes.shift(); if(flashTimes.length>=3) return false; flashTimes.push(frame); return true; }
+function flashWhite(n){ if(settings.flash && canFlash()) whiteFlash=Math.max(whiteFlash,n); }
+// Un único punto de entrada por nivel de impacto, para que todo el juego sea proporcionado.
+const FEEDBACK = {
+  small:  { trauma:0.15, stop:0, sparks:4 },
+  medium: { trauma:0.40, stop:3, sparks:10 },          // 3 fotogramas = 0,05 s de parón
+  large:  { trauma:0.85, stop:7, sparks:30, flash:5 },  // 7 fotogramas = 0,12 s
+};
+function feedback(tier, x, y){
+  const f=FEEDBACK[tier];
+  addTrauma(f.trauma);
+  if(f.stop && hitStop<=0) hitStop=f.stop;             // un golpe durante un parón no alarga el parón
+  if(f.flash) flashWhite(f.flash);
+  if(x!==undefined) sparks(x, y, f.sparks, tier==='large');
+}
+function sparks(x, y, n, big, cols=['#ffffff','#ffcd75','#ffffff']){
+  const list = scene==='battle' && battle ? battle.parts : wparts;
+  for(let i=0;i<n;i++){ const a=Math.random()*Math.PI*2, v=(big?2.4:1.5)+Math.random()*1.8;
+    list.push({ x, y, vx:Math.cos(a)*v, vy:Math.sin(a)*v-0.6, life:12+rnd(14), max:26, col:cols[i%cols.length], s:big?3:2, drag:true }); }
+}
+const easeOutBack = p => { const c1=1.70158, c3=c1+1; return 1 + c3*Math.pow(p-1,3) + c1*Math.pow(p-1,2); };
 
 // ---------- mapas: definición ----------
 const MAPS = {
@@ -845,17 +923,17 @@ const MAPS = {
     warps:[ {x1:1,y1:12,x2:1,y2:12,to:'forest',tx:36,ty:22,dir:'left'} ] },
 };
 function villageEntities(){ return [
-  { type:'npc', x:6,  y:6,  spr:'npc_elder', name:'Eldric', talk:talkElder },
+  { type:'npc', x:6,  y:6,  spr:'npc_elder', name:'Eldric', talk:()=>runDialogue('elder') },
   { type:'npc', x:23, y:6,  spr:'npc_smith', name:'Bruna',  talk:forge },
   { type:'npc', x:17, y:11, spr:'npc_inn',   name:'Marta',  talk:inn },
-  { type:'npc', x:11, y:15, spr:'npc_kid',   name:'Tomás',  talk:()=>say('¡Cuando sea mayor seré caballero como tú! Dicen que los limos son blandos... ¡pero los trasgos te roban el oro!',{name:'Tomás'}) },
-  { type:'npc', x:29, y:15, spr:'npc_guard', name:'Rodrigo',talk:()=>say('El Bosque Umbrío empieza al este. Si te ves en apuros, pulsa X para abrir el menú y beber una poción.',{name:'Rodrigo'}) },
+  { type:'npc', x:11, y:15, spr:'npc_kid',   name:'Tomás',  talk:()=>runDialogue('kid') },
+  { type:'npc', x:29, y:15, spr:'npc_guard', name:'Rodrigo',talk:()=>runDialogue('guard') },
   { type:'sign', x:28, y:12, text:'Aldea de Robledal\nAl este: Bosque Umbrío.' },
 ]; }
 function forestEntities(){ return [
   { type:'chest', x:34, y:4,  id:'f_key', give:{key:true} },
   { type:'chest', x:4,  y:23, id:'f_pot', give:{item:'pocion', n:3} },
-  { type:'npc',   x:23, y:12, spr:'npc_knight', name:'Sir Galvan', talk:talkGalvan },
+  { type:'npc',   x:23, y:12, spr:'npc_knight', name:'Sir Galvan', talk:()=>runDialogue('galvan') },
   { type:'sign',  x:3,  y:12, text:'Bosque Umbrío\n¡Cuidado con las bestias! Al oeste: Robledal.' },
   { type:'sign',  x:34, y:21, text:'Cueva de Ceniza\nPaso prohibido por orden del Rey.' },
 ]; }
@@ -863,7 +941,7 @@ function caveEntities(){ const a=[
   { type:'chest', x:17, y:3,  id:'c_eter',  give:{item:'eter', n:2} },
   { type:'chest', x:11, y:21, id:'c_gold',  give:{gold:150} },
   { type:'chest', x:26, y:10, id:'c_sword', give:{weapon:'alba'} },
-]; if(!flags.boss) a.push({ type:'boss', x:28, y:19, w:2, h:2, spr:'dragon', talk:talkBoss }); return a; }
+]; if(!flags.boss) a.push({ type:'boss', x:28, y:19, w:2, h:2, spr:'dragon', talk:()=>runDialogue('boss') }); return a; }
 
 function loadMap(id,x,y,dir){
   map=MAPS[id]; grid=map.build(); ents=map.entities();
@@ -875,41 +953,223 @@ const tileAt = (x,y) => (y<0||x<0||y>=grid.length||x>=grid[0].length) ? 'X' : gr
 const entAt = (x,y) => ents.find(e=> x>=e.x && x<e.x+(e.w||1) && y>=e.y && y<e.y+(e.h||1));
 const walkable = (x,y) => !(y<0||x<0||y>=grid.length||x>=grid[0].length) && !SOLID.has(grid[y][x]) && !entAt(x,y);
 
-// ---------- guardado ----------
-function saveGame(){ try{ localStorage.setItem(SAVE_KEY, JSON.stringify({ hero, flags, map:map.id, x:pl.x, y:pl.y, dir:pl.dir, time:playFrames })); return true; } catch(e){ return false; } }
-function readSave(){ try{ const s=localStorage.getItem(SAVE_KEY); return s?JSON.parse(s):null; } catch(e){ return null; } }
+// ---------- guardado (save-systems) ----------
+// Se guardan datos planos (identificadores, números y banderas) con un número de versión; el mundo se
+// reconstruye a partir de ellos. Cada escritura conserva la anterior como copia ".bak": si la principal
+// se corrompe, se carga la copia. Hay un hueco manual y otro de autoguardado que nunca se pisan.
+const SAVE_VERSION = 2;
+const AUTO_KEY = 'cronicas-valdoria-auto';
+let lastAutosave = -99999, titleSave = null;
+function captureState(){
+  return { version:SAVE_VERSION, savedAt:Date.now(), hero:JSON.parse(JSON.stringify(hero)), flags:JSON.parse(JSON.stringify(flags)),
+    map:map.id, x:pl.x, y:pl.y, dir:pl.dir, time:playFrames };
+}
+function writeSlot(key, data){
+  try {
+    const str=JSON.stringify(data), prev=localStorage.getItem(key);
+    localStorage.setItem(key+'.tmp', str);
+    JSON.parse(localStorage.getItem(key+'.tmp'));          // comprobar que lo escrito se puede leer
+    if(prev) localStorage.setItem(key+'.bak', prev);       // conservar la última partida buena
+    localStorage.setItem(key, str); localStorage.removeItem(key+'.tmp');
+    return true;
+  } catch(e){ return false; }
+}
+// Migraciones en orden (v -> v+1). Nunca se borran: dejarían huérfanas las partidas de esa versión.
+const MIGRATIONS = {
+  1: d => { d.savedAt=d.savedAt||0; d.flags=d.flags||{}; d.flags.chests=d.flags.chests||{};
+            d.hero.items=Object.assign({pocion:0,eter:0}, d.hero.items); return d; },   // la v1 no tenía versión
+};
+function migrate(d){
+  let v = Number.isInteger(d.version) ? d.version : 1;
+  if(v>SAVE_VERSION) throw new Error('newer');                // partida de una versión más nueva: no tocarla
+  while(v<SAVE_VERSION){ d=MIGRATIONS[v](d); v++; d.version=v; }
+  return d;
+}
+function validSave(d){
+  const h=d && d.hero;
+  return !!(h && Number.isInteger(h.lv) && h.lv>=1 && h.base && typeof h.hp==='number' && typeof h.gold==='number'
+    && WEAPONS[h.weapon] && ARMORS[h.armor] && h.items && MAPS[d.map] && Number.isInteger(d.x) && Number.isInteger(d.y)
+    && d.flags && typeof d.flags==='object');
+}
+function readSlot(key){
+  for(const k of [key, key+'.bak']){
+    let raw=null;
+    try { raw=localStorage.getItem(k); } catch(e){ return { error:'blocked' }; }
+    if(!raw) continue;
+    try { const d=migrate(JSON.parse(raw)); if(validSave(d)) return { data:d, backup:k!==key }; }
+    catch(e){ if(e.message==='newer') return { error:'newer' }; }
+  }
+  return null;
+}
+function newestSave(){
+  const found=[readSlot(SAVE_KEY), readSlot(AUTO_KEY)].filter(Boolean);
+  const ok=found.filter(x=>x.data).sort((a,b)=>(b.data.savedAt||0)-(a.data.savedAt||0));
+  return ok[0] || found[0] || null;
+}
+function saveGame(){ const r=writeSlot(SAVE_KEY, captureState()); if(r) saveIcon=60; return r; }
+function autosave(force){
+  if(!force && frame-lastAutosave<300) return;                // como mucho una vez cada 5 s
+  if(writeSlot(AUTO_KEY, captureState())){ lastAutosave=frame; saveIcon=60; }
+}
 
 // ---------- guion: personajes ----------
 async function runScript(fn){ busy++; try{ await fn(); } catch(e){ console.error(e); } finally{ busy--; } }
-async function talkElder(){
-  const o={name:'Eldric'};
-  if(flags.boss){ await say('¡Lo lograste, Sir Aldren! Robledal cantará tu nombre durante cien inviernos.',o); return; }
-  if(!flags.metElder){
-    await say('¡Aldren! Al fin llegas, muchacho. Escucha bien, pues no hay tiempo que perder.',o);
-    await say('El dragón Ignaroth ha despertado en la Cueva de Ceniza, al otro lado del Bosque Umbrío, al este de la aldea.',o);
-    await say('Cada luna nueva baja a quemar nuestras cosechas. Si nadie lo detiene, Robledal arderá hasta los cimientos.',o);
-    await say('La cueva está sellada con una reja de hierro. Su llave se perdió en el bosque... dicen que quedó en un cofre al noreste, pasado el río.',o);
-    await say('Toma estas monedas. Visita a Bruna en la forja y a Marta en la posada antes de partir.',o);
-    flags.metElder=true; hero.gold+=50; SFX.coin();
-    await say('Recibes 50 monedas de oro.');
-    return;
-  }
-  if(!flags.key){ await say('La llave está en un cofre al noreste del bosque. Cruza el puente y sigue el camino hacia el norte. Fortalécete luchando contra las bestias.',o); return; }
-  await say('Recuerda: Ignaroth nació del fuego. Las llamas apenas le hacen cosquillas... pero dicen que el Rayo hiere su piel. Lo aprenderás con la experiencia.',o);
+// ---------- diálogos como datos (dialogue-systems) ----------
+// Cada conversación es un grafo: los nodos tienen una línea (identificador de la tabla de textos), y salen
+// por "next", por "choices" (elecciones del jugador), por "branch" (según banderas) o terminan con "end".
+// "set" escribe banderas y "cmd" pide acciones al juego. Las condiciones usan un evaluador propio que solo
+// entiende variables declaradas, números, comparaciones y and/or/not: nunca se ejecuta código.
+const LINES = {
+  ELDER_INTRO_1:'¡Aldren! Al fin llegas, muchacho. Escucha bien, pues no hay tiempo que perder.',
+  ELDER_INTRO_2:'El dragón Ignaroth ha despertado en la Cueva de Ceniza, al otro lado del Bosque Umbrío, al este de la aldea.',
+  ELDER_INTRO_3:'Cada luna nueva baja a quemar nuestras cosechas. Si nadie lo detiene, Robledal arderá hasta los cimientos.',
+  ELDER_INTRO_4:'La cueva está sellada con una reja de hierro. Su llave se perdió en el bosque... dicen que quedó en un cofre al noreste, pasado el río.',
+  ELDER_INTRO_5:'Toma estas monedas. Visita a Bruna en la forja y a Marta en la posada antes de partir.',
+  GOT_50_GOLD:'Recibes 50 monedas de oro.',
+  ELDER_MENU:'¿Qué quieres saber, muchacho?',
+  OPT_KEY:'¿Dónde está la llave?', OPT_GATE:'¿Y ahora qué hago?', OPT_DRAGON:'¿Cómo venzo al dragón?', OPT_BYE:'Nada, gracias.',
+  ELDER_KEY:'En un cofre al noreste del bosque. Cruza el puente, sigue el camino hacia el norte y luego al este. Fortalécete luchando contra las bestias.',
+  ELDER_GATE:'Ya tienes la llave. La reja está al sureste del bosque, donde las rocas forman una boca negra. Ponte delante y úsala.',
+  ELDER_DRAGON_LOW:'Ignaroth nació del fuego: las llamas apenas le hacen cosquillas. Dicen que el Rayo hiere su piel, pero aún no lo dominas. Gana experiencia.',
+  ELDER_DRAGON_OK:'Ya dominas el Rayo: úsalo contra Ignaroth. Lleva pociones y cúrate cuando se enfurezca, pues entonces golpea dos veces.',
+  ELDER_BYE:'Que los antiguos te protejan, Aldren.',
+  ELDER_THANKS:'¡Lo lograste, Sir Aldren! Robledal cantará tu nombre durante cien inviernos.',
+  GALVAN_1:'Soy Sir Galvan, caballero del Rey. Entré en la Cueva de Ceniza y apenas salí con vida.',
+  GALVAN_2:'Los orcos y las gárgolas de allí dentro golpean como mazas. No entres sin una buena armadura.',
+  GALVAN_3:'Toma, estas pociones te harán más falta que a mí.',
+  GOT_2_POTIONS:'Recibes 2 Pociones.',
+  GALVAN_KEY:'El cofre de la llave está al noreste: sigue el camino hacia el norte y luego al este.',
+  GALVAN_SWORD:'Dicen que en lo profundo de la cueva hay una espada legendaria... el Colmillo de Alba.',
+  GALVAN_BOSS:'¡Has vencido donde yo fracasé! Será un honor luchar a tu lado algún día.',
+  KID_1:'¡Cuando sea mayor seré caballero como tú! Dicen que los limos son blandos... ¡pero los trasgos te roban el oro!',
+  KID_BOSS:'¡Has matado al dragón! ¡Cuando sea mayor quiero ser como tú, Sir Aldren!',
+  GUARD_1:'El Bosque Umbrío empieza al este. Si te ves en apuros, pulsa X para abrir el menú y beber una poción. En el Diario verás tu misión.',
+  GUARD_BOSS:'Ya no cae ceniza del cielo. Gracias a ti, por fin hago guardia tranquilo.',
+  BOSS_1:'¡¿Quién osa profanar mi guarida?!',
+  BOSS_2:'Huelo el miedo en tu sangre, pequeño escudero. Tus huesos adornarán mi tesoro, junto a los de los otros caballeros.',
+  BOSS_ASK:'¿Te enfrentas al dragón?', OPT_FIGHT:'¡Luchar!', OPT_RETREAT:'Retroceder',
+};
+const DIALOGUES = {
+  elder: { speaker:'Eldric', start:'root', nodes:{
+    root:   { branch:[ {if:'boss', to:'thanks'}, {if:'not metElder', to:'intro1'}, {to:'menu'} ] },
+    intro1: { line:'ELDER_INTRO_1', next:'intro2' },
+    intro2: { line:'ELDER_INTRO_2', next:'intro3' },
+    intro3: { line:'ELDER_INTRO_3', next:'intro4' },
+    intro4: { line:'ELDER_INTRO_4', next:'intro5' },
+    intro5: { line:'ELDER_INTRO_5', set:{metElder:true}, cmd:['gold 50'], next:'gift' },
+    gift:   { speaker:'', line:'GOT_50_GOLD', next:'end' },
+    menu:   { line:'ELDER_MENU', choices:[
+              {text:'OPT_KEY', to:'key', if:'not key'}, {text:'OPT_GATE', to:'gate', if:'key and not gate'},
+              {text:'OPT_DRAGON', to:'dragon'}, {text:'OPT_BYE', to:'bye'} ] },
+    key:    { line:'ELDER_KEY', next:'menu' },
+    gate:   { line:'ELDER_GATE', next:'menu' },
+    dragon: { branch:[ {if:'lv >= 5', to:'dragonOk'}, {to:'dragonLow'} ] },
+    dragonOk:  { line:'ELDER_DRAGON_OK', next:'menu' },
+    dragonLow: { line:'ELDER_DRAGON_LOW', next:'menu' },
+    bye:    { line:'ELDER_BYE', next:'end' },
+    thanks: { line:'ELDER_THANKS', next:'end' },
+    end:    { end:true } } },
+  galvan: { speaker:'Sir Galvan', start:'root', nodes:{
+    root: { branch:[ {if:'boss', to:'boss'}, {if:'not galvan', to:'g1'}, {if:'not key', to:'key'}, {to:'sword'} ] },
+    g1:   { line:'GALVAN_1', next:'g2' },
+    g2:   { line:'GALVAN_2', next:'g3' },
+    g3:   { line:'GALVAN_3', set:{galvan:true}, cmd:['item pocion 2'], next:'got' },
+    got:  { speaker:'', line:'GOT_2_POTIONS', next:'end' },
+    key:  { line:'GALVAN_KEY', next:'end' },
+    sword:{ line:'GALVAN_SWORD', next:'end' },
+    boss: { line:'GALVAN_BOSS', next:'end' },
+    end:  { end:true } } },
+  kid: { speaker:'Tomás', start:'root', nodes:{
+    root: { branch:[ {if:'boss', to:'after'}, {to:'before'} ] },
+    before: { line:'KID_1', next:'end' }, after: { line:'KID_BOSS', next:'end' }, end: { end:true } } },
+  guard: { speaker:'Rodrigo', start:'root', nodes:{
+    root: { branch:[ {if:'boss', to:'after'}, {to:'before'} ] },
+    before: { line:'GUARD_1', next:'end' }, after: { line:'GUARD_BOSS', next:'end' }, end: { end:true } } },
+  boss: { speaker:'Ignaroth', start:'r1', nodes:{
+    r1:    { cmd:['roar'], line:'BOSS_1', next:'r2' },
+    r2:    { line:'BOSS_2', next:'ask' },
+    ask:   { speaker:'', line:'BOSS_ASK', choices:[ {text:'OPT_FIGHT', to:'fight'}, {text:'OPT_RETREAT', to:'end'} ] },
+    fight: { cmd:['fight dragon'], next:'end' },
+    end:   { end:true } } },
+};
+// Variables que el diálogo puede leer. Las banderas se pueden escribir con "set"; oro y nivel son de solo lectura.
+const DLG_FLAGS = ['metElder','key','gate','boss','galvan'];
+function dlgVars(){ const v={ gold:hero?hero.gold:0, lv:hero?hero.lv:1 }; for(const f of DLG_FLAGS) v[f]=!!(flags&&flags[f]); return v; }
+const DLG_CMDS = {
+  gold: n => { hero.gold+=(+n); SFX.coin(); },
+  item: (k,n) => { hero.items[k]+=(+n); SFX.chest(); },
+  roar: () => { SFX.roar(); addTrauma(0.7); },
+  fight: id => encounter(id, true),
+};
+function evalExpr(src, vars){
+  if(src===undefined || src==='') return true;
+  const toks = src.match(/>=|<=|==|!=|[<>()]|\d+|[A-Za-z_]\w*|\S/g) || [];
+  let i=0; const peek=()=>toks[i], next=()=>toks[i++];
+  const orE=()=>{ let v=andE(); while(peek()==='or'){ next(); const r=andE(); v=v||r; } return v; };
+  const andE=()=>{ let v=notE(); while(peek()==='and'){ next(); const r=notE(); v=v&&r; } return v; };
+  const notE=()=>{ if(peek()==='not'){ next(); return !notE(); } return cmpE(); };
+  const cmpE=()=>{ let v=atom(); const o=peek();
+    if(['==','!=','<','<=','>','>='].includes(o)){ next(); const r=atom();
+      v = o==='=='?v===r : o==='!='?v!==r : o==='<'?v<r : o==='<='?v<=r : o==='>'?v>r : v>=r; }
+    return v; };
+  const atom=()=>{ const t=next();
+    if(t===undefined) throw new Error('fin inesperado');
+    if(t==='('){ const v=orE(); if(next()!==')') throw new Error('falta )'); return v; }
+    if(/^\d+$/.test(t)) return +t;
+    if(t==='true') return true; if(t==='false') return false;
+    if(!/^[A-Za-z_]\w*$/.test(t) || !(t in vars)) throw new Error('desconocido: '+t);
+    return vars[t]; };
+  const v=orE(); if(i!==toks.length) throw new Error('sobra: '+toks.slice(i).join(' '));
+  return v;
 }
-async function talkGalvan(){
-  const o={name:'Sir Galvan'};
-  if(!flags.galvan){
-    await say('Soy Sir Galvan, caballero del Rey. Entré en la Cueva de Ceniza y apenas salí con vida.',o);
-    await say('Los orcos y las gárgolas de allí dentro golpean como mazas. No entres sin una buena armadura.',o);
-    await say('Toma, estas pociones te harán más falta que a mí.',o);
-    flags.galvan=true; hero.items.pocion+=2; SFX.chest();
-    await say('Recibes 2 Pociones.');
-    return;
+async function runDialogue(id){
+  const g=DIALOGUES[id]; let nid=g.start;
+  for(let guard=0; nid && guard<200; guard++){
+    const n=g.nodes[nid];
+    for(const k in (n.set||{})) flags[k]=n.set[k];
+    for(const c of (n.cmd||[])){ const [name,...args]=c.split(' '); await DLG_CMDS[name](...args); if(scene!=='world') return; }
+    if(n.end) return;
+    const speaker = n.speaker!==undefined ? n.speaker : g.speaker, o = speaker ? {name:speaker} : {};
+    if(n.choices){
+      const shown=n.choices.filter(c=>evalExpr(c.if, dlgVars()));
+      const r=await ask(n.line?LINES[n.line]:'', shown.map(c=>LINES[c.text]), o);
+      const ch=shown[r<0 ? shown.length-1 : r];             // cancelar = la última opción (despedirse)
+      for(const k in (ch.set||{})) flags[k]=ch.set[k];      // lo que cuesta una elección se paga al elegir
+      nid=ch.to; continue;
+    }
+    if(n.line) await say(LINES[n.line], o);
+    if(n.branch){ nid=n.branch.find(b=>evalExpr(b.if, dlgVars())).to; continue; }
+    nid=n.next;
   }
-  if(!flags.key) await say('El cofre de la llave está al noreste: sigue el camino hacia el norte y luego al este.',o);
-  else await say('Dicen que en lo profundo de la cueva hay una espada legendaria... el Colmillo de Alba.',o);
 }
+// Validación: destinos que existen, una sola salida por nodo, textos y comandos conocidos, expresiones
+// que solo usan variables declaradas, nodos alcanzables y una salida incondicional en ramas y elecciones.
+function validateDialogues(){
+  const problems=[], vars=dlgVars();
+  for(const [id,g] of Object.entries(DIALOGUES)){
+    const P=m=>problems.push(id+'.'+m);
+    const targets=n=>[n.next, ...(n.choices||[]).map(c=>c.to), ...(n.branch||[]).map(b=>b.to)].filter(Boolean);
+    const expr=(nid,e)=>{ if(e===undefined) return; try{ evalExpr(e,vars); } catch(err){ P(nid+': "'+e+'" '+err.message); } };
+    if(!g.nodes[g.start]) P('start no existe');
+    const seen=new Set(), stack=[g.start];
+    while(stack.length){ const n=stack.pop(); if(seen.has(n) || !g.nodes[n]) continue; seen.add(n); stack.push(...targets(g.nodes[n])); }
+    for(const [nid,n] of Object.entries(g.nodes)){
+      if(!seen.has(nid)) P(nid+': inalcanzable');
+      const exits=['next','choices','branch','end'].filter(k=>n[k]!==undefined);
+      if(exits.length!==1) P(nid+': necesita exactamente una salida');
+      for(const t of targets(n)) if(!g.nodes[t]) P(nid+': destino '+t+' no existe');
+      if(n.line && !(n.line in LINES)) P(nid+': falta el texto '+n.line);
+      for(const c of (n.choices||[])){ if(!(c.text in LINES)) P(nid+': falta el texto '+c.text); expr(nid,c.if); }
+      if(n.choices && n.choices[n.choices.length-1].if) P(nid+': la última elección debe estar siempre visible');
+      for(const b of (n.branch||[])) expr(nid,b.if);
+      if(n.branch && n.branch[n.branch.length-1].if) P(nid+': la última rama debe ser incondicional');
+      for(const k in (n.set||{})) if(!DLG_FLAGS.includes(k)) P(nid+': escribe una variable no declarada '+k);
+      for(const c of (n.cmd||[])) if(!DLG_CMDS[c.split(' ')[0]]) P(nid+': comando desconocido '+c);
+    }
+  }
+  return problems;
+}
+
 async function forge(){
   const o={name:'Bruna'};
   await say('¡Bienvenido a la forja! Acero de Robledal, el mejor de todo Valdoria.',o);
@@ -943,6 +1203,7 @@ async function inn(){
       if(hero.gold<10){ SFX.buzz(); await say('Lo siento, la habitación cuesta 10 monedas.',o); continue; }
       hero.gold-=10;
       await transition('fade',()=>{ hero.hp=HS.maxhp(); hero.mp=HS.maxmp(); SFX.rest(); },40);
+      autosave(true);
       await say('Duermes profundamente... ¡PV y PM restaurados!');
     } else if(c===1){
       let j=0;
@@ -961,19 +1222,11 @@ async function inn(){
     }
   }
 }
-async function talkBoss(){
-  const o={name:'Ignaroth'};
-  SFX.roar(); shake=0.7;
-  await say('¡¿Quién osa profanar mi guarida?!',o);
-  await say('Huelo el miedo en tu sangre, pequeño escudero. Tus huesos adornarán mi tesoro, junto a los de los otros caballeros.',o);
-  const c=await ask('¿Te enfrentas al dragón?',['¡Luchar!','Retroceder']);
-  if(c===0) await encounter('dragon',true);
-}
 async function openChest(en){
   if(flags.chests[en.id]){ await say('El cofre está vacío.'); return; }
-  flags.chests[en.id]=true; SFX.chest();
+  flags.chests[en.id]=true; SFX.chest(); feedback('small', en.x*TS+8, en.y*TS+6); sparks(en.x*TS+8, en.y*TS+6, 14, false, ['#ffcd75','#fff3b0']);
   const g=en.give;
-  if(g.key){ flags.key=true; await say('¡Has encontrado la Llave de Hierro! Abre la reja de la Cueva de Ceniza.'); }
+  if(g.key){ flags.key=true; await say('¡Has encontrado la Llave de Hierro! Abre la reja de la Cueva de Ceniza.'); await questReward('key'); }
   else if(g.item){ hero.items[g.item]+=g.n; await say('¡Has encontrado '+g.n+' '+(g.n>1?ITEMS[g.item].plural:ITEMS[g.item].name)+'!'); }
   else if(g.gold){ hero.gold+=g.gold; await say('¡Has encontrado '+g.gold+' monedas de oro!'); }
   else if(g.weapon){ hero.weapon=g.weapon; await say('¡Has encontrado el Colmillo de Alba, la espada legendaria! (Ataque +24) Su hoja brilla como el amanecer. Te la equipas al instante.'); }
@@ -987,22 +1240,72 @@ async function interact(){
     if(en.type==='sign') return say(en.text);
   }
   if(tileAt(fx,fy)==='G'){
-    if(flags.key){ SFX.gate(); shake=0.4; flags.gate=true; grid[fy][fx]=':'; await say('Metes la Llave de Hierro en la cerradura... ¡La reja se abre con un chirrido!'); }
+    if(flags.key){ SFX.gate(); feedback('medium', fx*TS+8, fy*TS+8); flags.gate=true; grid[fy][fx]=':'; await say('Metes la Llave de Hierro en la cerradura... ¡La reja se abre con un chirrido!'); await questReward('gate'); }
     else await say('Una reja de hierro oxidada bloquea la entrada de la cueva. Está cerrada con llave.');
   }
 }
 async function pauseMenu(){
   SFX.ok(); let i=0;
   while(true){
-    const c=await choose(['Estado','Objetos','Guardar','Música: '+(muted?'No':'Sí'),'Cerrar'],{x:200,y:8,w:112,start:i});
-    if(c<0||c===4) return;
+    const c=await choose(['Estado','Diario','Objetos','Opciones','Guardar','Cerrar'],{x:200,y:8,w:112,start:i});
+    if(c<0||c===5) return;
     i=c;
     if(c===0) await openModal(new StatusPanel());
-    else if(c===1) await worldItems();
-    else if(c===2) await say(saveGame()?'Partida guardada.':'No se pudo guardar: el navegador bloquea el almacenamiento.');
-    else if(c===3) toggleMute();
+    else if(c===1) await openModal(new JournalPanel());
+    else if(c===2) await worldItems();
+    else if(c===3) await optionsMenu();
+    else if(c===4) await say(saveGame()?'Partida guardada.':'No se pudo guardar: el navegador bloquea el almacenamiento.');
   }
 }
+// Opciones (game-ui-ux + game-feel): volumen por bus, temblor y destellos regulables, velocidad del texto.
+async function optionsMenu(){
+  const STEPS=[0,0.25,0.5,0.75,1], pct=v=>Math.round(v*100)+'%';
+  const next=v=>{ const i=STEPS.indexOf(v); return STEPS[(i+1)%STEPS.length]; };
+  const TEXT=[0.6,1,2], tname=v=>v<1?'Lento':v>1?'Rápido':'Normal';
+  const info=['Volumen de la música.','Volumen de los efectos de sonido.','Fuerza del temblor de pantalla en los golpes. 0% lo quita.',
+    'Destellos blancos en golpes fuertes y rayos. Con "No" se cambian por un tinte suave.','Velocidad a la que aparece el texto.','Guardar los ajustes y volver.'];
+  let i=0;
+  while(true){
+    const items=[{label:'Música',right:pct(settings.music)},{label:'Efectos',right:pct(settings.sfx)},{label:'Temblor',right:pct(settings.shake)},
+      {label:'Destellos',right:settings.flash?'Sí':'No'},{label:'Texto',right:tname(settings.text)},{label:'Volver'}];
+    const c=await choose(items,{x:66,y:20,w:188,start:i,info:j=>info[j],infoBox:{x:66,y:112,w:188,h:52}});
+    if(c<0 || c===5){ saveSettings(); return; }
+    i=c;
+    if(c===0) settings.music=next(settings.music);
+    if(c===1){ settings.sfx=next(settings.sfx); }
+    if(c===2){ settings.shake=next(settings.shake); addTrauma(0.5); }
+    if(c===3) settings.flash=!settings.flash;
+    if(c===4) settings.text=TEXT[(TEXT.indexOf(settings.text)+1)%TEXT.length];
+    applyVolumes(); saveSettings();
+  }
+}
+// Diario de misiones (rpg): el objetivo sale de las banderas guardadas, así no se rompe al cargar.
+function questLog(){
+  if(!flags.metElder) return ['Habla con el Anciano Eldric. Vive en la casa del noroeste de Robledal.'];
+  if(!flags.key) return ['Busca la Llave de Hierro en un cofre al noreste del Bosque Umbrío.','Pista: cruza el puente y sigue el camino hacia el norte.'];
+  if(!flags.gate) return ['Abre la reja de la Cueva de Ceniza, al sureste del bosque.','Pista: ponte frente a la reja y pulsa Z.'];
+  if(!flags.boss) return ['Derrota al dragón Ignaroth, en lo más hondo de la Cueva de Ceniza.','Pista: el fuego apenas le hace daño; el Rayo (nivel 5) sí.'];
+  return ['¡Has salvado Valdoria! Puedes seguir explorando libremente.'];
+}
+class JournalPanel {
+  update(){ if(pressed.ok||pressed.cancel){ pressed.ok=pressed.cancel=false; SFX.cancel(); closeModal(this); } }
+  draw(){
+    const x=20,y=24,w=280,h=150; box(x,y,w,h);
+    txt('Diario de misiones',x+w/2,y+10,'#ffcd75','center');
+    let ly=y+30;
+    questLog().forEach((t,i)=>{ wrap(t,32).forEach(l=>{ txt(l,x+12,ly,i?'#94b0c2':'#f4f4f4'); ly+=12; }); ly+=6; });
+    const opened=Object.keys(flags.chests).length, total=5;
+    txt('Cofres abiertos: '+opened+'/'+total, x+12, y+h-22, '#c9a25a');
+  }
+}
+// rpg: la experiencia no sale solo de los combates; cumplir objetivos también da PX para no obligar a "farmear".
+const QUEST_XP = { key:30, gate:40 };
+async function questReward(kind){
+  const n=QUEST_XP[kind];
+  await say('¡Objetivo cumplido! Ganas '+n+' PX.');
+  await gainXp(n, t=>say(t));
+}
+
 async function worldItems(){
   const keys=['pocion','eter'];
   const list=keys.map(k=>({label:ITEMS[k].name, right:'x'+hero.items[k], disabled:hero.items[k]<=0}));
@@ -1016,6 +1319,7 @@ async function worldItems(){
 async function warpTo(w){
   const ty = w.ty===null ? pl.y : w.ty;
   await transition('fade',()=>loadMap(w.to,w.tx,ty,w.dir),14);
+  autosave(true);                          // cambio de zona: un punto seguro para autoguardar
 }
 
 // ---------- combate ----------
@@ -1034,24 +1338,28 @@ function setupBattle(id,boss){
     bg: boss?BG.lair:(map.id==='cave'?BG.cave:BG.forest), boss, parts:[], fx:[], lastCmd:0, dispHp:hero.hp, dispMp:hero.mp, dispE:d.hp };
 }
 function enemyBox(){ const e=battle.enemy, sp=SPR[e.spr], w=sp.width*e.scale, h=sp.height*e.scale; return { w, h, cx:160, cy:132-h/2, top:132-h }; }
-function popup(x,y,text,col){ popups.push({x,y,text,col,t:0}); }
+function popup(x,y,text,col,big){ popups.push({x,y,text,col,t:0,big:!!big}); }
 function addFx(type){
   const B=battle, eb=enemyBox();
   if(type==='slash') B.fx.push({type,t:0,dur:12,...eb});
   if(type==='bolt'){ const pts=[]; let x=eb.cx+rnd(40)-20; for(let y=0;y<=eb.cy;y+=12){ pts.push([x,y]); x+=rnd(17)-8; } pts.push([eb.cx,eb.cy]); B.fx.push({type,t:0,dur:20,pts}); }
   if(type==='fire') for(let i=0;i<46;i++) B.parts.push({ x:eb.cx+(Math.random()-.5)*eb.w*0.9, y:132-Math.random()*14, vx:(Math.random()-.5)*0.6, vy:-(0.6+Math.random()*1.9), life:30+rnd(22), max:52, col:['#ffcd75','#ef7d57','#e04f2f','#fff3b0'][i%4], s:2+rnd(3) });
+  if(type==='levelup') for(let i=0;i<40;i++) B.parts.push({ x:10+rnd(86), y:30+rnd(30), vx:(Math.random()-.5)*0.6, vy:-(0.6+Math.random()*1.2), life:40+rnd(30), max:70, col:['#ffcd75','#fff3b0','#ffffff'][i%3], s:2 });
   if(type==='heal') for(let i=0;i<26;i++) B.parts.push({ x:10+rnd(86), y:20+rnd(36), vx:0, vy:-(0.3+Math.random()*0.7), life:30+rnd(20), max:50, col:i%2?'#7cff8a':'#e8fff0', s:2 });
   if(type==='breath') for(let i=0;i<110;i++) B.parts.push({ x:120+rnd(30), y:70+rnd(20), vx:(Math.random()-.5)*5, vy:1+Math.random()*3.2, life:30+rnd(26), max:56, col:['#ffcd75','#ef7d57','#e04f2f','#fff3b0'][i%4], s:3+rnd(3) });
 }
 async function hurtHero(dmg){
-  hero.hp=Math.max(0,hero.hp-dmg); SFX.hurt(); shake=Math.min(1,shake+0.55); hurtFlash=10;
-  popup(52,74,String(dmg),'#ff6b6b'); await wait(26);
+  hero.hp=Math.max(0,hero.hp-dmg); SFX.hurt(); hurtFlash=10; battle.heroShake=12;
+  feedback(dmg>=HS.maxhp()*0.25?'large':'medium');
+  popup(52,74,String(dmg),'#ff6b6b',dmg>=HS.maxhp()*0.25); await wait(26);
 }
 async function hurtEnemy(dmg,crit){
   const e=battle.enemy, eb=enemyBox();
-  e.hp=Math.max(0,e.hp-dmg); e.flash=16; shake=Math.min(1,shake+(crit?0.55:0.28));
+  e.hp=Math.max(0,e.hp-dmg); e.flash=16; e.sq=12;
+  const big = crit || e.hp<=0;                     // crítico o golpe final: nivel fuerte
+  feedback(big?'large':'medium', eb.cx, eb.cy);
   crit?SFX.crit():SFX.hit();
-  popup(eb.cx, eb.cy-8, String(dmg), crit?'#ffcd75':'#ffffff');
+  popup(eb.cx, eb.cy-8, String(dmg), crit?'#ffcd75':'#ffffff', big);
   await wait(26);
   if(e.hp<=0){ e.dying=0; SFX.die(); await wait(34); }
 }
@@ -1095,7 +1403,7 @@ async function heroAct(act){
       await hurtEnemy(d,false);
       if(e.fireRes && e.hp>0) await bsay('Ignaroth apenas siente las llamas...',35);
     } else if(act.id==='rayo'){
-      addFx('bolt'); whiteFlash=6; SFX.thunder(); await wait(22);
+      addFx('bolt'); flashWhite(6); SFX.thunder(); await wait(22);
       await hurtEnemy(dmgCalc(HS.mag()*2.4,e.def*0.25),false);
     } else if(act.id==='curar'){
       addFx('heal'); SFX.heal();
@@ -1145,18 +1453,20 @@ async function enemyAttack(){
 }
 async function enemyTurn(){
   const e=battle.enemy;
-  if(e.id==='dragon' && !e.enraged && e.hp<e.maxhp/2){ e.enraged=true; SFX.roar(); shake=1; await bsay('¡Ignaroth ruge de furia! Sus ojos arden como brasas y ahora puede atacar dos veces.',45); }
+  if(e.id==='dragon' && !e.enraged && e.hp<e.maxhp/2){ e.enraged=true; SFX.roar(); addTrauma(1); await bsay('¡Ignaroth ruge de furia! Sus ojos arden como brasas y ahora puede atacar dos veces.',45); }
   const times = e.enraged && Math.random()<0.35 ? 2 : 1;
   for(let i=0;i<times;i++){ await enemyAttack(); if(hero.hp<=0) return; }
 }
-async function gainXp(n){
+async function gainXp(n, out=bsay){
   hero.xp+=n;
   while(hero.xp>=xpNeed(hero.lv)){
     hero.xp-=xpNeed(hero.lv); hero.lv++;
     for(const k in GROW) hero.base[k]+=GROW[k];
     hero.hp+=GROW.hp; hero.mp+=GROW.mp; SFX.levelup();
-    await bsay('¡'+hero.name+' sube al nivel '+hero.lv+'!\nPV +9  PM +3  Ataque +2\nDefensa +1  Magia +2',90);
-    for(const k in SPELLS) if(SPELLS[k].lv===hero.lv){ SFX.heal(); await bsay('¡Has aprendido el hechizo '+SPELLS[k].name+'!',70); }
+    const gold=['#ffcd75','#fff3b0','#ffffff'];
+    if(scene==='battle'){ addFx('levelup'); addTrauma(0.3); } else sparks(pl.x*TS+8, pl.y*TS+4, 24, true, gold);
+    await out('¡'+hero.name+' sube al nivel '+hero.lv+'!\nPV +9  PM +3  Ataque +2\nDefensa +1  Magia +2',90);
+    for(const k in SPELLS) if(SPELLS[k].lv===hero.lv){ SFX.heal(); await out('¡Has aprendido el hechizo '+SPELLS[k].name+'!',70); }
   }
 }
 async function battleLoop(){
@@ -1192,7 +1502,7 @@ async function victory(){
 async function encounter(id, boss=false){
   busy++;
   try{
-    SFX.encounter(); whiteFlash=8; playMusic(boss?'boss':'battle');
+    SFX.encounter(); flashWhite(8); playMusic(boss?'boss':'battle');
     await transition('swirl',()=>{ setupBattle(id,boss); scene='battle'; },26);
     const res=await battleLoop();
     if(res==='lose') await gameOver();
@@ -1210,7 +1520,7 @@ async function bossEnding(){
   flags.boss=true;
   await transition('fade',()=>{ scene='ending'; battle=null; ending={t:0}; playMusic('title'); },45);
   await waitOk();
-  await transition('fade',()=>{ loadMap('village',5,7,'up'); scene='world'; saveGame(); },30);
+  await transition('fade',()=>{ loadMap('village',5,7,'up'); scene='world'; saveGame(); autosave(true); },30);
   await say('La partida se ha guardado. Puedes seguir explorando Valdoria y hablar con los aldeanos.');
 }
 
@@ -1295,9 +1605,9 @@ function updateWorld(){
     if(pl.prog>=1){ pl.x=pl.tx; pl.y=pl.ty; pl.moving=false; pl.prog=0; if(onArrive()) return; }
     else return;
   }
-  if(pressed.cancel){ runScript(pauseMenu); return; }
-  if(pressed.ok){ runScript(interact); return; }
-  const on = k => held[k] || pressed[k];
+  if(consume('cancel')){ runScript(pauseMenu); return; }
+  if(consume('ok')){ runScript(interact); return; }
+  const on = k => held[k] || padHeld[k] || pressed[k];
   const d = on('up')?'up':on('down')?'down':on('left')?'left':on('right')?'right':null;
   if(d){
     pl.dir=d; const [dx,dy]=DIRS[d];
@@ -1309,7 +1619,8 @@ function updateBattleAnim(){
   const B=battle; if(!B) return;
   const e=B.enemy;
   if(e.flash>0) e.flash--; if(e.lunge>0) e.lunge--; if(e.dying>=0 && e.dying<40) e.dying++;
-  for(const p of B.parts){ p.x+=p.vx; p.y+=p.vy; p.life--; }
+  if(e.sq>0) e.sq--; if(B.heroShake>0) B.heroShake--;
+  for(const p of B.parts){ p.x+=p.vx; p.y+=p.vy; p.life--; if(p.drag){ p.vx*=0.86; p.vy*=0.86; } }
   B.parts=B.parts.filter(p=>p.life>0);
   for(const f of B.fx) f.t++;
   B.fx=B.fx.filter(f=>f.t<f.dur);
@@ -1328,29 +1639,43 @@ function newGame(){
   });
 }
 function continueGame(){
-  const s=readSave(); if(!s) return;
-  hero=s.hero; flags=s.flags; if(!flags.chests) flags.chests={}; playFrames=s.time||0;
-  loadMap(s.map,s.x,s.y,s.dir); scene='world';
+  const s=newestSave(); if(!s || !s.data) return;
+  const d=s.data;
+  hero=d.hero; flags=d.flags; playFrames=d.time||0;
+  hero.hp=clamp(Math.round(hero.hp),1,HS.maxhp()); hero.mp=clamp(Math.round(hero.mp),0,HS.maxmp());
+  loadMap(d.map,d.x,d.y,d.dir); scene='world';
+  if(SOLID.has(tileAt(d.x,d.y)) || entAt(d.x,d.y)) loadMap('village',5,8,'up');   // posición imposible: volver a la aldea
+  if(s.backup) runScript(()=>say('La partida principal estaba dañada. Se ha cargado la copia de seguridad.'));
 }
 function updateTitle(){
-  const hasSave=!!readSave();
-  if(pressed.up||pressed.down){ titleSel=1-titleSel; SFX.blip(); }
+  const hasSave=!!(titleSave && titleSave.data);
+  if(pressed.up){ titleSel=(titleSel+2)%3; SFX.blip(); }
+  if(pressed.down){ titleSel=(titleSel+1)%3; SFX.blip(); }
   if(pressed.ok){
     if(titleSel===1 && !hasSave){ SFX.buzz(); return; }
     SFX.ok();
+    if(titleSel===2){ runScript(optionsMenu); return; }
     transition('fade',()=>{ if(titleSel===0) newGame(); else continueGame(); },20);
   }
 }
 function update(){
   frame++;
-  for(let i=timers.length-1;i>=0;i--){ if(--timers[i].f<=0){ const t=timers[i]; timers.splice(i,1); t.res(); } }
+  pollPad();
   musicTick();
   if(pressed.mute){ toggleMute(); }
-  if(shake>0) shake=Math.max(0,shake-0.04);
-  if(hurtFlash>0) hurtFlash--; if(whiteFlash>0) whiteFlash--;
-  for(const p of popups) p.t++;
-  for(let i=popups.length-1;i>=0;i--) if(popups[i].t>50) popups.splice(i,1);
-  if(scene==='battle') updateBattleAnim();
+  // El temblor y los destellos corren en tiempo real, también durante el parón de impacto.
+  if(trauma>0) trauma=Math.max(0,trauma-0.02); shakeT+=0.5;
+  if(hurtFlash>0) hurtFlash--; if(whiteFlash>0) whiteFlash--; if(saveIcon>0) saveIcon--;
+  if(hitStop>0){
+    hitStop--;                       // parón de impacto: la pose, los textos y los temporizadores se congelan
+  } else {
+    for(let i=timers.length-1;i>=0;i--){ if(--timers[i].f<=0){ const t=timers[i]; timers.splice(i,1); t.res(); } }
+    for(const p of popups) p.t++;
+    for(let i=popups.length-1;i>=0;i--) if(popups[i].t>50) popups.splice(i,1);
+    if(scene==='battle') updateBattleAnim();
+    for(const p of wparts){ p.x+=p.vx; p.y+=p.vy; p.life--; if(p.drag){ p.vx*=0.86; p.vy*=0.86; } }
+    for(let i=wparts.length-1;i>=0;i--) if(wparts[i].life<=0) wparts.splice(i,1);
+  }
   if(scene==='ending' && ending) ending.t++;
   if(scene==='world' || scene==='battle') playFrames++;
   if(trans){
@@ -1363,6 +1688,8 @@ function update(){
     const r=okWaiter; okWaiter=null; SFX.ok(); r();
   } else if(scene==='title') updateTitle();
   else if(scene==='world') updateWorld();
+  // Las pulsaciones hechas durante un diálogo, un menú o una transición no pasan al mundo.
+  if(modals.length || trans || busy || scene!=='world') clearBuffer();
   for(const k in pressed) pressed[k]=false;
 }
 
@@ -1401,6 +1728,9 @@ function drawWorld(){
     else if(e.type==='sign') ctx.drawImage(SPR.sign,sx,sy);
     else if(e.type==='boss'){ ctx.fillStyle='rgba(0,0,0,0.35)'; ctx.fillRect(sx+4,sy+28,26,4); ctx.drawImage(SPR.dragon,sx,sy+4+Math.round(Math.sin(frame/25)*1.5)); }
   }
+  for(const p of wparts){ ctx.globalAlpha=clamp(p.life/p.max*1.5,0,1); ctx.fillStyle=p.col; ctx.fillRect(Math.round(p.x-camX),Math.round(p.y-camY),p.s,p.s); }
+  ctx.globalAlpha=1;
+  if(saveIcon>0 && Math.floor(saveIcon/10)%2===0) txt('Guardando...',W-8,H-14,'#ffcd75','right');
   // HUD
   if(!modals.length || modals[modals.length-1] instanceof Chooser){
     box(4,H-34,116,30);
@@ -1422,6 +1752,7 @@ function drawBattle(){
   let s=e.scale, w=sp.width*s, h=sp.height*s, x=160-w/2, y=132-h;
   y += Math.round(Math.sin(frame/18)*2);
   if(e.lunge>0){ const k=Math.sin((1-e.lunge/14)*Math.PI); const g=1+0.12*k; w*=g; h*=g; x=160-w/2; y=132-h+k*6; }
+  if(e.sq>0){ const v=1-easeOutBack(1-e.sq/12); w*=1+0.28*v; h*=1-0.28*v; x=160-w/2; y=132-h; }   // aplastar y estirar al recibir un golpe
   ctx.fillStyle='rgba(0,0,0,0.3)'; ctx.fillRect(160-w*0.35,130,w*0.7,4);
   if(e.dying<0 || e.dying<30){
     ctx.globalAlpha = e.dying>=0 ? Math.max(0,1-e.dying/30) : 1;
@@ -1436,12 +1767,13 @@ function drawBattle(){
   for(const p of B.parts){ ctx.globalAlpha=clamp(p.life/p.max*1.5,0,1); ctx.fillStyle=p.col; ctx.fillRect(Math.round(p.x),Math.round(p.y),p.s,p.s); }
   ctx.globalAlpha=1;
   // estado del héroe
-  box(4,4,100,52);
-  txt(hero.name.toUpperCase(),10,10,'#ffcd75'); txt('Nv'+hero.lv,98,10,'#f4f4f4','right');
-  txt('PV',10,22,'#c9a25a'); txt(Math.round(B.dispHp)+'/'+HS.maxhp(),98,22,'#f4f4f4','right');
-  bar(10,31,88,4,B.dispHp/HS.maxhp(),hpCol(hero.hp/HS.maxhp()));
-  txt('PM',10,38,'#c9a25a'); txt(Math.round(B.dispMp)+'/'+HS.maxmp(),98,38,'#f4f4f4','right');
-  bar(10,47,88,4,B.dispMp/HS.maxmp(),'#5aa0ff');
+  const hx = B.heroShake>0 ? Math.round(Math.sin(B.heroShake*1.9)*B.heroShake/4) : 0;   // la caja del héroe se sacude al recibir daño
+  box(4+hx,4,100,52);
+  txt(hero.name.toUpperCase(),10+hx,10,'#ffcd75'); txt('Nv'+hero.lv,98+hx,10,'#f4f4f4','right');
+  txt('PV',10+hx,22,'#c9a25a'); txt(Math.round(B.dispHp)+'/'+HS.maxhp(),98+hx,22,'#f4f4f4','right');
+  bar(10+hx,31,88,4,B.dispHp/HS.maxhp(),hpCol(hero.hp/HS.maxhp()));
+  txt('PM',10+hx,38,'#c9a25a'); txt(Math.round(B.dispMp)+'/'+HS.maxmp(),98+hx,38,'#f4f4f4','right');
+  bar(10+hx,47,88,4,B.dispMp/HS.maxmp(),'#5aa0ff');
   // enemigo
   if(e.dying<0){ box(216,4,100,30); txt(e.name,222,10,B.boss?'#ff8a6a':'#f4f4f4'); bar(222,22,88,5,B.dispE/e.maxhp,hpCol(e.hp/e.maxhp)); }
   if(!modals.length) box(BATTLE_BOX.x,BATTLE_BOX.y,BATTLE_BOX.w,BATTLE_BOX.h);
@@ -1454,12 +1786,19 @@ function drawTitle(){
   txt('Crónicas de',W/2,40,'#e8dcc0','center');
   bigTxt('VALDORIA',W/2,54,24,'#ffcd75','#6e1f35');
   txt('La ceniza del dragón',W/2,88,'#c9a25a','center');
-  const hasSave=!!readSave();
-  box(W/2-70,166,140,40);
-  const opts=['Nueva partida','Continuar'];
-  opts.forEach((o,i)=>{ const col = i===1&&!hasSave ? '#6b6f80' : (i===titleSel?'#ffcd75':'#f4f4f4'); txt(o,W/2-48,174+i*14,col); });
-  if(Math.floor(frame/20)%3!==2) tri(W/2-60,174+titleSel*14);
-  txt('Z / ENTER para empezar',W/2,224,'#8a8296','center');
+  const hasSave=!!(titleSave && titleSave.data);
+  box(W/2-70,150,140,52);
+  const opts=['Nueva partida','Continuar','Opciones'];
+  opts.forEach((o,i)=>{ const col = i===1&&!hasSave ? '#6b6f80' : (i===titleSel?'#ffcd75':'#f4f4f4'); txt(o,W/2-48,158+i*14,col); });
+  if(!modals.length && Math.floor(frame/20)%3!==2) tri(W/2-60,158+titleSel*14);
+  let info='Z / ENTER para empezar';
+  if(titleSel===1){
+    if(hasSave){ const d=titleSave.data; info='Nv '+d.hero.lv+' · '+MAPS[d.map].name+' · '+fmtTime(d.time||0); }
+    else if(titleSave && titleSave.error==='newer') info='Partida de una versión más nueva';
+    else if(titleSave && titleSave.error==='blocked') info='El navegador bloquea el guardado';
+    else info='No hay ninguna partida guardada';
+  }
+  txt(info,W/2,214,'#c9a25a','center');
 }
 const ENDING_LINES = [
   'Con un último rugido, Ignaroth cae.',
@@ -1490,7 +1829,7 @@ function drawGameOver(){
 }
 function draw(){
   ctx.save();
-  if(shake>0 && scene!=='title'){ const m=shake*shake*7; ctx.translate(Math.round((Math.random()*2-1)*m), Math.round((Math.random()*2-1)*m)); }
+  if(trauma>0 && scene!=='title'){ const k=trauma*trauma*settings.shake; ctx.translate(Math.round(7*k*Math.sin(shakeT*1.7)), Math.round(5*k*Math.sin(shakeT*2.3))); }
   ctx.fillStyle='#000'; ctx.fillRect(-10,-10,W+20,H+20);
   if(scene==='title') drawTitle();
   else if(scene==='world') drawWorld();
@@ -1499,9 +1838,14 @@ function draw(){
   else if(scene==='gameover') drawGameOver();
   else if(scene==='loading'){ txt('Cargando...',W/2,H/2-4,'#c9a25a','center'); }
   ctx.restore();
-  if(hurtFlash>0){ ctx.fillStyle='rgba(224,79,95,'+(hurtFlash/10*0.35)+')'; ctx.fillRect(0,0,W,H); }
+  if(hurtFlash>0){ ctx.fillStyle='rgba(224,79,95,'+(hurtFlash/10*(settings.flash?0.35:0.15))+')'; ctx.fillRect(0,0,W,H); }
   for(const m of modals) m.draw();
-  for(const p of popups){ const y=p.y-Math.min(p.t,14)*1.3; ctx.globalAlpha=p.t>38?Math.max(0,1-(p.t-38)/12):1; bigTxt(p.text,p.x,Math.round(y),8,p.col,'#0b0a12'); ctx.globalAlpha=1; }
+  for(const p of popups){
+    // Número que "salta": crece por encima de su tamaño y se asienta (easeOutBack), luego sube y se desvanece.
+    const rest=p.big?16:8, k=easeOutBack(Math.min(1,p.t/8)), size=p.t<8 ? Math.round(rest*(1.9-0.9*k)/2)*2 : rest;
+    const y=p.y-Math.min(p.t,14)*1.3-size/2+4;
+    ctx.globalAlpha=p.t>38?Math.max(0,1-(p.t-38)/12):1; bigTxt(p.text,p.x,Math.round(y),Math.max(8,size),p.col,'#0b0a12'); ctx.globalAlpha=1;
+  }
   if(whiteFlash>0){ ctx.fillStyle='rgba(255,255,255,'+(whiteFlash/8*0.8)+')'; ctx.fillRect(0,0,W,H); }
   if(trans){
     const t=trans.t, d=trans.dur, p = t<d ? t/d : 1-(t-d)/d;
@@ -1524,11 +1868,15 @@ async function boot(){
   BG.forest=forestBG(); BG.cave=caveBG(false); BG.lair=caveBG(true); BG.title=titleBG(); BG.dawn=dawnBG();
   requestAnimationFrame(loop);
   try{ await Promise.race([ document.fonts.load(FONT), new Promise(r=>setTimeout(r,2500)) ]); await document.fonts.load('24px "Press Start 2P"'); }catch(e){}
+  titleSave=newestSave();
   scene='title'; playMusic('title');
 }
 // acceso para pruebas desde la consola
 window.RPG = { get hero(){return hero;}, get flags(){return flags;}, get scene(){return scene;}, get map(){return map&&map.id;}, get pos(){return pl&&[pl.x,pl.y];},
   get ui(){ return { modals:modals.map(m=>m.constructor.name), busy, trans:!!trans, text: modals.length && modals[modals.length-1].pages ?modals[modals.length-1].pages.flat().join(' ') : '' }; },
+  validateDialogues:()=>validateDialogues(), evalExpr:(e,v)=>evalExpr(e,v), questLog:()=>questLog(), settings, HS:()=>({atk:HS.atk(),def:HS.def(),maxhp:HS.maxhp()}),
+  exportArt:()=>{ const o={}; for(const k in SPR){ const v=SPR[k]; if(Array.isArray(v)) v.forEach((c,i)=>o[k+'_'+i]=c.toDataURL()); else o[k]=v.toDataURL(); } for(const th in TILESETS) for(const ch in TILESETS[th]){ const e=TILESETS[th][ch]; (e.anim||e).forEach((c,i)=>o['tile_'+th+'_'+(ch==='"'?'tall':ch==='.'?'dot':ch===':'?'path':ch===','?'flower':ch==='~'?'water':ch==='='?'bridge':ch)+'_'+i]=c.toDataURL()); } return o; },
+  debugFeel:()=>({hitStop, trauma, sq: battle?battle.enemy.sq:0}), save:()=>saveGame(), readSlot:k=>readSlot(k),
   newGame:()=>newGame(), warp:(id,x,y)=>loadMap(id,x,y,'down'), fight:id=>{ if(busy||scene!=='world') return false; runScript(()=>encounter(id,id==='dragon')); return true; }, grid:()=>grid, walkable:(x,y)=>walkable(x,y), ents:()=>ents };
 boot();
 </script>
