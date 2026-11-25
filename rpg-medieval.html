@@ -288,8 +288,8 @@ const NPC_REMAP = {
   smith:  { h:'N', b:'n', B:'d', y:'E', S:'S' },
   inn:    { h:'o', b:'g', B:'G', y:'w' },
   kid:    { h:'y', b:'r', B:'R', y:'w' },
-  guard:  { h:'E', b:'e', B:'E', y:'r' },
-  knight: { h:'e', b:'E', B:'d', y:'y' },
+  guard:  { h:'N', b:'e', B:'E', y:'r' },   // guardia: pelo castaño, cota gris
+  knight: { h:'w', b:'E', B:'d', y:'y' },   // Sir Galvan: canoso, armadura oscura
 };
 function buildSprites(){
   SPR.down  = [spr(HERO_DOWN), spr(withLegs(HERO_DOWN, LEGS_DOWN_B))];
@@ -1262,13 +1262,13 @@ async function optionsMenu(){
   const STEPS=[0,0.25,0.5,0.75,1], pct=v=>Math.round(v*100)+'%';
   const next=v=>{ const i=STEPS.indexOf(v); return STEPS[(i+1)%STEPS.length]; };
   const TEXT=[0.6,1,2], tname=v=>v<1?'Lento':v>1?'Rápido':'Normal';
-  const info=['Volumen de la música.','Volumen de los efectos de sonido.','Fuerza del temblor de pantalla en los golpes. 0% lo quita.',
-    'Destellos blancos en golpes fuertes y rayos. Con "No" se cambian por un tinte suave.','Velocidad a la que aparece el texto.','Guardar los ajustes y volver.'];
+  const info=['Volumen de la música.','Volumen de los efectos de sonido.','Temblor de pantalla en los golpes. 0% lo quita.',
+    'Destellos en golpes fuertes y rayos. "No" usa un tinte suave.','Velocidad a la que aparece el texto.','Guardar los ajustes y volver.'];
   let i=0;
   while(true){
     const items=[{label:'Música',right:pct(settings.music)},{label:'Efectos',right:pct(settings.sfx)},{label:'Temblor',right:pct(settings.shake)},
       {label:'Destellos',right:settings.flash?'Sí':'No'},{label:'Texto',right:tname(settings.text)},{label:'Volver'}];
-    const c=await choose(items,{x:66,y:20,w:188,start:i,info:j=>info[j],infoBox:{x:66,y:112,w:188,h:52}});
+    const c=await choose(items,{x:66,y:20,w:188,start:i,info:j=>info[j],infoBox:{x:66,y:112,w:188,h:64}});
     if(c<0 || c===5){ saveSettings(); return; }
     i=c;
     if(c===0) settings.music=next(settings.music);
@@ -1733,10 +1733,10 @@ function drawWorld(){
   if(saveIcon>0 && Math.floor(saveIcon/10)%2===0) txt('Guardando...',W-8,H-14,'#ffcd75','right');
   // HUD
   if(!modals.length || modals[modals.length-1] instanceof Chooser){
-    box(4,H-34,116,30);
+    box(4,H-34,136,30);
     txt('PV '+hero.hp+'/'+HS.maxhp(),10,H-28, hero.hp/HS.maxhp()<=0.25?'#ff8a8a':'#f4f4f4');
     txt('PM '+hero.mp+'/'+HS.maxmp(),10,H-17,'#a9d6ff');
-    txt('Nv'+hero.lv,114,H-28,'#ffcd75','right'); txt(hero.gold+'G',114,H-17,'#ffcd75','right');
+    txt('Nv'+hero.lv,134,H-28,'#ffcd75','right'); txt(hero.gold+'G',134,H-17,'#ffcd75','right');
   }
   if(banner && banner.t>0){
     ctx.globalAlpha = Math.min(1, banner.t/20, (150-banner.t)/15+0.001);

@@ -31,8 +31,12 @@ Un pequeño juego de rol en pixel art ambientado en la Edad Media. Está entero 
 - **Mundo:** aldea con herrería y posada, bosque con río y encuentros aleatorios, cueva con lava y el dragón.
 - **Combate por turnos:** atacar, magia (Fuego, Curación y, desde el nivel 5, Rayo), objetos y huir. Siete enemigos distintos con ataques especiales y un jefe final.
 - **Progresión:** niveles y experiencia, oro, armas y armaduras, pociones y elixires, cofres y una espada legendaria escondida.
-- **Guardado:** en la posada o desde el menú (se guarda en el navegador). Si caes, despiertas en la posada con la mitad del oro.
+- **Guardado:** en la posada o desde el menú, más un autoguardado al cambiar de zona (se guarda en el navegador). Cada partida guarda una copia de seguridad: si la principal se daña, se carga la copia. Si caes, despiertas en la posada con la mitad del oro.
+- **Misiones:** el Diario del menú indica el objetivo actual, y cumplir objetivos también da experiencia.
+- **Opciones:** volumen de música y de efectos, intensidad del temblor de pantalla, destellos (se pueden cambiar por un tinte suave) y velocidad del texto.
 
-**Controles:** flechas o WASD para moverte, Z / Enter / Espacio para hablar y aceptar, X / Esc para el menú y volver, M para la música. En el celular aparecen una cruceta y los botones A y B.
+**Controles:** flechas o WASD para moverte, Z / Enter / Espacio para hablar y aceptar, X / Esc para el menú y volver, M para silenciar. También funciona con mando (cruceta o stick, A para aceptar, B o Start para el menú). En el celular aparecen una cruceta y los botones A y B.
+
+**Cómo está hecho:** se aplicaron las skills de `gamedev-skills/awesome-gamedev-agent-skills` instaladas en `.claude/skills/` (`rpg`, `save-systems`, `dialogue-systems`, `game-feel`, `input-systems`, `audio-design`, `game-ui-ux` y `create-game-assets`). Los diálogos de los personajes son datos (un grafo con condiciones) que se validan automáticamente. Todo el arte está dibujado a mano píxel a píxel en el propio código, sin imágenes generadas por IA ni recursos de terceros.
 
 Con GitHub Pages activado, queda en `https://<usuario>.github.io/<repositorio>/rpg-medieval.html`.
