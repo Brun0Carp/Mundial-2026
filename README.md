@@ -29,7 +29,8 @@ Un pequeño juego de rol en pixel art ambientado en la Edad Media. Está entero 
 **Historia:** el dragón Ignaroth ha despertado en la Cueva de Ceniza. Aldren, un escudero de la aldea de Robledal, debe cruzar el Bosque Umbrío, encontrar la llave de la reja y derrotarlo.
 
 - **Mundo:** aldea con herrería y posada, bosque con río y encuentros aleatorios, cueva con lava y el dragón.
-- **Combate por turnos:** atacar, magia (Fuego, Curación y, desde el nivel 5, Rayo), objetos y huir. Siete enemigos distintos con ataques especiales y un jefe final.
+- **Combate por turnos:** atacar, arco, magia (Fuego, Curación y, desde el nivel 5, Rayo), objetos y huir. Siete enemigos distintos con ataques especiales y un jefe final.
+- **El caballero animado:** en combate, Aldren es un caballero de pixel art con 8 animaciones de 8 fotogramas: caminar, correr, saltar, agacharse, golpear, disparar con arco y lanzar hechizos (más una de reposo). Entra caminando, corre hacia el enemigo para atacar, dispara flechas que atraviesan armaduras, alza la espada para los hechizos, se arrodilla para beber pociones y a veces salta para esquivar un golpe. También aparece en la pantalla de título.
 - **Progresión:** niveles y experiencia, oro, armas y armaduras, pociones y elixires, cofres y una espada legendaria escondida.
 - **Guardado:** en la posada o desde el menú, más un autoguardado al cambiar de zona (se guarda en el navegador). Cada partida guarda una copia de seguridad: si la principal se daña, se carga la copia. Si caes, despiertas en la posada con la mitad del oro.
 - **Misiones:** el Diario del menú indica el objetivo actual, y cumplir objetivos también da experiencia.
@@ -37,6 +38,6 @@ Un pequeño juego de rol en pixel art ambientado en la Edad Media. Está entero 
 
 **Controles:** flechas o WASD para moverte, Z / Enter / Espacio para hablar y aceptar, X / Esc para el menú y volver, M para silenciar. También funciona con mando (cruceta o stick, A para aceptar, B o Start para el menú). En el celular aparecen una cruceta y los botones A y B.
 
-**Cómo está hecho:** se aplicaron las skills de `gamedev-skills/awesome-gamedev-agent-skills` instaladas en `.claude/skills/` (`rpg`, `save-systems`, `dialogue-systems`, `game-feel`, `input-systems`, `audio-design`, `game-ui-ux` y `create-game-assets`). Los diálogos de los personajes son datos (un grafo con condiciones) que se validan automáticamente. Todo el arte está dibujado a mano píxel a píxel en el propio código, sin imágenes generadas por IA ni recursos de terceros.
+**Cómo está hecho:** se aplicaron las skills de `gamedev-skills/awesome-gamedev-agent-skills` instaladas en `.claude/skills/` (`rpg`, `save-systems`, `dialogue-systems`, `game-feel`, `input-systems`, `audio-design`, `game-ui-ux` y `create-game-assets`). Los diálogos de los personajes son datos (un grafo con condiciones) que se validan automáticamente. Todo el arte está dibujado a mano píxel a píxel en el propio código, sin imágenes generadas por IA ni recursos de terceros. El caballero se hizo con el plugin `agent-sprite-forge` (skill `codeart2d`): como no había ningún generador de imágenes configurado, se dibujó con código, sin modelo de imagen. Sus fuentes están en `arte/caballero/`: `build_knight.py` describe cada fotograma con un esqueleto y genera `caballero.pixelspec.json`; el renderizador de codeart2d lo dibuja y verifica (`render/codeart-meta.json`), y `build_sheet.py` monta la hoja y la incrusta en el juego.
 
 Con GitHub Pages activado, queda en `https://<usuario>.github.io/<repositorio>/rpg-medieval.html`.

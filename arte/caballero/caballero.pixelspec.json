@@ -1,0 +1,8913 @@
+{
+ "schema": "codeart2d.pixelspec.v1",
+ "name": "caballero",
+ "canvas": [
+  48,
+  48
+ ],
+ "anchor_px": [
+  18,
+  47
+ ],
+ "palette": {
+  "k": "#1a1c2c",
+  "A": "#e2e8f0",
+  "a": "#a9b8c8",
+  "m": "#6b7d96",
+  "M": "#46536b",
+  "d": "#333c57",
+  "b": "#3b5dc9",
+  "B": "#29366f",
+  "y": "#ffcd75",
+  "Y": "#c98a3b",
+  "r": "#d0465a",
+  "R": "#7a2337",
+  "n": "#8b5a2b",
+  "N": "#4a2c14",
+  "D": "#2e1c0e",
+  "w": "#f4f4f4",
+  "e": "#94b0c2",
+  "c": "#41a6f6",
+  "C": "#73eff7",
+  "W": "#ffffff",
+  "g": "#c2c3c7"
+ },
+ "outline": {
+  "mode": "solid",
+  "color": "k"
+ },
+ "layers": [
+  {
+   "name": "cape",
+   "z": 0,
+   "origin": [
+    0,
+    0
+   ],
+   "rows": [
+    "."
+   ]
+  },
+  {
+   "name": "far_arm",
+   "z": 1,
+   "origin": [
+    0,
+    0
+   ],
+   "rows": [
+    "."
+   ]
+  },
+  {
+   "name": "far_leg",
+   "z": 2,
+   "origin": [
+    0,
+    0
+   ],
+   "rows": [
+    "."
+   ]
+  },
+  {
+   "name": "near_leg",
+   "z": 3,
+   "origin": [
+    0,
+    0
+   ],
+   "rows": [
+    "."
+   ]
+  },
+  {
+   "name": "torso",
+   "z": 4,
+   "origin": [
+    0,
+    0
+   ],
+   "rows": [
+    "."
+   ]
+  },
+  {
+   "name": "head",
+   "z": 5,
+   "origin": [
+    0,
+    0
+   ],
+   "rows": [
+    "."
+   ]
+  },
+  {
+   "name": "near_arm",
+   "z": 6,
+   "origin": [
+    0,
+    0
+   ],
+   "rows": [
+    "."
+   ]
+  },
+  {
+   "name": "weapon",
+   "z": 7,
+   "origin": [
+    0,
+    0
+   ],
+   "rows": [
+    "."
+   ]
+  },
+  {
+   "name": "fx",
+   "z": 8,
+   "origin": [
+    0,
+    0
+   ],
+   "rows": [
+    "."
+   ]
+  }
+ ],
+ "frames": [
+  {
+   "name": "idle_0",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rRRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM",
+      ".MMd",
+      "MMd.",
+      "Md..",
+      "Md..",
+      "MMM.",
+      ".Md.",
+      ".MMM",
+      "..Md"
+     ],
+     "dx": 14,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "..MMMM",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      ".Aam..",
+      "..AaA.",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AA...",
+      "Am...",
+      "Am...",
+      "Am...",
+      "AaA..",
+      ".Am..",
+      ".AaA.",
+      "..Ama",
+      "...Am"
+     ],
+     "dx": 19,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "y............",
+      "NN..y........",
+      "..Ny.........",
+      "...yw........",
+      "..y..w.......",
+      "......w......",
+      ".......ww....",
+      ".........w...",
+      "..........ww.",
+      "............e"
+     ],
+     "dx": 20,
+     "dy": 31
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "idle_1",
+   "layers": {
+    "cape": {
+     "rows": [
+      ".....rrrrr",
+      ".....rrrrR",
+      "....rrrrrR",
+      "....rrrrrR",
+      "...rrrrrR.",
+      "...rrrrrR.",
+      "...rrrrrR.",
+      "..rrrrrrR.",
+      "..rrrrrrR.",
+      "..rrrrrrR.",
+      ".rrrrrrrR.",
+      ".rrrrrrR..",
+      "rrrrrrrR..",
+      "rrrrrrrR..",
+      ".rRRRRRR.."
+     ],
+     "dx": 10,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM",
+      ".MMd",
+      "MMd.",
+      "Md..",
+      "Md..",
+      "MMM.",
+      ".Md.",
+      ".MMM",
+      "..Md"
+     ],
+     "dx": 14,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "..MMMM",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      ".Aam..",
+      "..AaA.",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AA...",
+      "Am...",
+      "Am...",
+      "Am...",
+      "AaA..",
+      ".Am..",
+      ".AaA.",
+      "..Ama",
+      "...Am"
+     ],
+     "dx": 19,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "y............",
+      "NN..y........",
+      "..Ny.........",
+      "...yw........",
+      "..y..w.......",
+      "......w......",
+      ".......ww....",
+      ".........w...",
+      "..........ww.",
+      "............e"
+     ],
+     "dx": 20,
+     "dy": 31
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "idle_2",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rRRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 26
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM",
+      ".MMd",
+      "MMd.",
+      "Md..",
+      "Md..",
+      "MMM.",
+      ".Md.",
+      ".MMM",
+      "..Md"
+     ],
+     "dx": 14,
+     "dy": 27
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMMM",
+      "...MMd",
+      "..MMMd",
+      ".MMdd.",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 35
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      "..AaA.",
+      "...AaA",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 35
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 25
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 13
+    },
+    "near_arm": {
+     "rows": [
+      "AA...",
+      "Am...",
+      "Am...",
+      "Am...",
+      "AaA..",
+      ".Am..",
+      ".AaA.",
+      "..Ama",
+      "...Am"
+     ],
+     "dx": 19,
+     "dy": 27
+    },
+    "weapon": {
+     "rows": [
+      "y............",
+      "NN..y........",
+      "..Ny.........",
+      "...yw........",
+      "..y..w.......",
+      "......w......",
+      ".......ww....",
+      ".........w...",
+      "..........ww.",
+      "............e"
+     ],
+     "dx": 20,
+     "dy": 32
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "idle_3",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrRR..",
+      ".rRRR...."
+     ],
+     "dx": 11,
+     "dy": 26
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM",
+      ".MMd",
+      "MMd.",
+      "Md..",
+      "Md..",
+      "MMM.",
+      ".Md.",
+      ".MMM",
+      "..Md"
+     ],
+     "dx": 14,
+     "dy": 27
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMMM",
+      "...MMd",
+      "..MMMd",
+      ".MMdd.",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 35
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      "..AaA.",
+      "...AaA",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 35
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 25
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 13
+    },
+    "near_arm": {
+     "rows": [
+      "AA...",
+      "Am...",
+      "Am...",
+      "Am...",
+      "AaA..",
+      ".Am..",
+      ".AaA.",
+      "..Ama",
+      "...Am"
+     ],
+     "dx": 19,
+     "dy": 27
+    },
+    "weapon": {
+     "rows": [
+      "y............",
+      "NN..y........",
+      "..Ny.........",
+      "...yw........",
+      "..y..w.......",
+      "......w......",
+      ".......ww....",
+      ".........w...",
+      "..........ww.",
+      "............e"
+     ],
+     "dx": 20,
+     "dy": 32
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "walk_0",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rRRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 26
+    },
+    "far_arm": {
+     "rows": [
+      "MMM.",
+      "MMd.",
+      "Md..",
+      "Md..",
+      "Md..",
+      "MMM.",
+      ".Md.",
+      ".MMM",
+      "..Md"
+     ],
+     "dx": 15,
+     "dy": 27
+    },
+    "far_leg": {
+     "rows": [
+      "....M..",
+      "...MMM.",
+      "...MMd.",
+      "...MMd.",
+      "....MMM",
+      "....MMd",
+      "..MMMMd",
+      ".MMddd.",
+      ".Md....",
+      "DDD....",
+      "DNNDN..",
+      "DDDDD.."
+     ],
+     "dx": 13,
+     "dy": 35
+    },
+    "near_leg": {
+     "rows": [
+      ".A......",
+      "AaA.....",
+      ".AaAA...",
+      "..AaaA..",
+      "...AaaA.",
+      "....Aam.",
+      "...Aam..",
+      "...Aam..",
+      "...Aam..",
+      "...NNN..",
+      "...NnnNn",
+      "...NNNNN"
+     ],
+     "dx": 18,
+     "dy": 35
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 25
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 13
+    },
+    "near_arm": {
+     "rows": [
+      ".AAA",
+      ".Aam",
+      "Aam.",
+      "Am..",
+      "Am..",
+      "AaA.",
+      ".Am.",
+      ".Ama",
+      "..Am"
+     ],
+     "dx": 17,
+     "dy": 27
+    },
+    "weapon": {
+     "rows": [
+      "y............",
+      ".NN.y........",
+      "..N.y........",
+      "...yw........",
+      "..y..ww......",
+      ".......w.....",
+      "........ww...",
+      "..........w..",
+      "..........ww.",
+      "............e"
+     ],
+     "dx": 17,
+     "dy": 32
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "walk_1",
+   "layers": {
+    "cape": {
+     "rows": [
+      ".....rrrrr",
+      ".....rrrrR",
+      "....rrrrrR",
+      "....rrrrrR",
+      "...rrrrrR.",
+      "...rrrrrR.",
+      "...rrrrrR.",
+      "..rrrrrrR.",
+      "..rrrrrrR.",
+      ".rrrrrrrR.",
+      ".rrrrrrrR.",
+      ".rrrrrrR..",
+      "rrrrrrrR..",
+      "rrrrrrrR..",
+      ".rRRRRRR.."
+     ],
+     "dx": 10,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      "MMM.",
+      "MMd.",
+      "Md..",
+      "Md..",
+      "MMM.",
+      ".Md.",
+      ".MMM",
+      "..Md",
+      "..Md"
+     ],
+     "dx": 15,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "...M...",
+      "..MMM..",
+      "..MMd..",
+      "...MMM.",
+      "...MMd.",
+      "....MMM",
+      "...MMMd",
+      ".MMMdd.",
+      ".MMd...",
+      "DDD....",
+      "DNNDN..",
+      "DDDDD.."
+     ],
+     "dx": 14,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A.....",
+      "AaA....",
+      ".AaA...",
+      ".AaaA..",
+      "..Aam..",
+      "...AaA.",
+      "...Aam.",
+      "..Aam..",
+      "..Aam..",
+      "..Aam..",
+      "..NNN..",
+      "..NnnNn",
+      "..NNNNN"
+     ],
+     "dx": 18,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      ".AAA",
+      ".Aam",
+      "Aam.",
+      "Am..",
+      "Am..",
+      "AaA.",
+      ".Am.",
+      ".Ama",
+      "..Am"
+     ],
+     "dx": 17,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "y............",
+      "NN..y........",
+      "..Ny.........",
+      "...yw........",
+      "..y..w.......",
+      "......w......",
+      ".......ww....",
+      ".........w...",
+      "..........ww.",
+      "............e"
+     ],
+     "dx": 17,
+     "dy": 31
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "walk_2",
+   "layers": {
+    "cape": {
+     "rows": [
+      "......rrrrr",
+      "......rrrrR",
+      ".....rrrrrR",
+      ".....rrrrrR",
+      "....rrrrrR.",
+      "....rrrrrR.",
+      "...rrrrrrR.",
+      "...rrrrrrR.",
+      "...rrrrrrR.",
+      "..rrrrrrrR.",
+      "..rrrrrrrR.",
+      ".rrrrrrrR..",
+      ".rrrrrrrR..",
+      "rRrrrrrrR..",
+      "..rRRRRRR.."
+     ],
+     "dx": 9,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM.",
+      ".MMd.",
+      ".Md..",
+      "MMd..",
+      "MMd..",
+      ".MMM.",
+      "..Md.",
+      "..MMM",
+      "...Md"
+     ],
+     "dx": 14,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      ".M.....",
+      "MMMM...",
+      ".MMMM..",
+      "..MdMM.",
+      "....MMM",
+      "....MMd",
+      "...MMd.",
+      "..MMd..",
+      ".DDD...",
+      ".DNNDN.",
+      ".DDDDD."
+     ],
+     "dx": 16,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      "..A...",
+      ".AaA..",
+      ".Aam..",
+      "..AaA.",
+      "..Aam.",
+      "..Aam.",
+      "..AaaA",
+      ".Aaam.",
+      ".Aam..",
+      "Aam...",
+      "NNN...",
+      "NnnNn.",
+      "NNNNN."
+     ],
+     "dx": 17,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      ".AAA.",
+      ".Aam.",
+      "Aam..",
+      "Am...",
+      "AaA..",
+      ".Am..",
+      ".AaA.",
+      "..Ama",
+      "..Am."
+     ],
+     "dx": 17,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "y.............",
+      ".NN.y.........",
+      "...Ny.........",
+      "...yw.........",
+      "...y.ww.......",
+      ".......w......",
+      "........ww....",
+      "..........w...",
+      "...........ww.",
+      ".............e"
+     ],
+     "dx": 17,
+     "dy": 31
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "walk_3",
+   "layers": {
+    "cape": {
+     "rows": [
+      ".....rrrrr",
+      ".....rrrrR",
+      "....rrrrrR",
+      "....rrrrrR",
+      "...rrrrrR.",
+      "...rrrrrR.",
+      "...rrrrrR.",
+      "..rrrrrrR.",
+      "..rrrrrrR.",
+      ".rrrrrrrR.",
+      ".rrrrrrrR.",
+      ".rrrrrrR..",
+      "rrrrrrrR..",
+      "rrrrrrrR..",
+      ".rRRRRRR.."
+     ],
+     "dx": 10,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      "..MMM",
+      ".MMdd",
+      ".Md..",
+      "MMd..",
+      "MMd..",
+      ".Md..",
+      ".MMM.",
+      "..Md.",
+      "..Md."
+     ],
+     "dx": 13,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      ".M.......",
+      "MMMM.....",
+      ".MMMM....",
+      "..MdMMM..",
+      "....MMd..",
+      ".....Md..",
+      "....MMd..",
+      "....Md...",
+      "....Md...",
+      "....DDD..",
+      "....DNNDN",
+      "....DDDDD"
+     ],
+     "dx": 16,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".....A.",
+      "....AaA",
+      "....Aam",
+      "....Aam",
+      "...Aam.",
+      "...Aam.",
+      "...AaA.",
+      "..Aam..",
+      ".Aam...",
+      "Aam....",
+      "NNN....",
+      "NnnNn..",
+      "NNNNN.."
+     ],
+     "dx": 14,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AAA..",
+      "Aam..",
+      "Am...",
+      "Am...",
+      "AaA..",
+      ".Am..",
+      ".AaA.",
+      "..Ama",
+      "...Am"
+     ],
+     "dx": 18,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "y............",
+      ".N..y........",
+      "..Ny.........",
+      "...yw........",
+      "..y..ww......",
+      ".......w.....",
+      ".......ww....",
+      ".........w...",
+      "..........ww.",
+      "............e"
+     ],
+     "dx": 19,
+     "dy": 31
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "walk_4",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rRRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 26
+    },
+    "far_arm": {
+     "rows": [
+      "..MMM",
+      ".MMdd",
+      ".Md..",
+      "MMd..",
+      "Md...",
+      "Md...",
+      "MMM..",
+      ".Md..",
+      ".Md.."
+     ],
+     "dx": 13,
+     "dy": 27
+    },
+    "far_leg": {
+     "rows": [
+      ".M........",
+      "MMM.......",
+      ".MMMM.....",
+      "..MMMM....",
+      "...MMMM...",
+      "....MMd...",
+      ".....Md...",
+      ".....Md...",
+      ".....MMM..",
+      ".....DDD..",
+      ".....DNNDN",
+      ".....DDDDD"
+     ],
+     "dx": 16,
+     "dy": 35
+    },
+    "near_leg": {
+     "rows": [
+      "......A.",
+      ".....AaA",
+      ".....Aam",
+      ".....Aam",
+      "....Aam.",
+      "....Aam.",
+      "..AAaaA.",
+      ".Aaamm..",
+      "Aaam....",
+      "NNN.....",
+      "NnnNn...",
+      "NNNNN..."
+     ],
+     "dx": 13,
+     "dy": 35
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 25
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 13
+    },
+    "near_arm": {
+     "rows": [
+      "AA....",
+      "Am....",
+      "Am....",
+      "AaA...",
+      ".Am...",
+      ".AaA..",
+      "..Am..",
+      "..Aama",
+      "...Am."
+     ],
+     "dx": 19,
+     "dy": 27
+    },
+    "weapon": {
+     "rows": [
+      "y............",
+      ".NN.y........",
+      "...Ny........",
+      "...yw........",
+      "..y..ww......",
+      ".......w.....",
+      "........ww...",
+      "..........w..",
+      "...........w.",
+      "............e"
+     ],
+     "dx": 20,
+     "dy": 32
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "walk_5",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      ".rRRRR..."
+     ],
+     "dx": 11,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      "..MMM",
+      ".MMdd",
+      ".Md..",
+      "MMd..",
+      "Md...",
+      "Md...",
+      "Md...",
+      "MMM..",
+      ".Md.."
+     ],
+     "dx": 13,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      ".M.......",
+      "MMM......",
+      ".MMM.....",
+      ".MMMM....",
+      "..MMd....",
+      "...MMM...",
+      "...MMd...",
+      "....Md...",
+      "....Md...",
+      "....Md...",
+      "....DDD..",
+      "....DNNDN",
+      "....DDDDD"
+     ],
+     "dx": 16,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".....A.",
+      "....AaA",
+      "....Aam",
+      "....Aam",
+      "....Aam",
+      "....Aam",
+      "..AAaaA",
+      ".Aaaam.",
+      "Aaamm..",
+      "NNN....",
+      "NnnNn..",
+      "NNNNN.."
+     ],
+     "dx": 14,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AA....",
+      "Am....",
+      "AaA...",
+      ".Am...",
+      ".AaA..",
+      "..Am..",
+      "..AaA.",
+      "...Ama",
+      "...Am."
+     ],
+     "dx": 19,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "y............",
+      "NN..y........",
+      "..Ny.........",
+      "...yw........",
+      "..y..w.......",
+      "......w......",
+      ".......ww....",
+      ".........w...",
+      "..........ww.",
+      "............e"
+     ],
+     "dx": 21,
+     "dy": 31
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "walk_6",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrR..",
+      ".rrrrrR..",
+      "rrrrrrR..",
+      ".rRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      "..MMM",
+      ".MMdd",
+      ".Md..",
+      "MMd..",
+      "Md...",
+      "MMM..",
+      ".Md..",
+      ".Md..",
+      ".Md.."
+     ],
+     "dx": 13,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      ".M....",
+      "MMM...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "...MMM",
+      "...Md.",
+      "..MMd.",
+      "..Md..",
+      "..Md..",
+      ".DDD..",
+      ".DNNDN",
+      ".DDDDD"
+     ],
+     "dx": 16,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      "..A....",
+      ".AaA...",
+      "..AaA..",
+      "..Aam..",
+      "...AaA.",
+      "..AaaaA",
+      ".Aaaam.",
+      "Aaamm..",
+      "NNN....",
+      "NnnNn..",
+      "NNNNN.."
+     ],
+     "dx": 17,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AA...",
+      "Am...",
+      "Am...",
+      "Am...",
+      "AaA..",
+      ".AaA.",
+      "..Am.",
+      "..Ama",
+      "...Am"
+     ],
+     "dx": 19,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "y............",
+      ".N..y........",
+      "..Ny.........",
+      "...yw........",
+      "..y..ww......",
+      ".......w.....",
+      "........w....",
+      ".........w...",
+      "..........ww.",
+      "............e"
+     ],
+     "dx": 20,
+     "dy": 31
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "walk_7",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      ".rRRRR..."
+     ],
+     "dx": 11,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM",
+      ".MMd",
+      "MMd.",
+      "Md..",
+      "Md..",
+      "MMM.",
+      ".Md.",
+      ".MMM",
+      "..Md"
+     ],
+     "dx": 14,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "...M..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "...MMM",
+      "...MMd",
+      "...MMd",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 14,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A.....",
+      "AaA....",
+      ".AaAA..",
+      "..AaaA.",
+      "...AaaA",
+      "...Aam.",
+      "...Aam.",
+      "..Aam..",
+      "..Aam..",
+      "..NNN..",
+      "..NnnNn",
+      "..NNNNN"
+     ],
+     "dx": 18,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AAA..",
+      "Aam..",
+      "Am...",
+      "Am...",
+      "Am...",
+      "AaA..",
+      ".AaA.",
+      "..Ama",
+      "..Am."
+     ],
+     "dx": 18,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "y.............",
+      ".NN..y........",
+      "...Ny.........",
+      "...yw.........",
+      "...y.ww.......",
+      ".......w......",
+      "........ww....",
+      "..........w...",
+      "...........ww.",
+      ".............e"
+     ],
+     "dx": 18,
+     "dy": 31
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "run_0",
+   "layers": {
+    "cape": {
+     "rows": [
+      "..........rrrrr",
+      ".........rrrrrR",
+      "........rrrrrrR",
+      ".......rrrrrrR.",
+      "......rrrrrrrR.",
+      ".....rrrrrrrrR.",
+      "....rrrrrrrrrR.",
+      "...rrrrrrrrrrR.",
+      "..rrrrrrrrrrrR.",
+      ".rrrrrrrrrrrR..",
+      "rRrrrrrrrrrrR..",
+      "..rRRRRRRRRRR.."
+     ],
+     "dx": 6,
+     "dy": 26
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM..",
+      ".MMd..",
+      "MMd...",
+      "Md....",
+      "MMMMM.",
+      ".MddMM",
+      "....Md"
+     ],
+     "dx": 15,
+     "dy": 27
+    },
+    "far_leg": {
+     "rows": [
+      "......M.",
+      ".....MMM",
+      ".....MMd",
+      ".....MMd",
+      "....MMd.",
+      "....MMd.",
+      "..MMMMd.",
+      ".MMddd..",
+      ".Md.....",
+      "DDD.....",
+      "DNNDN...",
+      "DDDDD..."
+     ],
+     "dx": 11,
+     "dy": 35
+    },
+    "near_leg": {
+     "rows": [
+      ".A........",
+      "AaA.......",
+      ".AaAA.....",
+      "..AaaA....",
+      "...AaaA...",
+      "....Aam...",
+      "....Aam...",
+      ".....AaA..",
+      ".....Aam..",
+      ".....NNN..",
+      ".....NnnNn",
+      ".....NNNNN"
+     ],
+     "dx": 18,
+     "dy": 35
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 15,
+     "dy": 25
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 13,
+     "dy": 13
+    },
+    "near_arm": {
+     "rows": [
+      "AAAAAA",
+      "Aaaaam",
+      "Amaama",
+      "..Amm."
+     ],
+     "dx": 16,
+     "dy": 27
+    },
+    "weapon": {
+     "rows": [
+      "eww.............",
+      "...wwwww...y....",
+      "........wwwyN...",
+      "...........y.NNy",
+      "..........y....."
+     ],
+     "dx": 8,
+     "dy": 27
+    },
+    "fx": {
+     "rows": [
+      "e....",
+      "gg.e.",
+      "...gg"
+     ],
+     "dx": 9,
+     "dy": 44
+    }
+   }
+  },
+  {
+   "name": "run_1",
+   "layers": {
+    "cape": {
+     "rows": [
+      "...........rrrrr",
+      "..........rrrrrR",
+      ".........rrrrrrR",
+      ".......rrrrrrrR.",
+      "......rrrrrrrrR.",
+      ".....rrrrrrrrrR.",
+      "....rrrrrrrrrrR.",
+      "..rrrrrrrrrrrrR.",
+      ".rrrrrrrrrrrrrR.",
+      "rRrrrrrrrrrrrR..",
+      "..rRRRRRRRRRRR.."
+     ],
+     "dx": 5,
+     "dy": 24
+    },
+    "far_arm": {
+     "rows": [
+      "MMM..",
+      "MMd..",
+      "Md...",
+      "Md...",
+      "MMMMM",
+      ".MdMd",
+      "...Md"
+     ],
+     "dx": 16,
+     "dy": 25
+    },
+    "far_leg": {
+     "rows": [
+      "....M..",
+      "...MMM.",
+      "...MMd.",
+      "...MMd.",
+      "....MMM",
+      "....MMd",
+      ".MMMMMd",
+      "MMMddd.",
+      "DDD....",
+      "DNNDN..",
+      "DDDDD.."
+     ],
+     "dx": 13,
+     "dy": 33
+    },
+    "near_leg": {
+     "rows": [
+      ".A......",
+      "AaA.....",
+      "Aam.....",
+      ".AaA....",
+      ".Aam....",
+      ".Aam....",
+      "..AaA...",
+      "..Aam...",
+      "...AaA..",
+      "...Aam..",
+      "...Aam..",
+      "...NNN..",
+      "...NnnNn",
+      "...NNNNN"
+     ],
+     "dx": 18,
+     "dy": 33
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 15,
+     "dy": 23
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 13,
+     "dy": 11
+    },
+    "near_arm": {
+     "rows": [
+      "AAAAA.",
+      "AaaaaA",
+      ".Aaaam",
+      "..Ama.",
+      "...Am."
+     ],
+     "dx": 16,
+     "dy": 24
+    },
+    "weapon": {
+     "rows": [
+      "ewww.......y....",
+      "....wwwwww.y....",
+      "..........wyNNN.",
+      "...........y...y"
+     ],
+     "dx": 7,
+     "dy": 25
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "run_2",
+   "layers": {
+    "cape": {
+     "rows": [
+      "..........rrrrr",
+      ".........rrrrrR",
+      "........rrrrrrR",
+      ".......rrrrrrR.",
+      "......rrrrrrrR.",
+      ".....rrrrrrrrR.",
+      "....rrrrrrrrrR.",
+      "...rrrrrrrrrrR.",
+      "..rrrrrrrrrrrR.",
+      ".rrrrrrrrrrrR..",
+      "rRrrrrrrrrrrR..",
+      "..rRRRRRRRRRR.."
+     ],
+     "dx": 6,
+     "dy": 24
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM.",
+      ".MMd.",
+      "MMd..",
+      "MMd..",
+      "MdMM.",
+      "..MMM",
+      "...Md"
+     ],
+     "dx": 15,
+     "dy": 25
+    },
+    "far_leg": {
+     "rows": [
+      ".MM....",
+      "MMMMM..",
+      ".MdMMM.",
+      "...MMMM",
+      "...MMMd",
+      "..MMdd.",
+      "..Md...",
+      ".DDD...",
+      ".DNNDN.",
+      ".DDDDD."
+     ],
+     "dx": 16,
+     "dy": 33
+    },
+    "near_leg": {
+     "rows": [
+      "..A..",
+      ".AaA.",
+      ".Aam.",
+      ".Aam.",
+      ".Aam.",
+      ".Aam.",
+      ".AaA.",
+      ".Aam.",
+      "Aam..",
+      "Aam..",
+      "Aam..",
+      "NNN..",
+      "NnnNn",
+      "NNNNN"
+     ],
+     "dx": 17,
+     "dy": 33
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 15,
+     "dy": 23
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 13,
+     "dy": 11
+    },
+    "near_arm": {
+     "rows": [
+      "..AAAA",
+      "AAaaam",
+      "Amaaam",
+      "..Amma"
+     ],
+     "dx": 16,
+     "dy": 25
+    },
+    "weapon": {
+     "rows": [
+      "eww.............",
+      "...wwww....y....",
+      ".......wwwwy....",
+      "...........yNNNy",
+      "...........y...."
+     ],
+     "dx": 8,
+     "dy": 25
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "run_3",
+   "layers": {
+    "cape": {
+     "rows": [
+      "........rrrrr",
+      ".......rrrrrR",
+      ".......rrrrrR",
+      "......rrrrrrR",
+      ".....rrrrrrR.",
+      "....rrrrrrrR.",
+      "....rrrrrrrR.",
+      "...rrrrrrrrR.",
+      "..rrrrrrrrrR.",
+      ".rrrrrrrrrrR.",
+      ".rrrrrrrrrR..",
+      "rrrrrrrrrrR..",
+      ".rRRRRRRRRR.."
+     ],
+     "dx": 8,
+     "dy": 24
+    },
+    "far_arm": {
+     "rows": [
+      "...MMM",
+      ".MMMdd",
+      "MMMd..",
+      "MMd...",
+      ".MMM..",
+      "..MMM.",
+      "...Md."
+     ],
+     "dx": 13,
+     "dy": 25
+    },
+    "far_leg": {
+     "rows": [
+      ".MM.......",
+      "MMMMM.....",
+      ".MdMMM....",
+      "...MdMM...",
+      ".....Md...",
+      ".....Md...",
+      ".....MMM..",
+      "......Md..",
+      ".....DDD..",
+      ".....DNNDN",
+      ".....DDDDD"
+     ],
+     "dx": 16,
+     "dy": 33
+    },
+    "near_leg": {
+     "rows": [
+      "......A.",
+      ".....AaA",
+      ".....Aam",
+      "....Aam.",
+      "....Aam.",
+      "...Aam..",
+      "..AaaA..",
+      "..Aam...",
+      ".Aam....",
+      "Aam.....",
+      "Aam.....",
+      "NNN.....",
+      "NnnNn...",
+      "NNNNN..."
+     ],
+     "dx": 13,
+     "dy": 33
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 15,
+     "dy": 23
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 13,
+     "dy": 11
+    },
+    "near_arm": {
+     "rows": [
+      ".AAA..",
+      ".Aam..",
+      "Aam...",
+      "AaaAAA",
+      "Ammmma"
+     ],
+     "dx": 18,
+     "dy": 25
+    },
+    "weapon": {
+     "rows": [
+      "eww............",
+      "...www.........",
+      "......www..y...",
+      "........wwy....",
+      "..........yNN..",
+      "..........y..Ny"
+     ],
+     "dx": 11,
+     "dy": 25
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "run_4",
+   "layers": {
+    "cape": {
+     "rows": [
+      "..........rrrrr",
+      ".........rrrrrR",
+      "........rrrrrrR",
+      ".......rrrrrrR.",
+      "......rrrrrrrR.",
+      ".....rrrrrrrrR.",
+      "....rrrrrrrrrR.",
+      "...rrrrrrrrrrR.",
+      "..rrrrrrrrrrrR.",
+      ".rrrrrrrrrrrR..",
+      "rRrrrrrrrrrrR..",
+      "..rRRRRRRRRRR.."
+     ],
+     "dx": 6,
+     "dy": 26
+    },
+    "far_arm": {
+     "rows": [
+      ".MMMMM",
+      "MMdddd",
+      "Md....",
+      "Md....",
+      "MMM...",
+      ".Md...",
+      ".Md..."
+     ],
+     "dx": 13,
+     "dy": 27
+    },
+    "far_leg": {
+     "rows": [
+      ".M..........",
+      "MMM.........",
+      ".MMM........",
+      "..MMM.......",
+      "...MMM......",
+      "...MMMM.....",
+      "....MdMM....",
+      "......MMM...",
+      ".......MMM..",
+      ".......DDD..",
+      ".......DNNDN",
+      ".......DDDDD"
+     ],
+     "dx": 16,
+     "dy": 35
+    },
+    "near_leg": {
+     "rows": [
+      "........A.",
+      ".......AaA",
+      "......Aam.",
+      ".....Aam..",
+      ".....Aam..",
+      "...AAaA...",
+      "..Aaam....",
+      ".Aamm.....",
+      "Aam.......",
+      "NNN.......",
+      "NnnNn.....",
+      "NNNNN....."
+     ],
+     "dx": 11,
+     "dy": 35
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 15,
+     "dy": 25
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 13,
+     "dy": 13
+    },
+    "near_arm": {
+     "rows": [
+      "AA....",
+      "Am....",
+      "Am.Ama",
+      "AaAamm",
+      "Ammm.."
+     ],
+     "dx": 20,
+     "dy": 27
+    },
+    "weapon": {
+     "rows": [
+      "ew............",
+      "..ww..........",
+      "....ww........",
+      "......w.......",
+      ".......ww.y...",
+      ".........wy...",
+      ".........y.NN.",
+      ".............y"
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "fx": {
+     "rows": [
+      "e....",
+      "gg.e.",
+      "...gg"
+     ],
+     "dx": 9,
+     "dy": 44
+    }
+   }
+  },
+  {
+   "name": "run_5",
+   "layers": {
+    "cape": {
+     "rows": [
+      "...........rrrrr",
+      "..........rrrrrR",
+      ".........rrrrrrR",
+      ".......rrrrrrrR.",
+      "......rrrrrrrrR.",
+      ".....rrrrrrrrrR.",
+      "....rrrrrrrrrrR.",
+      "..rrrrrrrrrrrrR.",
+      ".rrrrrrrrrrrrrR.",
+      "rRrrrrrrrrrrrR..",
+      "..rRRRRRRRRRRR.."
+     ],
+     "dx": 5,
+     "dy": 24
+    },
+    "far_arm": {
+     "rows": [
+      ".MMMMM",
+      "MMdddd",
+      "Md....",
+      "Md....",
+      "Md....",
+      "MMM...",
+      ".Md..."
+     ],
+     "dx": 13,
+     "dy": 25
+    },
+    "far_leg": {
+     "rows": [
+      ".M........",
+      "MMM.......",
+      ".MMM......",
+      ".MMd......",
+      "..MMM.....",
+      "...MMM....",
+      "...MMd....",
+      "....Md....",
+      "....MMM...",
+      ".....Md...",
+      ".....MMM..",
+      ".....DDD..",
+      ".....DNNDN",
+      ".....DDDDD"
+     ],
+     "dx": 16,
+     "dy": 33
+    },
+    "near_leg": {
+     "rows": [
+      "......A.",
+      ".....AaA",
+      ".....Aam",
+      ".....Aam",
+      ".....Aam",
+      "...AAam.",
+      ".AAaaaA.",
+      "Aaaamm..",
+      "NNNm....",
+      "NnnNn...",
+      "NNNNN..."
+     ],
+     "dx": 13,
+     "dy": 33
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 15,
+     "dy": 23
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 13,
+     "dy": 11
+    },
+    "near_arm": {
+     "rows": [
+      "AA.....",
+      "Am.....",
+      "AaAAAma",
+      ".Aaamm.",
+      ".Amm..."
+     ],
+     "dx": 20,
+     "dy": 25
+    },
+    "weapon": {
+     "rows": [
+      "e.............",
+      ".ww...........",
+      "..ww..........",
+      "....ww........",
+      "......ww..y...",
+      "........wy....",
+      ".........yN...",
+      "........y..NN.",
+      ".............y"
+     ],
+     "dx": 15,
+     "dy": 21
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "run_6",
+   "layers": {
+    "cape": {
+     "rows": [
+      "..........rrrrr",
+      ".........rrrrrR",
+      "........rrrrrrR",
+      ".......rrrrrrR.",
+      "......rrrrrrrR.",
+      ".....rrrrrrrrR.",
+      "....rrrrrrrrrR.",
+      "...rrrrrrrrrrR.",
+      "..rrrrrrrrrrrR.",
+      ".rrrrrrrrrrrR..",
+      "rRrrrrrrrrrrR..",
+      "..rRRRRRRRRRR.."
+     ],
+     "dx": 6,
+     "dy": 24
+    },
+    "far_arm": {
+     "rows": [
+      "..MMMM",
+      "MMMddd",
+      "MMd...",
+      "MMd...",
+      ".Md...",
+      ".MMM..",
+      "..Md.."
+     ],
+     "dx": 13,
+     "dy": 25
+    },
+    "far_leg": {
+     "rows": [
+      ".M....",
+      "MMM...",
+      "MMd...",
+      "MMd...",
+      "MMd...",
+      ".MMM..",
+      ".MMd..",
+      ".Md...",
+      ".Md...",
+      ".Md...",
+      ".MMM..",
+      ".DDD..",
+      ".DNNDN",
+      ".DDDDD"
+     ],
+     "dx": 16,
+     "dy": 33
+    },
+    "near_leg": {
+     "rows": [
+      "..A....",
+      ".AaA...",
+      "..AaA..",
+      "...AaA.",
+      "...AaaA",
+      ".AAaaaA",
+      "Aaammm.",
+      "NNN....",
+      "NnnNn..",
+      "NNNNN.."
+     ],
+     "dx": 17,
+     "dy": 33
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 15,
+     "dy": 23
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 13,
+     "dy": 11
+    },
+    "near_arm": {
+     "rows": [
+      "AA....",
+      "Am....",
+      "Am.AA.",
+      "AaAama",
+      "Ammm.."
+     ],
+     "dx": 20,
+     "dy": 25
+    },
+    "weapon": {
+     "rows": [
+      "e..............",
+      ".ww............",
+      "...ww..........",
+      ".....ww........",
+      ".......ww..y...",
+      ".........wy....",
+      "..........yNN..",
+      ".........y...Ny"
+     ],
+     "dx": 13,
+     "dy": 22
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "run_7",
+   "layers": {
+    "cape": {
+     "rows": [
+      "........rrrrr",
+      ".......rrrrrR",
+      ".......rrrrrR",
+      "......rrrrrrR",
+      ".....rrrrrrR.",
+      "....rrrrrrrR.",
+      "....rrrrrrrR.",
+      "...rrrrrrrrR.",
+      "..rrrrrrrrrR.",
+      ".rrrrrrrrrrR.",
+      ".rrrrrrrrrR..",
+      "rrrrrrrrrrR..",
+      ".rRRRRRRRRR.."
+     ],
+     "dx": 8,
+     "dy": 24
+    },
+    "far_arm": {
+     "rows": [
+      "..MMM",
+      ".MMdd",
+      "MMd..",
+      "MMd..",
+      "MdMM.",
+      "..MMM",
+      "...Md"
+     ],
+     "dx": 14,
+     "dy": 25
+    },
+    "far_leg": {
+     "rows": [
+      "....M.",
+      "...MMM",
+      "...MMd",
+      "..MMd.",
+      "..MMd.",
+      "..MMd.",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      ".Md...",
+      "MMd...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 13,
+     "dy": 33
+    },
+    "near_leg": {
+     "rows": [
+      ".AA.....",
+      "AaaAA...",
+      ".AmaaA..",
+      "...AaaA.",
+      "....Aam.",
+      "....Aam.",
+      "....Aam.",
+      "...Aam..",
+      "...NNN..",
+      "...NnnNn",
+      "...NNNNN"
+     ],
+     "dx": 18,
+     "dy": 33
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 15,
+     "dy": 23
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 13,
+     "dy": 11
+    },
+    "near_arm": {
+     "rows": [
+      "..AAA..",
+      ".Aamm..",
+      ".Am....",
+      "AaaAAA.",
+      "Ammmmma"
+     ],
+     "dx": 17,
+     "dy": 25
+    },
+    "weapon": {
+     "rows": [
+      "ew..............",
+      "..www...........",
+      ".....www...y....",
+      "........wwwy....",
+      "...........yNNN.",
+      "..........y....y"
+     ],
+     "dx": 10,
+     "dy": 25
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "jump_0",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rRRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 28
+    },
+    "far_arm": {
+     "rows": [
+      "MMM",
+      "MMd",
+      "Md.",
+      "Md.",
+      "Md.",
+      "Md.",
+      "Md.",
+      "Md.",
+      "Md.",
+      "Md."
+     ],
+     "dx": 15,
+     "dy": 29
+    },
+    "far_leg": {
+     "rows": [
+      "..M....",
+      ".MMM...",
+      "..MMM..",
+      "...MMM.",
+      "....MMM",
+      ".MMMMMd",
+      ".MMddd.",
+      "DDD....",
+      "DNNDN..",
+      "DDDDD.."
+     ],
+     "dx": 15,
+     "dy": 37
+    },
+    "near_leg": {
+     "rows": [
+      ".AA....",
+      "AaaAA..",
+      ".AmaaA.",
+      "...AaaA",
+      "...Aaam",
+      "..Aaam.",
+      ".Aaam..",
+      ".NNN...",
+      ".NnnNn.",
+      ".NNNNN."
+     ],
+     "dx": 18,
+     "dy": 37
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 27
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 15
+    },
+    "near_arm": {
+     "rows": [
+      "AA..",
+      "Am..",
+      "Am..",
+      "Am..",
+      "AaA.",
+      ".Am.",
+      ".Am.",
+      ".Am.",
+      ".Ama",
+      "..Am"
+     ],
+     "dx": 19,
+     "dy": 29
+    },
+    "weapon": {
+     "rows": [
+      "y............",
+      "NN..y........",
+      "..Ny.........",
+      "...yw........",
+      "..y..w.......",
+      "......w......",
+      ".......ww....",
+      ".........w...",
+      "..........ww.",
+      "............e"
+     ],
+     "dx": 19,
+     "dy": 35
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "jump_1",
+   "layers": {
+    "cape": {
+     "rows": [
+      ".....rrrrr",
+      ".....rrrrR",
+      "....rrrrrR",
+      "....rrrrrR",
+      "...rrrrrR.",
+      "...rrrrrR.",
+      "...rrrrrR.",
+      "..rrrrrrR.",
+      "..rrrrrrR.",
+      "..rrrrrrR.",
+      ".rrrrrrrR.",
+      ".rrrrrrR..",
+      "rrrrrrrR..",
+      "rrrrrrrR..",
+      ".rRRRRRR.."
+     ],
+     "dx": 10,
+     "dy": 30
+    },
+    "far_arm": {
+     "rows": [
+      "..MMM",
+      "..MMd",
+      ".MMd.",
+      ".Md..",
+      ".Md..",
+      ".Md..",
+      "MMd..",
+      "Md...",
+      "Md...",
+      "Md...",
+      "Md..."
+     ],
+     "dx": 13,
+     "dy": 31
+    },
+    "far_leg": {
+     "rows": [
+      "..M.....",
+      ".MMM....",
+      "..MMMM..",
+      "...MMMM.",
+      ".MMMMMMM",
+      "DDDMMdd.",
+      "DNNDN...",
+      "DDDDD..."
+     ],
+     "dx": 15,
+     "dy": 39
+    },
+    "near_leg": {
+     "rows": [
+      ".AAA....",
+      "AaaaAAA.",
+      ".AaaaaaA",
+      "..Aaamm.",
+      ".Aaam...",
+      ".NNN....",
+      ".NnnNn..",
+      ".NNNNN.."
+     ],
+     "dx": 18,
+     "dy": 39
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 29
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 17
+    },
+    "near_arm": {
+     "rows": [
+      ".AAA",
+      ".Aam",
+      ".Am.",
+      ".Am.",
+      "Aam.",
+      "Am..",
+      "Am..",
+      "Am..",
+      "Am..",
+      "Am..",
+      "ma..",
+      "Am.."
+     ],
+     "dx": 17,
+     "dy": 31
+    },
+    "weapon": {
+     "rows": [
+      ".......y..NNy",
+      "........yN...",
+      ".......wy....",
+      ".....ww..y...",
+      "...ww........",
+      ".ww..........",
+      "ww..........."
+     ],
+     "dx": 8,
+     "dy": 40
+    },
+    "fx": {
+     "rows": [
+      "e........e.",
+      "gg.......gg"
+     ],
+     "dx": 14,
+     "dy": 45
+    }
+   }
+  },
+  {
+   "name": "jump_2",
+   "layers": {
+    "cape": {
+     "rows": [
+      ".......rrrrr",
+      "......rrrrrR",
+      "......rrrrrR",
+      ".....rrrrrrR",
+      "....rrrrrrR.",
+      "....rrrrrrR.",
+      "...rrrrrrrR.",
+      "...rrrrrrrR.",
+      "..rrrrrrrrR.",
+      ".rrrrrrrrrR.",
+      ".rrrrrrrrR..",
+      "rrrrrrrrrR..",
+      "rRRRRRRRRR.."
+     ],
+     "dx": 8,
+     "dy": 22
+    },
+    "far_arm": {
+     "rows": [
+      "MM...",
+      "MMMMM",
+      "MMMdd",
+      "MMd..",
+      "Md..."
+     ],
+     "dx": 16,
+     "dy": 23
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMMM",
+      "...MMd",
+      "..MMMd",
+      ".MMdd.",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 31
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      ".Aam..",
+      "..AaA.",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 31
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 21
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 9
+    },
+    "near_arm": {
+     "rows": [
+      "AA..Ama",
+      "AaAAamm",
+      ".Aaam..",
+      ".Aaam..",
+      "..Am..."
+     ],
+     "dx": 19,
+     "dy": 23
+    },
+    "weapon": {
+     "rows": [
+      "........e",
+      ".......w.",
+      "......ww.",
+      "......w..",
+      ".....w...",
+      ".....w...",
+      "....w....",
+      "....w....",
+      ".y.w.....",
+      "..yy.....",
+      "..N.y....",
+      "..N......",
+      ".N.......",
+      "y........"
+     ],
+     "dx": 22,
+     "dy": 13
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "jump_3",
+   "layers": {
+    "cape": {
+     "rows": [
+      ".........rrrrr",
+      "........rrrrrR",
+      ".......rrrrrrR",
+      "......rrrrrrR.",
+      ".....rrrrrrrR.",
+      ".....rrrrrrrR.",
+      "....rrrrrrrrR.",
+      "...rrrrrrrrrR.",
+      "..rrrrrrrrrrR.",
+      ".rrrrrrrrrrrR.",
+      "rrrrrrrrrrrR..",
+      ".rRRRRRRRRRR.."
+     ],
+     "dx": 6,
+     "dy": 17
+    },
+    "far_arm": {
+     "rows": [
+      "MM...",
+      "MMMMM",
+      "MMMdd",
+      "MMd..",
+      "Md..."
+     ],
+     "dx": 16,
+     "dy": 18
+    },
+    "far_leg": {
+     "rows": [
+      "..M.....",
+      ".MMM....",
+      "..MMM...",
+      "...MMMM.",
+      ".MMMMMMM",
+      ".MMdddd.",
+      "DDD.....",
+      "DNNDN...",
+      "DDDDD..."
+     ],
+     "dx": 15,
+     "dy": 26
+    },
+    "near_leg": {
+     "rows": [
+      ".AA....",
+      "AaaAA..",
+      ".AmaaA.",
+      "...AaaA",
+      "...Aaam",
+      "..Aaam.",
+      ".Aaam..",
+      ".NNN...",
+      ".NnnNn.",
+      ".NNNNN."
+     ],
+     "dx": 18,
+     "dy": 26
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 16
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 4
+    },
+    "near_arm": {
+     "rows": [
+      "AA..Ama",
+      "AaAAamm",
+      ".Aaam..",
+      ".Aaam..",
+      "..Am..."
+     ],
+     "dx": 19,
+     "dy": 18
+    },
+    "weapon": {
+     "rows": [
+      "..........e",
+      ".........w.",
+      "........w..",
+      ".......w...",
+      "......w....",
+      ".....w.....",
+      "..y.w......",
+      "..yw.......",
+      "..Nyy......",
+      ".N.........",
+      "y.........."
+     ],
+     "dx": 22,
+     "dy": 10
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "jump_4",
+   "layers": {
+    "cape": {
+     "rows": [
+      ".........rrrrr",
+      "........rrrrrR",
+      ".......rrrrrrR",
+      "......rrrrrrR.",
+      ".....rrrrrrrR.",
+      "....rrrrrrrrR.",
+      "...rrrrrrrrrR.",
+      "..rrrrrrrrrrR.",
+      ".rrrrrrrrrrrR.",
+      "rrrrrrrrrrrR..",
+      "rRRRRrrrrrrR..",
+      ".....rRRRRRR.."
+     ],
+     "dx": 6,
+     "dy": 14
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM..",
+      ".MMd..",
+      "MMMMMM",
+      "MMMddd",
+      "Mdd..."
+     ],
+     "dx": 14,
+     "dy": 15
+    },
+    "far_leg": {
+     "rows": [
+      "..M.....",
+      ".MMM....",
+      "..MMMM..",
+      "...MMMM.",
+      ".MMMMMMM",
+      "DDDMMdd.",
+      "DNNDN...",
+      "DDDDD..."
+     ],
+     "dx": 15,
+     "dy": 23
+    },
+    "near_leg": {
+     "rows": [
+      ".AA.....",
+      "AaaAAA..",
+      ".AmaaaA.",
+      "...AaaaA",
+      "..Aaamm.",
+      ".Aaam...",
+      ".NNN....",
+      ".NnnNn..",
+      ".NNNNN.."
+     ],
+     "dx": 18,
+     "dy": 23
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 13
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 1
+    },
+    "near_arm": {
+     "rows": [
+      "AA.....",
+      "Am.....",
+      "AaAAAma",
+      ".Aaammm",
+      ".Amm..."
+     ],
+     "dx": 19,
+     "dy": 15
+    },
+    "weapon": {
+     "rows": [
+      ".............we",
+      "...........ww..",
+      "...y....www....",
+      "....ywww.......",
+      "..NNy..........",
+      "yN..y.........."
+     ],
+     "dx": 21,
+     "dy": 13
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "jump_5",
+   "layers": {
+    "cape": {
+     "rows": [
+      "...........rrrrr",
+      "..........rrrrrR",
+      ".........rrrrrrR",
+      ".......rrrrrrrR.",
+      "......rrrrrrrrR.",
+      ".....rrrrrrrrrR.",
+      "....rrrrrrrrrrR.",
+      "..rrrrrrrrrrrrR.",
+      ".rrrrrrrrrrrrrR.",
+      "rRrrrrrrrrrrrR..",
+      "..rRRRRRRRRRRR.."
+     ],
+     "dx": 4,
+     "dy": 17
+    },
+    "far_arm": {
+     "rows": [
+      "..MMM.",
+      ".MMMd.",
+      "MMMMd.",
+      "MdddMM",
+      "....Md"
+     ],
+     "dx": 13,
+     "dy": 18
+    },
+    "far_leg": {
+     "rows": [
+      "..M....",
+      ".MMM...",
+      "..MMM..",
+      "..MMd..",
+      "...MMM.",
+      "....MMM",
+      "..MMMdd",
+      ".MMdd..",
+      "DDD....",
+      "DNNDN..",
+      "DDDDD.."
+     ],
+     "dx": 15,
+     "dy": 26
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      "..AaA.",
+      "...AaA",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 26
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 16
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 4
+    },
+    "near_arm": {
+     "rows": [
+      "AA....",
+      "Am....",
+      "Am....",
+      "Am....",
+      "AaAAma",
+      "Ammmmm"
+     ],
+     "dx": 19,
+     "dy": 18
+    },
+    "weapon": {
+     "rows": [
+      "y...y...........",
+      ".NNNyw..........",
+      "....y.wwwwww....",
+      "....y.......wwwe"
+     ],
+     "dx": 20,
+     "dy": 21
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "jump_6",
+   "layers": {
+    "cape": {
+     "rows": [
+      ".......rrrrr",
+      "......rrrrrR",
+      "......rrrrrR",
+      ".....rrrrrrR",
+      "....rrrrrrR.",
+      "....rrrrrrR.",
+      "...rrrrrrrR.",
+      "...rrrrrrrR.",
+      "..rrrrrrrrR.",
+      ".rrrrrrrrrR.",
+      ".rrrrrrrrR..",
+      "rrrrrrrrrR..",
+      "rRRRRRRRRR.."
+     ],
+     "dx": 8,
+     "dy": 29
+    },
+    "far_arm": {
+     "rows": [
+      "...MMM",
+      ".MMMdd",
+      "MMMd..",
+      "MMd...",
+      ".Md...",
+      ".Md...",
+      ".MMM..",
+      "..Md.."
+     ],
+     "dx": 12,
+     "dy": 30
+    },
+    "far_leg": {
+     "rows": [
+      "..M.....",
+      ".MMM....",
+      "..MMM...",
+      "...MMMM.",
+      ".MMMMMMM",
+      ".MMdddd.",
+      "DDD.....",
+      "DNNDN...",
+      "DDDDD..."
+     ],
+     "dx": 15,
+     "dy": 38
+    },
+    "near_leg": {
+     "rows": [
+      ".AA.....",
+      "AaaAAA..",
+      ".AmaaaA.",
+      "...AaaaA",
+      "..Aaamm.",
+      ".Aaam...",
+      ".NNN....",
+      ".NnnNn..",
+      ".NNNNN.."
+     ],
+     "dx": 18,
+     "dy": 38
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 28
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 16
+    },
+    "near_arm": {
+     "rows": [
+      "AA....",
+      "Am....",
+      "AaA...",
+      ".Am...",
+      ".AaA..",
+      "..Am..",
+      "..AaA.",
+      "...Am.",
+      "...Ama",
+      "....Am"
+     ],
+     "dx": 19,
+     "dy": 30
+    },
+    "weapon": {
+     "rows": [
+      "y...........",
+      "NN..y.......",
+      "..Ny........",
+      "..y.w.......",
+      "..y.w.......",
+      ".....w......",
+      "......ww....",
+      "........w...",
+      ".........w..",
+      "..........w.",
+      "...........e"
+     ],
+     "dx": 21,
+     "dy": 36
+    },
+    "fx": {
+     "rows": [
+      "e.................e.",
+      "gg.e...........e..gg",
+      "...gg..........gg..."
+     ],
+     "dx": 9,
+     "dy": 44
+    }
+   }
+  },
+  {
+   "name": "jump_7",
+   "layers": {
+    "cape": {
+     "rows": [
+      ".....rrrrr",
+      ".....rrrrR",
+      "....rrrrrR",
+      "....rrrrrR",
+      "...rrrrrR.",
+      "...rrrrrR.",
+      "...rrrrrR.",
+      "..rrrrrrR.",
+      "..rrrrrrR.",
+      "..rrrrrrR.",
+      ".rrrrrrrR.",
+      ".rrrrrrR..",
+      "rrrrrrrR..",
+      "rrrrrrrR..",
+      ".rRRRRRR.."
+     ],
+     "dx": 10,
+     "dy": 26
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM",
+      ".MMd",
+      "MMd.",
+      "Md..",
+      "Md..",
+      "MMM.",
+      ".Md.",
+      ".MMM",
+      "..Md"
+     ],
+     "dx": 14,
+     "dy": 27
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMMM",
+      "...MMd",
+      "..MMMd",
+      ".MMdd.",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 35
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      "..AaA.",
+      "...AaA",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 35
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 25
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 13
+    },
+    "near_arm": {
+     "rows": [
+      "AA...",
+      "Am...",
+      "Am...",
+      "Am...",
+      "AaA..",
+      ".Am..",
+      ".AaA.",
+      "..Ama",
+      "...Am"
+     ],
+     "dx": 19,
+     "dy": 27
+    },
+    "weapon": {
+     "rows": [
+      "y............",
+      "NN..y........",
+      "..Ny.........",
+      "...yw........",
+      "..y..w.......",
+      "......w......",
+      ".......ww....",
+      ".........w...",
+      "..........ww.",
+      "............e"
+     ],
+     "dx": 20,
+     "dy": 32
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "crouch_0",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rRRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 26
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM",
+      ".MMd",
+      "MMd.",
+      "Md..",
+      "Md..",
+      "MMM.",
+      ".Md.",
+      ".MMM",
+      "..Md"
+     ],
+     "dx": 14,
+     "dy": 27
+    },
+    "far_leg": {
+     "rows": [
+      "...M...",
+      "..MMM..",
+      "..MMd..",
+      "...MMM.",
+      "...MMd.",
+      "...MMd.",
+      "..MMMMM",
+      ".MMddd.",
+      ".Md....",
+      "DDD....",
+      "DNNDN..",
+      "DDDDD.."
+     ],
+     "dx": 14,
+     "dy": 35
+    },
+    "near_leg": {
+     "rows": [
+      ".A.....",
+      "AaA....",
+      ".AaAA..",
+      "..AaaA.",
+      "...AaaA",
+      "...Aam.",
+      "...Aam.",
+      "..Aam..",
+      "..Aam..",
+      "..NNN..",
+      "..NnnNn",
+      "..NNNNN"
+     ],
+     "dx": 18,
+     "dy": 35
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 25
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 13
+    },
+    "near_arm": {
+     "rows": [
+      "AA...",
+      "Am...",
+      "Am...",
+      "Am...",
+      "AaA..",
+      ".Am..",
+      ".AaA.",
+      "..Ama",
+      "...Am"
+     ],
+     "dx": 19,
+     "dy": 27
+    },
+    "weapon": {
+     "rows": [
+      "y...........",
+      "NN..y.......",
+      "..Ny........",
+      "..y.w.......",
+      "..y.w.......",
+      ".....w......",
+      "......ww....",
+      "........w...",
+      ".........w..",
+      "..........w.",
+      "...........e"
+     ],
+     "dx": 20,
+     "dy": 32
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "crouch_1",
+   "layers": {
+    "cape": {
+     "rows": [
+      ".....rrrrr",
+      ".....rrrrR",
+      "....rrrrrR",
+      "....rrrrrR",
+      "....rrrrR.",
+      "...rrrrrR.",
+      "...rrrrrR.",
+      "...rrrrrR.",
+      "..rrrrrrR.",
+      "..rrrrrrR.",
+      "..rrrrrrR.",
+      ".rrrrrrR..",
+      ".rrrrrrR..",
+      ".rrrrrrR..",
+      "rRrrRRRR..",
+      "..rR......"
+     ],
+     "dx": 10,
+     "dy": 28
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM",
+      ".MMd",
+      "MMd.",
+      "Md..",
+      "Md..",
+      "MMM.",
+      ".Md.",
+      ".MMM",
+      "..Md"
+     ],
+     "dx": 14,
+     "dy": 29
+    },
+    "far_leg": {
+     "rows": [
+      "...M....",
+      "..MMM...",
+      "...MMM..",
+      "...MMd..",
+      "....MMM.",
+      ".MMMMMMM",
+      ".MMdddd.",
+      "DDD.....",
+      "DNNDN...",
+      "DDDDD..."
+     ],
+     "dx": 14,
+     "dy": 37
+    },
+    "near_leg": {
+     "rows": [
+      ".AA.....",
+      "AaaAAAA.",
+      ".AmaaaaA",
+      "...Aaam.",
+      "....Aam.",
+      "...Aam..",
+      "...Aam..",
+      "...NNN..",
+      "...NnnNn",
+      "...NNNNN"
+     ],
+     "dx": 18,
+     "dy": 37
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 27
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 15
+    },
+    "near_arm": {
+     "rows": [
+      "AA....",
+      "Am....",
+      "AaA...",
+      ".Am...",
+      ".AaA..",
+      "..Am..",
+      "..AaA.",
+      "...Am.",
+      "...Ama",
+      "....Am"
+     ],
+     "dx": 19,
+     "dy": 29
+    },
+    "weapon": {
+     "rows": [
+      "yN.........",
+      ".N.........",
+      "..Nyy......",
+      "..y........",
+      ".y.ww......",
+      ".....w.....",
+      "......w....",
+      "......w....",
+      ".......w...",
+      "........w..",
+      ".........w.",
+      "..........e"
+     ],
+     "dx": 21,
+     "dy": 35
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "crouch_2",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrRR..",
+      ".rRRR...."
+     ],
+     "dx": 11,
+     "dy": 30
+    },
+    "far_arm": {
+     "rows": [
+      "..MMM",
+      ".MMdd",
+      ".Md..",
+      "MMd..",
+      "Md...",
+      "MMM..",
+      ".Md..",
+      ".MMM.",
+      "..Md."
+     ],
+     "dx": 13,
+     "dy": 31
+    },
+    "far_leg": {
+     "rows": [
+      "...M....",
+      "..MMM...",
+      "...MMM..",
+      "...MMd..",
+      ".MMMMMM.",
+      "DDDMMdMM",
+      "DNNDN.Md",
+      "DDDDD..."
+     ],
+     "dx": 14,
+     "dy": 39
+    },
+    "near_leg": {
+     "rows": [
+      "......A.",
+      ".AAAAAaA",
+      "Aaaaaam.",
+      ".Amaaam.",
+      "...Aam..",
+      "...Aam..",
+      "...NNN..",
+      "...NnnNn",
+      "...NNNNN"
+     ],
+     "dx": 18,
+     "dy": 38
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 29
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 17
+    },
+    "near_arm": {
+     "rows": [
+      "AA.....",
+      "Am.....",
+      "AaA....",
+      ".Am....",
+      ".AaA...",
+      "..AaA..",
+      "...Am..",
+      "...AaA.",
+      "....Ama",
+      ".....Am"
+     ],
+     "dx": 19,
+     "dy": 31
+    },
+    "weapon": {
+     "rows": [
+      "y......",
+      ".N.....",
+      "..N....",
+      "..N.y..",
+      "..yy...",
+      ".y.w...",
+      "....w..",
+      "....w..",
+      ".....w.",
+      ".....w.",
+      "......w"
+     ],
+     "dx": 22,
+     "dy": 36
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "crouch_3",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrR..",
+      ".rrrrrR..",
+      "rrrrrrR..",
+      ".rRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 32
+    },
+    "far_arm": {
+     "rows": [
+      "..MMM",
+      ".MMdd",
+      ".Md..",
+      "MMd..",
+      "Md...",
+      "MMM..",
+      ".Md..",
+      ".MMM.",
+      "..Md."
+     ],
+     "dx": 13,
+     "dy": 33
+    },
+    "far_leg": {
+     "rows": [
+      "...M...",
+      "..MMM..",
+      ".MMMd..",
+      "DDDMMM.",
+      "DNNDNd.",
+      "DDDDDdM"
+     ],
+     "dx": 14,
+     "dy": 41
+    },
+    "near_leg": {
+     "rows": [
+      ".....A...",
+      "...AAaA..",
+      "..Aaaam..",
+      ".Aamaam..",
+      "Aam.Aam..",
+      ".A..Aam..",
+      "....NNN..",
+      "....NnnNn",
+      "....NNNNN"
+     ],
+     "dx": 18,
+     "dy": 38
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 31
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 19
+    },
+    "near_arm": {
+     "rows": [
+      "AA......",
+      "AaA.....",
+      ".Am.....",
+      ".AaA....",
+      "..Am....",
+      "..AaA...",
+      "...AaA..",
+      "....Am..",
+      "....AaA.",
+      ".....Ama",
+      "......Am"
+     ],
+     "dx": 19,
+     "dy": 33
+    },
+    "weapon": {
+     "rows": [
+      "y...",
+      "N...",
+      ".N..",
+      ".N..",
+      "yyyy",
+      "..w.",
+      "..w.",
+      "..w."
+     ],
+     "dx": 24,
+     "dy": 39
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "crouch_4",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrR..",
+      ".rrrrrR..",
+      "rrrrrrR..",
+      ".rRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 32
+    },
+    "far_arm": {
+     "rows": [
+      "..MMM",
+      ".MMdd",
+      ".Md..",
+      "MMd..",
+      "Md...",
+      "MMM..",
+      ".Md..",
+      ".MMM.",
+      "..Md."
+     ],
+     "dx": 13,
+     "dy": 33
+    },
+    "far_leg": {
+     "rows": [
+      "...M...",
+      "..MMM..",
+      ".MMMd..",
+      "DDDMMM.",
+      "DNNDNd.",
+      "DDDDDdM"
+     ],
+     "dx": 14,
+     "dy": 41
+    },
+    "near_leg": {
+     "rows": [
+      ".....A...",
+      "...AAaA..",
+      "..Aaaam..",
+      ".Aamaam..",
+      "Aam.Aam..",
+      ".A..Aam..",
+      "....NNN..",
+      "....NnnNn",
+      "....NNNNN"
+     ],
+     "dx": 18,
+     "dy": 38
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 31
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 20
+    },
+    "near_arm": {
+     "rows": [
+      "AA......",
+      "Am......",
+      "AaA.....",
+      ".Am.....",
+      ".AaA....",
+      "..AaA...",
+      "...Am...",
+      "...AaA..",
+      "....Am..",
+      "....AaA.",
+      ".....Ama",
+      "......Am"
+     ],
+     "dx": 19,
+     "dy": 33
+    },
+    "weapon": {
+     "rows": [
+      ".y..",
+      ".N..",
+      ".N..",
+      ".N..",
+      "yyyy",
+      ".w..",
+      ".w.."
+     ],
+     "dx": 24,
+     "dy": 40
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "crouch_5",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      ".rRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 31
+    },
+    "far_arm": {
+     "rows": [
+      "..MMM",
+      ".MMdd",
+      ".Md..",
+      "MMd..",
+      "Md...",
+      "MMM..",
+      ".Md..",
+      ".MMM.",
+      "..Md."
+     ],
+     "dx": 13,
+     "dy": 32
+    },
+    "far_leg": {
+     "rows": [
+      "...M....",
+      "..MMM...",
+      "...MMM..",
+      ".MMMMMM.",
+      "DDDMMMd.",
+      "DNNDNMMM",
+      "DDDDDdd."
+     ],
+     "dx": 14,
+     "dy": 40
+    },
+    "near_leg": {
+     "rows": [
+      ".....AA..",
+      "...AAaaA.",
+      ".AAaaam..",
+      "Aaamaam..",
+      ".Am.Aam..",
+      "....Aam..",
+      "....NNN..",
+      "....NnnNn",
+      "....NNNNN"
+     ],
+     "dx": 18,
+     "dy": 38
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 30
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 18
+    },
+    "near_arm": {
+     "rows": [
+      "AA......",
+      "AaA.....",
+      ".Am.....",
+      ".AaA....",
+      "..Am....",
+      "..AaA...",
+      "...AaA..",
+      "....Am..",
+      "....AaA.",
+      ".....Ama",
+      "......Am"
+     ],
+     "dx": 19,
+     "dy": 32
+    },
+    "weapon": {
+     "rows": [
+      "y...",
+      ".N..",
+      ".N..",
+      ".N..",
+      "yyyy",
+      ".w..",
+      "..w.",
+      "..w.",
+      "..w."
+     ],
+     "dx": 24,
+     "dy": 38
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "crouch_6",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrRRR..",
+      ".rRR....."
+     ],
+     "dx": 11,
+     "dy": 29
+    },
+    "far_arm": {
+     "rows": [
+      "..MMM",
+      ".MMdd",
+      ".Md..",
+      "MMd..",
+      "Md...",
+      "MMM..",
+      ".Md..",
+      ".MMM.",
+      "..Md."
+     ],
+     "dx": 13,
+     "dy": 30
+    },
+    "far_leg": {
+     "rows": [
+      "...M....",
+      "..MMM...",
+      "...MMM..",
+      "...MMMM.",
+      "....MMd.",
+      ".MMMMMMM",
+      "DDDMMdd.",
+      "DNNDN...",
+      "DDDDD..."
+     ],
+     "dx": 14,
+     "dy": 38
+    },
+    "near_leg": {
+     "rows": [
+      ".AAAAAA.",
+      "AaaaaaaA",
+      ".Ammaam.",
+      "....Aam.",
+      "...Aam..",
+      "...Aam..",
+      "...NNN..",
+      "...NnnNn",
+      "...NNNNN"
+     ],
+     "dx": 18,
+     "dy": 38
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 28
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 16
+    },
+    "near_arm": {
+     "rows": [
+      "AA.....",
+      "Am.....",
+      "AaA....",
+      ".Am....",
+      ".AaA...",
+      "..AaA..",
+      "...Am..",
+      "...AaA.",
+      "....Ama",
+      ".....Am"
+     ],
+     "dx": 19,
+     "dy": 30
+    },
+    "weapon": {
+     "rows": [
+      "y.......",
+      ".N......",
+      "..N.....",
+      "..N.y...",
+      "..yy....",
+      ".y.w....",
+      "....w...",
+      "....w...",
+      ".....w..",
+      ".....w..",
+      "......w.",
+      "......ww"
+     ],
+     "dx": 22,
+     "dy": 35
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "crouch_7",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rRRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 27
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM",
+      ".MMd",
+      "MMd.",
+      "Md..",
+      "Md..",
+      "MMM.",
+      ".Md.",
+      ".MMM",
+      "..Md"
+     ],
+     "dx": 14,
+     "dy": 28
+    },
+    "far_leg": {
+     "rows": [
+      "...M...",
+      "..MMM..",
+      "..MMd..",
+      "...MMM.",
+      "...MMd.",
+      "....MMM",
+      ".MMMMdd",
+      ".MMdd..",
+      "DDD....",
+      "DNNDN..",
+      "DDDDD.."
+     ],
+     "dx": 14,
+     "dy": 36
+    },
+    "near_leg": {
+     "rows": [
+      ".A.....",
+      "AaAA...",
+      ".AaaA..",
+      "..AmaA.",
+      "....AaA",
+      "...Aam.",
+      "...Aam.",
+      "..Aam..",
+      "..NNN..",
+      "..NnnNn",
+      "..NNNNN"
+     ],
+     "dx": 18,
+     "dy": 36
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 26
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 14
+    },
+    "near_arm": {
+     "rows": [
+      "AA....",
+      "Am....",
+      "AaA...",
+      ".Am...",
+      ".AaA..",
+      "..Am..",
+      "..AaA.",
+      "...Ama",
+      "....Am"
+     ],
+     "dx": 19,
+     "dy": 28
+    },
+    "weapon": {
+     "rows": [
+      "y..........",
+      ".N.........",
+      "..Nyy......",
+      "..yw.......",
+      "..y.w......",
+      ".....w.....",
+      "......w....",
+      ".......w...",
+      "........w..",
+      ".........w.",
+      "..........e"
+     ],
+     "dx": 21,
+     "dy": 33
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "attack_0",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rRRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM",
+      ".MMd",
+      "MMd.",
+      "Md..",
+      "Md..",
+      "MMM.",
+      ".Md.",
+      ".MMM",
+      "..Md"
+     ],
+     "dx": 14,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "..MMMM",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      ".Aam..",
+      "..AaA.",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AA....",
+      "Am....",
+      "Am....",
+      "AaAAma",
+      "Ammmmm"
+     ],
+     "dx": 19,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      ".............e",
+      "...........ww.",
+      "..........ww..",
+      "........ww....",
+      "...y..ww......",
+      "....yw........",
+      "...Ny.........",
+      "yNN..y........"
+     ],
+     "dx": 20,
+     "dy": 23
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "attack_1",
+   "layers": {
+    "cape": {
+     "rows": [
+      "......rrrrr",
+      "......rrrrR",
+      ".....rrrrrR",
+      ".....rrrrrR",
+      "....rrrrrR.",
+      "....rrrrrR.",
+      "...rrrrrrR.",
+      "...rrrrrrR.",
+      "...rrrrrrR.",
+      "..rrrrrrrR.",
+      "..rrrrrrrR.",
+      ".rrrrrrrR..",
+      ".rrrrrrrR..",
+      "rRrrrrrrR..",
+      "..rRRRRRR.."
+     ],
+     "dx": 8,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      "MM....",
+      "Md....",
+      "Md....",
+      "MMMMMM",
+      "Mddddd"
+     ],
+     "dx": 15,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      ".M...",
+      "MMM..",
+      "MMd..",
+      ".MMM.",
+      ".MMd.",
+      "..MMM",
+      "..MMd",
+      "..Md.",
+      ".MMd.",
+      ".Md..",
+      "DDD..",
+      "DNNDN",
+      "DDDDD"
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A.....",
+      "AaA....",
+      ".AaA...",
+      ".AaaA..",
+      "..Aam..",
+      "...AaA.",
+      "...Aam.",
+      "..Aam..",
+      "..Aam..",
+      "..Aam..",
+      "..NNN..",
+      "..NnnNn",
+      "..NNNNN"
+     ],
+     "dx": 17,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 13,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 11,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "maAAA",
+      "Amaam",
+      "..Aam",
+      "..Am.",
+      "..Am.",
+      "..Am."
+     ],
+     "dx": 16,
+     "dy": 22
+    },
+    "weapon": {
+     "rows": [
+      "e...........",
+      ".w..........",
+      "..w.........",
+      "...w........",
+      "....ww......",
+      "......w.....",
+      ".......w.y..",
+      ".......w.y..",
+      "........yN..",
+      ".......y..NN",
+      "...........y"
+     ],
+     "dx": 7,
+     "dy": 14
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "attack_2",
+   "layers": {
+    "cape": {
+     "rows": [
+      "......rrrrr",
+      "......rrrrR",
+      ".....rrrrrR",
+      ".....rrrrrR",
+      "....rrrrrR.",
+      "....rrrrrR.",
+      "...rrrrrrR.",
+      "...rrrrrrR.",
+      "..rrrrrrrR.",
+      "..rrrrrrrR.",
+      ".rrrrrrrrR.",
+      ".rrrrrrrR..",
+      "rrrrrrrrR..",
+      "rRRRRRRRR.."
+     ],
+     "dx": 8,
+     "dy": 26
+    },
+    "far_arm": {
+     "rows": [
+      "MM.....",
+      "Md.....",
+      "Md.....",
+      "MMMMMMM",
+      ".Mddddd"
+     ],
+     "dx": 15,
+     "dy": 27
+    },
+    "far_leg": {
+     "rows": [
+      ".M....",
+      "MMM...",
+      ".MMM..",
+      "..MMM.",
+      "..MMd.",
+      "...MMM",
+      "...MMd",
+      "..MMd.",
+      ".MMd..",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 35
+    },
+    "near_leg": {
+     "rows": [
+      ".A.....",
+      "AaA....",
+      ".AaAA..",
+      "..AaaA.",
+      "...AaaA",
+      "...Aam.",
+      "...Aam.",
+      "..Aam..",
+      "..Aam..",
+      "..NNN..",
+      "..NnnNn",
+      "..NNNNN"
+     ],
+     "dx": 17,
+     "dy": 35
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 13,
+     "dy": 25
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 11,
+     "dy": 13
+    },
+    "near_arm": {
+     "rows": [
+      "maAA..",
+      "AmmaA.",
+      "...Am.",
+      "...Am.",
+      "...Am.",
+      "...AaA",
+      "....Am"
+     ],
+     "dx": 14,
+     "dy": 22
+    },
+    "weapon": {
+     "rows": [
+      "ewww.......y....",
+      "....wwwwww.y....",
+      "..........wyNNN.",
+      "...........y...y"
+     ],
+     "dx": 2,
+     "dy": 20
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "attack_3",
+   "layers": {
+    "cape": {
+     "rows": [
+      ".......rrrrr",
+      "......rrrrrR",
+      "......rrrrrR",
+      ".....rrrrrrR",
+      "....rrrrrrR.",
+      "....rrrrrrR.",
+      "...rrrrrrrR.",
+      "...rrrrrrrR.",
+      "..rrrrrrrrR.",
+      ".rrrrrrrrrR.",
+      ".rrrrrrrrR..",
+      "rrrrrrrrrR..",
+      "rRRRRRRRRR.."
+     ],
+     "dx": 9,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM..",
+      ".MMd..",
+      "MMd...",
+      "MMMMM.",
+      "MdddMM",
+      "....Md"
+     ],
+     "dx": 15,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "...M..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "...MMM",
+      "...MMd",
+      "...MMd",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A.....",
+      "AaA....",
+      ".AaA...",
+      ".AaaA..",
+      "..Aam..",
+      "...AaA.",
+      "...Aam.",
+      "..Aam..",
+      "..Aam..",
+      "..Aam..",
+      "..NNN..",
+      "..NnnNn",
+      "..NNNNN"
+     ],
+     "dx": 19,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 15,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 13,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "...ma",
+      "...Am",
+      "...Am",
+      "AAAam",
+      "Aammm",
+      "Am..."
+     ],
+     "dx": 20,
+     "dy": 22
+    },
+    "weapon": {
+     "rows": [
+      ".....e",
+      ".....w",
+      "....w.",
+      "....w.",
+      "...w..",
+      "...w..",
+      "...w..",
+      "..w...",
+      "..w...",
+      "..w...",
+      "yyy...",
+      ".N.y..",
+      ".N....",
+      "N.....",
+      "y....."
+     ],
+     "dx": 22,
+     "dy": 11
+    },
+    "fx": {
+     "rows": [
+      ".........WWWWWWW",
+      "......WWWCCCCCCC",
+      ".....CWCCccccccc",
+      "....Ccc.cc......",
+      "...Ccc..........",
+      "..CCc...........",
+      ".CC.............",
+      ".C..............",
+      ".C..............",
+      "CC.............."
+     ],
+     "dx": 7,
+     "dy": 12
+    }
+   }
+  },
+  {
+   "name": "attack_4",
+   "layers": {
+    "cape": {
+     "rows": [
+      ".........rrrrr",
+      "........rrrrrR",
+      ".......rrrrrrR",
+      "......rrrrrrR.",
+      ".....rrrrrrrR.",
+      ".....rrrrrrrR.",
+      "....rrrrrrrrR.",
+      "...rrrrrrrrrR.",
+      "..rrrrrrrrrrR.",
+      ".rrrrrrrrrrrR.",
+      "rrrrrrrrrrrR..",
+      ".rRRRRRRRRRR.."
+     ],
+     "dx": 8,
+     "dy": 26
+    },
+    "far_arm": {
+     "rows": [
+      "MMMMMM",
+      "MMMddd",
+      "MMd...",
+      ".Md...",
+      ".MMM..",
+      "..Md.."
+     ],
+     "dx": 14,
+     "dy": 27
+    },
+    "far_leg": {
+     "rows": [
+      "....M..",
+      "...MMM.",
+      "...MMd.",
+      "...MMd.",
+      "....MMM",
+      "....MMd",
+      "..MMMMd",
+      ".MMddd.",
+      ".Md....",
+      "DDD....",
+      "DNNDN..",
+      "DDDDD.."
+     ],
+     "dx": 15,
+     "dy": 35
+    },
+    "near_leg": {
+     "rows": [
+      ".A......",
+      "AaA.....",
+      ".AaAA...",
+      "..AaaA..",
+      "...AaaA.",
+      "....Aam.",
+      "...Aam..",
+      "...Aam..",
+      "...Aam..",
+      "...NNN..",
+      "...NnnNn",
+      "...NNNNN"
+     ],
+     "dx": 20,
+     "dy": 35
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 16,
+     "dy": 25
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 14,
+     "dy": 13
+    },
+    "near_arm": {
+     "rows": [
+      "AA.......",
+      "AaAA.....",
+      ".AmaAA...",
+      "...AmaAA.",
+      ".....Amma",
+      ".......Am"
+     ],
+     "dx": 21,
+     "dy": 27
+    },
+    "weapon": {
+     "rows": [
+      "yN...y.........",
+      "..NNy..........",
+      "....yww........",
+      "...y...ww......",
+      "........www....",
+      "...........ww..",
+      ".............we"
+     ],
+     "dx": 25,
+     "dy": 30
+    },
+    "fx": {
+     "rows": [
+      "CCCCCC..........",
+      "......CCC.......",
+      "........CCC.....",
+      "........ccCC....",
+      ".........ccCC...",
+      "...........cCC..",
+      "............cW..",
+      "............CCW.",
+      ".............CW.",
+      ".............CW.",
+      "............ccCW",
+      ".............cCW",
+      ".............cCW",
+      ".............cCW",
+      ".............cCW",
+      ".............cCW",
+      "............ccCW",
+      "............cCW.",
+      "............cCW.",
+      "...........cCCW.",
+      "............CW.."
+     ],
+     "dx": 18,
+     "dy": 12
+    }
+   }
+  },
+  {
+   "name": "attack_5",
+   "layers": {
+    "cape": {
+     "rows": [
+      "........rrrrr",
+      ".......rrrrrR",
+      ".......rrrrrR",
+      "......rrrrrrR",
+      ".....rrrrrrR.",
+      "....rrrrrrrR.",
+      "....rrrrrrrR.",
+      "...rrrrrrrrR.",
+      "..rrrrrrrrrR.",
+      ".rrrrrrrrrrR.",
+      ".rrrrrrrrrR..",
+      "rrrrrrrrrrR..",
+      ".rRRRRRRRRR.."
+     ],
+     "dx": 9,
+     "dy": 26
+    },
+    "far_arm": {
+     "rows": [
+      "MMMMMM",
+      "MMMddd",
+      "MMd...",
+      ".Md...",
+      ".MMM..",
+      "..Md.."
+     ],
+     "dx": 14,
+     "dy": 27
+    },
+    "far_leg": {
+     "rows": [
+      "....M..",
+      "...MMM.",
+      "...MMd.",
+      "...MMd.",
+      "....MMM",
+      "....MMd",
+      "..MMMMd",
+      ".MMddd.",
+      ".Md....",
+      "DDD....",
+      "DNNDN..",
+      "DDDDD.."
+     ],
+     "dx": 15,
+     "dy": 35
+    },
+    "near_leg": {
+     "rows": [
+      ".A......",
+      "AaA.....",
+      ".AaAA...",
+      "..AaaA..",
+      "...AaaA.",
+      "....Aam.",
+      "...Aam..",
+      "...Aam..",
+      "...Aam..",
+      "...NNN..",
+      "...NnnNn",
+      "...NNNNN"
+     ],
+     "dx": 20,
+     "dy": 35
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 16,
+     "dy": 25
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 14,
+     "dy": 13
+    },
+    "near_arm": {
+     "rows": [
+      "AA......",
+      "AaA.....",
+      ".Am.....",
+      ".AaA....",
+      "..Am....",
+      "..AaA...",
+      "...AaA..",
+      "....AaA.",
+      ".....Ama",
+      "......Am"
+     ],
+     "dx": 21,
+     "dy": 27
+    },
+    "weapon": {
+     "rows": [
+      "y.....",
+      "N.....",
+      ".N....",
+      ".N.y..",
+      "yyy...",
+      "..w...",
+      "..w...",
+      "..w...",
+      "...w..",
+      "...w..",
+      "...w..",
+      "....w.",
+      "....w.",
+      ".....w",
+      ".....e"
+     ],
+     "dx": 26,
+     "dy": 32
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "attack_6",
+   "layers": {
+    "cape": {
+     "rows": [
+      "......rrrrr",
+      ".....rrrrrR",
+      ".....rrrrrR",
+      "....rrrrrrR",
+      "....rrrrrR.",
+      "...rrrrrrR.",
+      "...rrrrrrR.",
+      "..rrrrrrrR.",
+      "..rrrrrrrR.",
+      ".rrrrrrrrR.",
+      ".rrrrrrrrR.",
+      "rrrrrrrrR..",
+      "rrrrrrrrR..",
+      "rRRRRRRRR.."
+     ],
+     "dx": 10,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM",
+      ".MMd",
+      "MMd.",
+      "Md..",
+      "Md..",
+      "MMM.",
+      ".Md.",
+      ".MMM",
+      "..Md"
+     ],
+     "dx": 15,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "...M..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "...MMM",
+      "...MMd",
+      "...MMd",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A.....",
+      "AaA....",
+      ".AaA...",
+      ".AaaA..",
+      "..Aam..",
+      "...AaA.",
+      "...Aam.",
+      "..Aam..",
+      "..Aam..",
+      "..Aam..",
+      "..NNN..",
+      "..NnnNn",
+      "..NNNNN"
+     ],
+     "dx": 19,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 15,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 13,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AA.....",
+      "Am.....",
+      "AaA....",
+      ".Am....",
+      ".AaAA..",
+      "..AmaA.",
+      "....Ama",
+      ".....Am"
+     ],
+     "dx": 20,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "y.............",
+      ".N...y........",
+      "..NNy.........",
+      "....yw........",
+      "...y..ww......",
+      "........ww....",
+      "..........ww..",
+      "...........ww.",
+      ".............e"
+     ],
+     "dx": 22,
+     "dy": 30
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "attack_7",
+   "layers": {
+    "cape": {
+     "rows": [
+      ".....rrrrr",
+      ".....rrrrR",
+      "....rrrrrR",
+      "....rrrrrR",
+      "...rrrrrR.",
+      "...rrrrrR.",
+      "...rrrrrR.",
+      "..rrrrrrR.",
+      "..rrrrrrR.",
+      "..rrrrrrR.",
+      ".rrrrrrrR.",
+      ".rrrrrrR..",
+      "rrrrrrrR..",
+      "rrrrrrrR..",
+      ".rRRRRRR.."
+     ],
+     "dx": 10,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM",
+      ".MMd",
+      "MMd.",
+      "Md..",
+      "Md..",
+      "MMM.",
+      ".Md.",
+      ".MMM",
+      "..Md"
+     ],
+     "dx": 14,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "..MMMM",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      ".Aam..",
+      "..AaA.",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AA....",
+      "Am....",
+      "Am....",
+      "Am....",
+      "AaAAma",
+      "Ammmmm"
+     ],
+     "dx": 19,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "....y.......wwwe",
+      "....y.wwwwww....",
+      ".NNNyw..........",
+      "y...y..........."
+     ],
+     "dx": 20,
+     "dy": 28
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "shoot_0",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rRRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM",
+      ".MMd",
+      "MMd.",
+      "Md..",
+      "Md..",
+      "MMM.",
+      ".Md.",
+      ".MMM",
+      "..Md"
+     ],
+     "dx": 14,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "..MMMM",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      ".Aam..",
+      "..AaA.",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AA....",
+      "Am....",
+      "Am....",
+      "Am....",
+      "AaAA..",
+      ".AmaA.",
+      "...Ama",
+      "....Am"
+     ],
+     "dx": 19,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "wn..",
+      "wn..",
+      "w.n.",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w.n.",
+      "wn..",
+      "wn.."
+     ],
+     "dx": 23,
+     "dy": 26
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "shoot_1",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rRRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      "MMM...",
+      "MMd...",
+      "Md....",
+      "MMMMMM",
+      "Mddddd"
+     ],
+     "dx": 15,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "..MMMM",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      ".Aam..",
+      "..AaA.",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AA.......",
+      "AaAA.....",
+      ".AmaAAAma",
+      "...Ammmmm"
+     ],
+     "dx": 19,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "wn..",
+      "w.n.",
+      "w.n.",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w.n.",
+      "w.n.",
+      "wn.."
+     ],
+     "dx": 26,
+     "dy": 22
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "shoot_2",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rRRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      "MMMMMMMMM.",
+      "MdddddddMM",
+      "........Md"
+     ],
+     "dx": 16,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "..MMMM",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      ".Aam..",
+      "..AaA.",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AAAAAAAAA.",
+      "Ammmmmmmma",
+      "........Am"
+     ],
+     "dx": 19,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "wn.....",
+      "wn.....",
+      "w.n....",
+      "w..n...",
+      "w..n...",
+      "r..n...",
+      "nnnnnne",
+      "r..n...",
+      "w..n...",
+      "w..n...",
+      "w.n....",
+      "wn.....",
+      "wn....."
+     ],
+     "dx": 27,
+     "dy": 21
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "shoot_3",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rRRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      "MM......",
+      "MMM..MMM",
+      ".MMMMMdd",
+      ".MMMdd..",
+      "..Md...."
+     ],
+     "dx": 16,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "..MMMM",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      ".Aam..",
+      "..AaA.",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AAAAAAAAA.",
+      "Ammmmmmmma",
+      "........Am"
+     ],
+     "dx": 19,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      ".wn.....",
+      ".wn.....",
+      ".w.n....",
+      "w...n...",
+      "w...n...",
+      "r...n...",
+      "nnnnnnne",
+      "r...n...",
+      "w...n...",
+      "w...n...",
+      ".w.n....",
+      ".wn.....",
+      ".wn....."
+     ],
+     "dx": 26,
+     "dy": 21
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "shoot_4",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rRRRRRR.."
+     ],
+     "dx": 10,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      "MM...",
+      "MMMMM",
+      "MMMdd",
+      "MMd..",
+      "Md..."
+     ],
+     "dx": 15,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      ".M...",
+      "MMM..",
+      "MMd..",
+      ".MMM.",
+      ".MMd.",
+      "..MMM",
+      "..MMd",
+      "..Md.",
+      ".MMd.",
+      ".Md..",
+      "DDD..",
+      "DNNDN",
+      "DDDDD"
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A.....",
+      "AaA....",
+      ".AaA...",
+      ".AaaA..",
+      "..Aam..",
+      "...AaA.",
+      "...Aam.",
+      "..Aam..",
+      "..Aam..",
+      "..Aam..",
+      "..NNN..",
+      "..NnnNn",
+      "..NNNNN"
+     ],
+     "dx": 17,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 13,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 11,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AAAAAAAAA.",
+      "Ammmmmmmma",
+      "........Am"
+     ],
+     "dx": 18,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "....wn.....",
+      "...w..n....",
+      "...w..n....",
+      "..w....n...",
+      ".w.....n...",
+      "rw.....n...",
+      "nnnnnnnnnne",
+      "rw.....n...",
+      ".w.....n...",
+      "..w....n...",
+      "...w..n....",
+      "...w..n....",
+      "....wn....."
+     ],
+     "dx": 22,
+     "dy": 21
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "shoot_5",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rRRRRRR.."
+     ],
+     "dx": 10,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      "MMM",
+      "MMd",
+      "Md.",
+      "Md.",
+      "Md."
+     ],
+     "dx": 15,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      ".M...",
+      "MMM..",
+      "MMd..",
+      ".MMM.",
+      ".MMd.",
+      "..MMM",
+      "..MMd",
+      "..Md.",
+      ".MMd.",
+      ".Md..",
+      "DDD..",
+      "DNNDN",
+      "DDDDD"
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A.....",
+      "AaA....",
+      ".AaA...",
+      ".AaaA..",
+      "..Aam..",
+      "...AaA.",
+      "...Aam.",
+      "..Aam..",
+      "..Aam..",
+      "..Aam..",
+      "..NNN..",
+      "..NnnNn",
+      "..NNNNN"
+     ],
+     "dx": 17,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 13,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 11,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AAAAAAAAA.",
+      "Ammmmmmmma",
+      "........Am"
+     ],
+     "dx": 18,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "wn..",
+      "w.n.",
+      "w.n.",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w.n.",
+      "w.n.",
+      "wn.."
+     ],
+     "dx": 26,
+     "dy": 21
+    },
+    "fx": {
+     "rows": [
+      "r..........",
+      "nnnnnnnnnwe",
+      "r.........."
+     ],
+     "dx": 35,
+     "dy": 26
+    }
+   }
+  },
+  {
+   "name": "shoot_6",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rRRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      "..MMM.",
+      ".MMMd.",
+      "MMMMMM",
+      "Mddddd"
+     ],
+     "dx": 13,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "..MMMM",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      ".Aam..",
+      "..AaA.",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AA.......",
+      "AaAA.....",
+      ".AmaAAAma",
+      "...Ammmmm"
+     ],
+     "dx": 19,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "wn..",
+      "w.n.",
+      "w.n.",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w.n.",
+      "w.n.",
+      "wn.."
+     ],
+     "dx": 26,
+     "dy": 22
+    },
+    "fx": {
+     "rows": [
+      "r..",
+      "nnn",
+      "r.."
+     ],
+     "dx": 44,
+     "dy": 26
+    }
+   }
+  },
+  {
+   "name": "shoot_7",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rRRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      "..MMMM",
+      "MMMddd",
+      "MMd...",
+      ".Md...",
+      ".MMM..",
+      "..MMM.",
+      "...Md."
+     ],
+     "dx": 12,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "..MMMM",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      ".Aam..",
+      "..AaA.",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AA.....",
+      "Am.....",
+      "Am.....",
+      "AaAAAA.",
+      ".Ammmma",
+      ".....Am"
+     ],
+     "dx": 19,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "wn..",
+      "w.n.",
+      "w.n.",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w..n",
+      "w.n.",
+      "w.n.",
+      "wn.."
+     ],
+     "dx": 24,
+     "dy": 24
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "cast_0",
+   "layers": {
+    "cape": {
+     "rows": [
+      "....rrrrr",
+      "....rrrrR",
+      "...rrrrrR",
+      "...rrrrrR",
+      "...rrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      "..rrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      ".rrrrrrR.",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rrrrrrR..",
+      "rRRRRRR.."
+     ],
+     "dx": 11,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM",
+      ".MMd",
+      "MMd.",
+      "Md..",
+      "Md..",
+      "MMM.",
+      ".Md.",
+      ".MMM",
+      "..Md"
+     ],
+     "dx": 14,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "..MMMM",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      ".Aam..",
+      "..AaA.",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AA....",
+      "Am....",
+      "Am....",
+      "AaAAma",
+      "Ammmmm"
+     ],
+     "dx": 19,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      ".......e",
+      "......w.",
+      ".....ww.",
+      ".....w..",
+      "....w...",
+      "....w...",
+      "...w....",
+      "...w....",
+      "y.w.....",
+      ".yy.....",
+      ".N.y....",
+      "N.......",
+      "N.......",
+      "y......."
+     ],
+     "dx": 22,
+     "dy": 19
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "cast_1",
+   "layers": {
+    "cape": {
+     "rows": [
+      "......rrrrr",
+      "......rrrrR",
+      ".....rrrrrR",
+      ".....rrrrrR",
+      "....rrrrrR.",
+      "....rrrrrR.",
+      "...rrrrrrR.",
+      "...rrrrrrR.",
+      "...rrrrrrR.",
+      "..rrrrrrrR.",
+      "..rrrrrrrR.",
+      ".rrrrrrrR..",
+      ".rrrrrrrR..",
+      "rRrrrrrrR..",
+      "..rRRRRRR.."
+     ],
+     "dx": 9,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      "...MMM",
+      "MM.MMd",
+      "MMMMd.",
+      ".MMMd.",
+      "..Md.."
+     ],
+     "dx": 16,
+     "dy": 25
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "..MMMM",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      ".Aam..",
+      "..AaA.",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "...ma",
+      "...Am",
+      "...Am",
+      "...Am",
+      ".AAam",
+      "Aamm.",
+      "Am...",
+      "Am..."
+     ],
+     "dx": 19,
+     "dy": 20
+    },
+    "weapon": {
+     "rows": [
+      "..e..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "y.y.y",
+      "..N..",
+      "..N..",
+      "..N..",
+      "..y.."
+     ],
+     "dx": 20,
+     "dy": 8
+    },
+    "fx": {
+     "rows": [
+      ".C.................",
+      "CWC................",
+      ".C.................",
+      "...................",
+      "...................",
+      "...................",
+      ".................C.",
+      "................CWC",
+      ".................C."
+     ],
+     "dx": 13,
+     "dy": 8
+    }
+   }
+  },
+  {
+   "name": "cast_2",
+   "layers": {
+    "cape": {
+     "rows": [
+      "......rrrrr",
+      ".....rrrrrR",
+      ".....rrrrrR",
+      "....rrrrrrR",
+      "....rrrrrR.",
+      "...rrrrrrR.",
+      "...rrrrrrR.",
+      "..rrrrrrrR.",
+      "..rrrrrrrR.",
+      ".rrrrrrrrR.",
+      ".rrrrrrrrR.",
+      "rrrrrrrrR..",
+      "rrrrrrrrR..",
+      ".rRRRRRRR.."
+     ],
+     "dx": 9,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      "...MMM",
+      "MM.MMd",
+      "MMMMd.",
+      ".MMMd.",
+      "..Md.."
+     ],
+     "dx": 16,
+     "dy": 25
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "..MMMM",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      ".Aam..",
+      "..AaA.",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "...ma",
+      "...Am",
+      "...Am",
+      "...Am",
+      ".AAam",
+      "Aamm.",
+      "Am...",
+      "Am..."
+     ],
+     "dx": 19,
+     "dy": 20
+    },
+    "weapon": {
+     "rows": [
+      "..e..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "y.y.y",
+      "..N..",
+      "..N..",
+      "..N..",
+      "..y.."
+     ],
+     "dx": 20,
+     "dy": 8
+    },
+    "fx": {
+     "rows": [
+      ".............C.",
+      "............CWC",
+      ".............C.",
+      ".C.............",
+      "CWC............",
+      ".C.......C.....",
+      "........CWC....",
+      ".........C....."
+     ],
+     "dx": 18,
+     "dy": 1
+    }
+   }
+  },
+  {
+   "name": "cast_3",
+   "layers": {
+    "cape": {
+     "rows": [
+      ".......rrrrr",
+      "......rrrrrR",
+      "......rrrrrR",
+      ".....rrrrrrR",
+      "....rrrrrrR.",
+      "....rrrrrrR.",
+      "...rrrrrrrR.",
+      "...rrrrrrrR.",
+      "..rrrrrrrrR.",
+      ".rrrrrrrrrR.",
+      ".rrrrrrrrR..",
+      "rrrrrrrrrR..",
+      "rRRRRRRRRR.."
+     ],
+     "dx": 8,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      "...MMM",
+      "MM.MMd",
+      "MMMMd.",
+      ".MMMd.",
+      "..Md.."
+     ],
+     "dx": 16,
+     "dy": 25
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "..MMMM",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      ".Aam..",
+      "..AaA.",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "...ma",
+      "...Am",
+      "...Am",
+      "...Am",
+      ".AAam",
+      "Aamm.",
+      "Am...",
+      "Am..."
+     ],
+     "dx": 19,
+     "dy": 20
+    },
+    "weapon": {
+     "rows": [
+      "..e..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "y.y.y",
+      "..N..",
+      "..N..",
+      "..N..",
+      "..y.."
+     ],
+     "dx": 20,
+     "dy": 8
+    },
+    "fx": {
+     "rows": [
+      ".c.",
+      "cWc",
+      ".c."
+     ],
+     "dx": 22,
+     "dy": 4
+    }
+   }
+  },
+  {
+   "name": "cast_4",
+   "layers": {
+    "cape": {
+     "rows": [
+      "........rrrrr",
+      ".......rrrrrR",
+      ".......rrrrrR",
+      "......rrrrrrR",
+      ".....rrrrrrR.",
+      "....rrrrrrrR.",
+      "....rrrrrrrR.",
+      "...rrrrrrrrR.",
+      "..rrrrrrrrrR.",
+      ".rrrrrrrrrrR.",
+      ".rrrrrrrrrR..",
+      "rrrrrrrrrrR..",
+      ".rRRRRRRRRR.."
+     ],
+     "dx": 7,
+     "dy": 24
+    },
+    "far_arm": {
+     "rows": [
+      "...MMM",
+      "MM.MMd",
+      "MMMMd.",
+      ".MMMd.",
+      "..Md.."
+     ],
+     "dx": 16,
+     "dy": 24
+    },
+    "far_leg": {
+     "rows": [
+      "..M..",
+      ".MMM.",
+      ".MMd.",
+      ".MMd.",
+      ".MMd.",
+      ".MMd.",
+      ".MMd.",
+      ".Md..",
+      ".Md..",
+      ".Md..",
+      ".Md..",
+      "DDD..",
+      "DNNDN",
+      "DDDDD"
+     ],
+     "dx": 15,
+     "dy": 33
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      "Aam...",
+      "Aam...",
+      "Aam...",
+      ".AaA..",
+      ".AaA..",
+      ".Aam..",
+      ".Aam..",
+      ".Aam..",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 33
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 23
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 11
+    },
+    "near_arm": {
+     "rows": [
+      "...ma",
+      "...Am",
+      "...Am",
+      "...Am",
+      ".AAam",
+      "Aamm.",
+      "Am...",
+      "Am..."
+     ],
+     "dx": 19,
+     "dy": 19
+    },
+    "weapon": {
+     "rows": [
+      "..e..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "..w..",
+      "y.y.y",
+      "..N..",
+      "..N..",
+      "..N..",
+      "..y.."
+     ],
+     "dx": 20,
+     "dy": 7
+    },
+    "fx": {
+     "rows": [
+      "CWC...ccc......",
+      ".C...cCCCc.....",
+      "....cCCWCCc....",
+      "....cCWWWCc....",
+      "....cCCWCCc....",
+      ".....cCCCc.....",
+      "......ccc......",
+      ".............C.",
+      "............CWC",
+      ".............C."
+     ],
+     "dx": 16,
+     "dy": 1
+    }
+   }
+  },
+  {
+   "name": "cast_5",
+   "layers": {
+    "cape": {
+     "rows": [
+      "..........rrrrr",
+      ".........rrrrrR",
+      "........rrrrrrR",
+      ".......rrrrrrR.",
+      "......rrrrrrrR.",
+      ".....rrrrrrrrR.",
+      "....rrrrrrrrrR.",
+      "...rrrrrrrrrrR.",
+      "..rrrrrrrrrrrR.",
+      ".rrrrrrrrrrrR..",
+      "rRRRRRrrrrrrR..",
+      "......rRRRRRR.."
+     ],
+     "dx": 6,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      "MMMMMM",
+      "MMMMdd",
+      ".MMd..",
+      "..MMM.",
+      "...Md."
+     ],
+     "dx": 13,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "...M..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "...MMM",
+      "...MMd",
+      "...MMd",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A......",
+      "AaA.....",
+      ".AaA....",
+      "..AaA...",
+      "..Aam...",
+      "...AaA..",
+      "...Aam..",
+      "...Aam..",
+      "...Aam..",
+      "...Aam..",
+      "...NNN..",
+      "...NnnNn",
+      "...NNNNN"
+     ],
+     "dx": 19,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 15,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 13,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AA.......",
+      "AaAA.AAma",
+      ".AmaAammm",
+      "...Amm..."
+     ],
+     "dx": 20,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      ".............wwe",
+      "....y....wwww...",
+      "....ywwww.......",
+      "..NNy...........",
+      "yN..y..........."
+     ],
+     "dx": 24,
+     "dy": 24
+    },
+    "fx": {
+     "rows": [
+      "..ccc.",
+      ".cCCCc",
+      "cCCWCC",
+      "cCWWWC",
+      "cCCWCC",
+      ".cCCCc",
+      "..ccc."
+     ],
+     "dx": 41,
+     "dy": 20
+    }
+   }
+  },
+  {
+   "name": "cast_6",
+   "layers": {
+    "cape": {
+     "rows": [
+      "........rrrrr",
+      ".......rrrrrR",
+      ".......rrrrrR",
+      "......rrrrrrR",
+      ".....rrrrrrR.",
+      "....rrrrrrrR.",
+      "....rrrrrrrR.",
+      "...rrrrrrrrR.",
+      "..rrrrrrrrrR.",
+      ".rrrrrrrrrrR.",
+      ".rrrrrrrrrR..",
+      "rrrrrrrrrrR..",
+      ".rRRRRRRRRR.."
+     ],
+     "dx": 8,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      "MMMMMM",
+      "MMMMdd",
+      ".MMd..",
+      "..MMM.",
+      "...Md."
+     ],
+     "dx": 13,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "...M..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "...MMM",
+      "...MMd",
+      "...MMd",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A......",
+      "AaA.....",
+      ".AaA....",
+      "..AaA...",
+      "..Aam...",
+      "...AaA..",
+      "...Aam..",
+      "...Aam..",
+      "...Aam..",
+      "...Aam..",
+      "...NNN..",
+      "...NnnNn",
+      "...NNNNN"
+     ],
+     "dx": 19,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 15,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 13,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AA.......",
+      "AaAA.....",
+      ".AmaAAAma",
+      "...Ammmmm"
+     ],
+     "dx": 20,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "....y...........",
+      "....y....wwwwwwe",
+      "yNNNywwww.......",
+      "....y..........."
+     ],
+     "dx": 24,
+     "dy": 26
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  },
+  {
+   "name": "cast_7",
+   "layers": {
+    "cape": {
+     "rows": [
+      "......rrrrr",
+      "......rrrrR",
+      ".....rrrrrR",
+      ".....rrrrrR",
+      "....rrrrrR.",
+      "....rrrrrR.",
+      "...rrrrrrR.",
+      "...rrrrrrR.",
+      "...rrrrrrR.",
+      "..rrrrrrrR.",
+      "..rrrrrrrR.",
+      ".rrrrrrrR..",
+      ".rrrrrrrR..",
+      "rRrrrrrrR..",
+      "..rRRRRRR.."
+     ],
+     "dx": 9,
+     "dy": 25
+    },
+    "far_arm": {
+     "rows": [
+      ".MMM",
+      ".MMd",
+      "MMd.",
+      "Md..",
+      "Md..",
+      "MMM.",
+      ".Md.",
+      ".MMM",
+      "..Md"
+     ],
+     "dx": 14,
+     "dy": 26
+    },
+    "far_leg": {
+     "rows": [
+      "..M...",
+      ".MMM..",
+      ".MMd..",
+      "..MMM.",
+      "..MMd.",
+      "..MMd.",
+      "..MMMM",
+      "..MMd.",
+      ".MMd..",
+      ".Md...",
+      "DDD...",
+      "DNNDN.",
+      "DDDDD."
+     ],
+     "dx": 15,
+     "dy": 34
+    },
+    "near_leg": {
+     "rows": [
+      ".A....",
+      "AaA...",
+      ".AaA..",
+      ".Aam..",
+      "..AaA.",
+      "...AaA",
+      "..Aam.",
+      "..Aam.",
+      ".Aam..",
+      ".Aam..",
+      ".NNN..",
+      ".NnnNn",
+      ".NNNNN"
+     ],
+     "dx": 18,
+     "dy": 34
+    },
+    "torso": {
+     "rows": [
+      ".mAAaam..",
+      "AAaaaaaam",
+      "Aaaaaaaam",
+      "abbbbbbbm",
+      "bbbbybbbB",
+      "bbbyyybbB",
+      "bbbbybbbB",
+      "NnnnynnnN",
+      "bbbbbbbbB",
+      "bbbbbbbbB",
+      ".BbbbbbB."
+     ],
+     "dx": 14,
+     "dy": 24
+    },
+    "head": {
+     "rows": [
+      ".rrr........",
+      "rrR.........",
+      "rR..........",
+      "R...AAAAA...",
+      "...AaaaaaA..",
+      "..Aaaaaaaaa.",
+      "..aaaayyyyy.",
+      "..aaaakkkkkk",
+      "..maaaaaaaaa",
+      "..maaaakkkaa",
+      "...mmaaaaam.",
+      "....mmmmmm.."
+     ],
+     "dx": 12,
+     "dy": 12
+    },
+    "near_arm": {
+     "rows": [
+      "AA....",
+      "Am....",
+      "Am....",
+      "Am....",
+      "AaAAA.",
+      ".Ammma",
+      "....Am"
+     ],
+     "dx": 19,
+     "dy": 26
+    },
+    "weapon": {
+     "rows": [
+      "yN..y..........",
+      "..NNy..........",
+      "....ywww.......",
+      "...y....www....",
+      "...........ww..",
+      ".............we"
+     ],
+     "dx": 20,
+     "dy": 30
+    },
+    "fx": {
+     "hidden": true
+    }
+   }
+  }
+ ],
+ "clips": {
+  "idle": {
+   "duration_ms": 220,
+   "loop": true,
+   "frames": [
+    "idle_0",
+    "idle_1",
+    "idle_2",
+    "idle_3"
+   ]
+  },
+  "walk": {
+   "duration_ms": 100,
+   "loop": true,
+   "frames": [
+    "walk_0",
+    "walk_1",
+    "walk_2",
+    "walk_3",
+    "walk_4",
+    "walk_5",
+    "walk_6",
+    "walk_7"
+   ]
+  },
+  "run": {
+   "duration_ms": 70,
+   "loop": true,
+   "frames": [
+    "run_0",
+    "run_1",
+    "run_2",
+    "run_3",
+    "run_4",
+    "run_5",
+    "run_6",
+    "run_7"
+   ]
+  },
+  "jump": {
+   "duration_ms": [
+    90,
+    90,
+    70,
+    70,
+    110,
+    80,
+    90,
+    110
+   ],
+   "loop": false,
+   "frames": [
+    "jump_0",
+    "jump_1",
+    "jump_2",
+    "jump_3",
+    "jump_4",
+    "jump_5",
+    "jump_6",
+    "jump_7"
+   ]
+  },
+  "crouch": {
+   "duration_ms": [
+    70,
+    70,
+    70,
+    120,
+    160,
+    120,
+    80,
+    80
+   ],
+   "loop": false,
+   "frames": [
+    "crouch_0",
+    "crouch_1",
+    "crouch_2",
+    "crouch_3",
+    "crouch_4",
+    "crouch_5",
+    "crouch_6",
+    "crouch_7"
+   ]
+  },
+  "attack": {
+   "duration_ms": [
+    70,
+    70,
+    110,
+    50,
+    90,
+    80,
+    80,
+    90
+   ],
+   "loop": false,
+   "frames": [
+    "attack_0",
+    "attack_1",
+    "attack_2",
+    "attack_3",
+    "attack_4",
+    "attack_5",
+    "attack_6",
+    "attack_7"
+   ],
+   "events": [
+    {
+     "at": 4,
+     "name": "hit"
+    }
+   ]
+  },
+  "shoot": {
+   "duration_ms": [
+    80,
+    80,
+    80,
+    90,
+    150,
+    60,
+    80,
+    100
+   ],
+   "loop": false,
+   "frames": [
+    "shoot_0",
+    "shoot_1",
+    "shoot_2",
+    "shoot_3",
+    "shoot_4",
+    "shoot_5",
+    "shoot_6",
+    "shoot_7"
+   ],
+   "events": [
+    {
+     "at": 5,
+     "name": "custom:release"
+    }
+   ]
+  },
+  "cast": {
+   "duration_ms": [
+    80,
+    90,
+    90,
+    90,
+    140,
+    70,
+    80,
+    100
+   ],
+   "loop": false,
+   "frames": [
+    "cast_0",
+    "cast_1",
+    "cast_2",
+    "cast_3",
+    "cast_4",
+    "cast_5",
+    "cast_6",
+    "cast_7"
+   ],
+   "events": [
+    {
+     "at": 5,
+     "name": "custom:release"
+    }
+   ]
+  }
+ }
+}
