@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Smilodon Voxel</title>
+<style>
+  :root {
+    --bg-1: #fbf7f1;
+    --bg-2: #e9e2d7;
+    --bg-3: #b8bcc6;
+    --ink: #2b2420;
+    --ink-soft: #6d635b;
+    --accent: #c8642a;
+    --panel: rgba(255, 255, 255, 0.62);
+    --panel-border: rgba(43, 36, 32, 0.10);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; }
+  body {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background: radial-gradient(ellipse 90% 75% at 50% 38%, var(--bg-1) 0%, var(--bg-2) 48%, var(--bg-3) 100%);
+  }
+  canvas { display: block; outline: none; touch-action: none; }
+
+  .hud {
+    position: fixed; top: 20px; left: 20px; right: 20px;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
+    pointer-events: none;
+  }
+  .title h1 {
+    margin: 0; font-size: 20px; font-weight: 650; letter-spacing: -0.01em;
+  }
+  .title p {
+    margin: 4px 0 0; font-size: 13px; color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .hint {
+    font-size: 12px; color: var(--ink-soft); text-align: right; line-height: 1.5;
+  }
+
+  .controls {
+    position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%);
+    display: flex; gap: 10px; padding: 8px;
+    background: var(--panel); border: 1px solid var(--panel-border);
+    border-radius: 999px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(40, 30, 20, 0.12);
+  }
+  button {
+    font: inherit; font-size: 14px; font-weight: 600;
+    border: 0; border-radius: 999px; padding: 11px 20px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: transform .15s ease, background .2s ease, box-shadow .2s ease;
+  }
+  button:active { transform: scale(0.96); }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #replay { background: var(--ink); color: #fff; }
+  #replay:hover { background: #000; }
+  #spin { background: transparent; color: var(--ink); }
+  #spin:hover { background: rgba(0,0,0,0.06); }
+  #spin[aria-pressed="true"] { background: rgba(200,100,42,0.14); color: var(--accent); }
+  button svg { width: 16px; height: 16px; }
+
+  @media (max-width: 560px) {
+    .hud { top: 16px; left: 16px; right: 16px; }
+    .hint { display: none; }
+    .controls { bottom: 18px; }
+    button { padding: 10px 16px; font-size: 13px; }
+  }
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="hud">
+  <div class="title">
+    <h1>Smilodon · Voxel Study</h1>
+    <p id="stats">Generando voxels…</p>
+  </div>
+  <div class="hint">Arrastrar · orbitar<br />Rueda / pellizco · zoom<br />Clic derecho · desplazar</div>
+</div>
+<div class="controls">
+  <button id="replay" type="button" aria-label="Repetir animación">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+    Repetir animación
+  </button>
+  <button id="spin" type="button" aria-pressed="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><ellipse cx="12" cy="12" rx="10" ry="4"/><path d="M12 3v18"/></svg>
+    Auto‑giro
+  </button>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+/* =========================================================================
+   1. MODELO VOXEL PROCEDURAL
+   Primitivas (elipsoides y cápsulas cónicas) evaluadas sobre una rejilla.
+   El orden define prioridad: la primera primitiva que contiene el voxel
+   decide su material. Eje X = largo (cabeza en +X), Y = alto, Z = ancho.
+   ========================================================================= */
+
+const prims = [];
+const E = (cx, cy, cz, rx, ry, rz, mat) => prims.push({ t: 0, cx, cy, cz, rx, ry, rz, mat });
+const C = (ax, ay, az, bx, by, bz, r1, r2, mat) => prims.push({ t: 1, ax, ay, az, bx, by, bz, r1, r2, mat });
+const ES = (cx, cy, cz, rx, ry, rz, mat) => { E(cx, cy, cz, rx, ry, rz, mat); E(cx, cy, -cz, rx, ry, rz, mat); };
+const CS = (ax, ay, az, bx, by, bz, r1, r2, mat) => { C(ax, ay, az, bx, by, bz, r1, r2, mat); C(ax, ay, -az, bx, by, -bz, r1, r2, mat); };
+
+// --- Cabeza: detalles primero (mayor prioridad)
+ES(26.6, 33.2, 3.9, 1.0, 1.1, 1.25, 'eye');          // ojos incandescentes
+E (31.6, 31.6, 0,   1.0, 1.0, 1.8,  'nose');         // trufa
+CS(30.2, 27.5, 2.1, 30.9, 21.5, 2.1, 1.05, 0.75, 'tooth'); // colmillos sable (raíz)
+CS(30.9, 21.5, 2.1, 30.2, 15.5, 2.1, 0.75, 0.3, 'tooth');  // colmillos sable (punta curva)
+ES(27.8, 25.6, 1.9, 0.5, 1.1, 0.5, 'tooth');         // caninos inferiores
+ES(26.0, 35.2, 3.6, 2.2, 0.9, 1.8, 'dark');          // ceño
+E (28.2, 30.0, 0,   4.0, 3.0, 4.0,  'cream');        // hocico superior
+E (25.0, 23.6, 0,   4.6, 1.8, 3.3,  'cream');        // mandíbula abierta
+E (26.3, 26.3, 0,   3.6, 3.0, 3.1,  'mouth');        // interior de la boca
+E (24.5, 29.8, 0,   4.6, 3.4, 6.4,  'cream');        // mejillas
+ES(19.5, 37.8, 4.2, 1.6, 2.4, 1.7,  'ear');          // orejas
+E (22.0, 32.5, 0,   6.6, 6.0, 6.0,  'fur');          // cráneo
+
+// --- Cuerpo
+C (12, 26, 0, 19, 30.5, 0, 6.4, 5.6, 'fur');         // cuello
+E (8,  24.5, 0, 8.5, 8.0, 6.8, 'fur');               // cruz / hombros
+E (-2, 22.0, 0, 15,  7.5, 6.3, 'fur');               // torso
+E (-12, 22.5, 0, 7.5, 7.8, 6.4, 'fur');              // cadera
+
+// --- Patas delanteras
+ES(9.5, 16.5, 4.4, 4.4, 7.0, 3.4, 'fur');
+CS(10.5, 14, 4.5, 11.5, 3, 4.5, 3.1, 2.6, 'fur');
+ES(12.8, 1.6, 4.5, 3.8, 1.9, 2.8, 'paw');
+
+// --- Patas traseras
+ES(-13, 17.5, 4.6, 6.2, 8.0, 3.6, 'fur');
+CS(-16, 11, 4.6, -13.8, 3, 4.6, 2.8, 2.4, 'fur');
+ES(-11.6, 1.6, 4.6, 3.6, 1.9, 2.7, 'paw');
+
+// --- Cola corta
+C (-17.5, 25, 0, -22.5, 19, 0, 2.4, 1.9, 'tail');
+
+function inside(p, x, y, z) {
+  if (p.t === 0) {
+    const dx = (x - p.cx) / p.rx, dy = (y - p.cy) / p.ry, dz = (z - p.cz) / p.rz;
+    return dx * dx + dy * dy + dz * dz <= 1;
+  }
+  const abx = p.bx - p.ax, aby = p.by - p.ay, abz = p.bz - p.az;
+  const apx = x - p.ax, apy = y - p.ay, apz = z - p.az;
+  let t = (apx * abx + apy * aby + apz * abz) / (abx * abx + aby * aby + abz * abz);
+  t = Math.max(0, Math.min(1, t));
+  const qx = apx - abx * t, qy = apy - aby * t, qz = apz - abz * t;
+  const r = p.r1 + (p.r2 - p.r1) * t;
+  return qx * qx + qy * qy + qz * qz <= r * r;
+}
+
+// Hash determinista para variación por voxel
+function hash(x, y, z) {
+  let h = Math.imul(x | 0, 374761393) ^ Math.imul(y | 0, 668265263) ^ Math.imul(z | 0, 1442695041);
+  h = Math.imul(h ^ (h >>> 13), 1274126177);
+  return ((h ^ (h >>> 16)) >>> 0) / 4294967295;
+}
+
+const MATS = ['', 'eye', 'nose', 'tooth', 'dark', 'cream', 'mouth', 'ear', 'fur', 'paw', 'tail'];
+const MAT_ID = Object.fromEntries(MATS.map((m, i) => [m, i]));
+
+// RES = voxels por unidad de modelado. 2 → voxels de 0.5 u (más detalle).
+const RES = 2, VS = 1 / RES;
+const X0 = -26 * RES, X1 = 35 * RES, Y0 = 0, Y1 = 44 * RES, Z0 = -12 * RES, Z1 = 12 * RES;
+const NX = X1 - X0 + 1, NY = Y1 - Y0 + 1, NZ = Z1 - Z0 + 1;
+const grid = new Uint8Array(NX * NY * NZ);
+const idx = (x, y, z) => (x - X0) + NX * ((y - Y0) + NY * (z - Z0));
+
+for (let z = Z0; z <= Z1; z++)
+  for (let y = Y0; y <= Y1; y++)
+    for (let x = X0; x <= X1; x++)
+      for (const p of prims)
+        if (inside(p, x * VS, y * VS, z * VS)) { grid[idx(x, y, z)] = MAT_ID[p.mat]; break; }
+
+const filled = (x, y, z) =>
+  x >= X0 && x <= X1 && y >= Y0 && y <= Y1 && z >= Z0 && z <= Z1 && grid[idx(x, y, z)] !== 0;
+
+// --- Paleta y sombreado por voxel
+const col = new THREE.Color(), tmp = new THREE.Color();
+const PAL = {
+  fur: 0xc98546, furDark: 0xa66831, stripe: 0x6b3d1a, belly: 0xe2c39a, chest: 0xeedcc0,
+  cream: 0xeedcc0, whisker: 0x5b3a26, mouth: 0x5e1414, mouthDeep: 0x2e0909,
+  tooth: 0xf4eee0, toothRoot: 0xe3d3b3, nose: 0x2e1d16, dark: 0x4a2c17,
+  ear: 0x8c5a2e, earIn: 0xd9b394, paw: 0xb4773f, claw: 0xece4d2,
+  eye: 0xff5a1a, eyeCore: 0xffc35a,
+};
+
+function shadeFur(x, y, z) {
+  const az = Math.abs(z);
+  const isChest = x > 11 && x < 21 && y < 27 && y > 12 && az < 4;
+  const isBelly = y < 17.5 && x > -16 && x < 8 && y > 13;
+  if (isChest) return col.setHex(PAL.chest);
+  if (isBelly) return col.setHex(PAL.belly);
+
+  col.setHex(PAL.fur);
+  if (y > 26) col.lerp(tmp.setHex(PAL.furDark), Math.min(1, (y - 26) / 8));
+
+  // Rayas de tigre: ondas deformadas por la altura y la profundidad
+  let stripe = false;
+  if (x > 17 && y > 34) {
+    stripe = Math.sin(az * 1.4 + x * 0.35) > 0.78;                // frente
+  } else if (y > 14) {
+    const w = x * 0.62 + 2.1 * Math.sin(y * 0.28 + z * 0.12) + 0.8 * Math.sin(z * 0.45 + x * 0.1);
+    stripe = Math.sin(w) > 0.8 && y > 15 + (az < 3 ? 6 : 0);        // flancos y lomo
+  } else {
+    stripe = Math.sin(y * 0.95 + x * 0.25 + az * 0.3) > 0.88 && az > 3; // anillos de patas
+  }
+  if (stripe) col.setHex(PAL.stripe);
+  return col;
+}
+
+function colorFor(mat, x, y, z, h) {
+  const az = Math.abs(z);
+  switch (mat) {
+    case 'fur': shadeFur(x, y, z); break;
+    case 'tail': x < -21.3 ? col.setHex(PAL.stripe) : shadeFur(x, y, z); break;
+    case 'cream':
+      col.setHex(PAL.cream);
+      if (x >= 29 && y >= 29 && y <= 31 && az >= 2 && h < 0.35) col.setHex(PAL.whisker);
+      break;
+    case 'mouth': col.setHex(x < 25 ? PAL.mouthDeep : PAL.mouth); break;
+    case 'tooth': col.setHex(y > 24 ? PAL.toothRoot : PAL.tooth); break;
+    case 'nose': col.setHex(PAL.nose); break;
+    case 'dark': col.setHex(PAL.dark); break;
+    case 'ear': col.setHex(x >= 20 && az >= 3 && az <= 5 && y < 39.5 ? PAL.earIn : PAL.ear); break;
+    case 'paw':
+      col.setHex(PAL.paw);
+      if (y <= 1 && ((x >= 16) || (x >= -8.5 && x < 0))) col.setHex(PAL.claw);
+      break;
+    case 'eye': col.setHex(y >= 33 && az >= 4 ? PAL.eyeCore : PAL.eye); break;
+  }
+  if (mat !== 'eye') {
+    const ao = 0.8 + 0.2 * Math.min(1, y / 18);          // oclusión vertical suave
+    const jitter = 0.9 + 0.16 * h;           // variación artesanal
+    col.multiplyScalar(ao * jitter);
+  }
+  return col;
+}
+
+// --- Extraer solo voxels de superficie (los interiores nunca se ven)
+const body = [], glow = [];
+let minY = Infinity, maxY = -Infinity;
+for (let z = Z0; z <= Z1; z++)
+  for (let y = Y0; y <= Y1; y++)
+    for (let x = X0; x <= X1; x++) {
+      const m = grid[idx(x, y, z)];
+      if (!m) continue;
+      if (filled(x + 1, y, z) && filled(x - 1, y, z) && filled(x, y + 1, z) &&
+          filled(x, y - 1, z) && filled(x, y, z + 1) && filled(x, y, z - 1)) continue;
+      const mat = MATS[m];
+      const wx = x * VS, wy = y * VS, wz = z * VS;
+      const c = colorFor(mat, wx, wy, wz, hash(x, y, z)).clone();
+      (mat === 'eye' ? glow : body).push({ ix: x, iy: y, iz: z, x: wx, y: wy, z: wz, c });
+      minY = Math.min(minY, wy); maxY = Math.max(maxY, wy);
+    }
+
+/* =========================================================================
+   2. ESCENA, RENDER E ILUMINACIÓN DE ESTUDIO
+   ========================================================================= */
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x000000, 0);                       // deja ver el degradado CSS
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(34, window.innerWidth / window.innerHeight, 1, 600);
+camera.position.set(78, 40, 96);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.target.set(0, 19, 0);
+controls.minDistance = 45;
+controls.maxDistance = 220;
+controls.maxPolarAngle = Math.PI * 0.495;
+controls.autoRotateSpeed = 0.9;
+controls.update();
+
+// Luz de cielo/suelo suave
+scene.add(new THREE.HemisphereLight(0xfff4e6, 0x7d7368, 1.1));
+
+// Key light con sombras suaves
+const key = new THREE.DirectionalLight(0xfff0da, 2.7);
+key.position.set(48, 84, 56);
+key.castShadow = true;
+key.shadow.mapSize.set(4096, 4096);
+const sc = key.shadow.camera;
+sc.left = -42; sc.right = 42; sc.top = 42; sc.bottom = -42; sc.near = 10; sc.far = 260;
+key.shadow.bias = -0.0006;
+key.shadow.normalBias = 0.12;
+scene.add(key);
+
+// Fill frío y rim cálido para recortar la silueta
+const fill = new THREE.DirectionalLight(0xcfe0ff, 0.7);
+fill.position.set(-60, 30, 40);
+scene.add(fill);
+const rim = new THREE.DirectionalLight(0xffcf9a, 1.6);
+rim.position.set(-40, 50, -80);
+scene.add(rim);
+
+// Suelo "shadow catcher" invisible: solo recibe la sombra
+const ground = new THREE.Mesh(
+  new THREE.PlaneGeometry(600, 600),
+  new THREE.ShadowMaterial({ color: 0x3a2a1c, opacity: 0.26 })
+);
+ground.rotation.x = -Math.PI / 2;
+ground.receiveShadow = true;
+scene.add(ground);
+
+// Grupo del modelo (centrado en X, apoyado sobre el suelo)
+const model = new THREE.Group();
+model.position.set(-4.5, VS / 2, 0);
+scene.add(model);
+
+/* =========================================================================
+   3. INSTANCED MESH
+   ========================================================================= */
+
+const voxelGeo = new RoundedBoxGeometry(VS * 0.97, VS * 0.97, VS * 0.97, 1, VS * 0.1);
+
+const bodyMat = new THREE.MeshStandardMaterial({ roughness: 0.82, metalness: 0.0 });
+const glowMat = new THREE.MeshStandardMaterial({
+  roughness: 0.35, metalness: 0.0, emissive: 0xff2a00, emissiveIntensity: 1.6,
+});
+
+function buildInstanced(list, material, cast) {
+  const mesh = new THREE.InstancedMesh(voxelGeo, material, list.length);
+  mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+  mesh.castShadow = cast;
+  mesh.receiveShadow = true;
+  mesh.frustumCulled = false;
+  list.forEach((v, i) => mesh.setColorAt(i, v.c));
+  mesh.instanceColor.needsUpdate = true;
+  model.add(mesh);
+  return mesh;
+}
+
+const meshes = [
+  { mesh: buildInstanced(body, bodyMat, true), list: body },
+  { mesh: buildInstanced(glow, glowMat, false), list: glow },
+];
+
+// Destello sutil alrededor de los ojos
+const eyeLight = new THREE.PointLight(0xff4a14, 0, 18, 2);
+eyeLight.position.set(29, 33, 0);
+model.add(eyeLight);
+
+/* =========================================================================
+   4. ANIMACIÓN: FLOTACIÓN + ENSAMBLAJE CON RESORTE Y STAGGER POR ALTURA
+   ========================================================================= */
+
+const CENTER = new THREE.Vector3(4, 20, 0);
+const STAGGER = 2.1;        // segundos entre la base y la cima del modelo
+const INTRO = 0.45;         // tiempo flotando antes de que empiece el ensamblaje
+const BOB_F = 1.7, BOB_A = 0.7;
+const CLOUD_S = 0.75;      // escala de los voxels mientras flotan
+
+// Spring amortiguado (sub-crítico): solución analítica de x'' = -w²(x-1) - 2ζw x'
+function spring(t, w, z) {
+  if (t <= 0) return 0;
+  const wd = w * Math.sqrt(1 - z * z);
+  return 1 - Math.exp(-z * w * t) * (Math.cos(wd * t) + (z * w / wd) * Math.sin(wd * t));
+}
+
+let maxDelay = 0;
+for (const m of meshes) {
+  const n = m.list.length;
+  m.tgt = new Float32Array(n * 3);
+  m.st = new Float32Array(n * 3);
+  m.del = new Float32Array(n);
+  m.rot = new Float32Array(n * 2);
+  m.ph = new Float32Array(n);
+  const d = new THREE.Vector3();
+  m.list.forEach((v, i) => {
+    const r1 = hash(v.ix + 11, v.iy, v.iz), r2 = hash(v.ix, v.iy + 23, v.iz), r3 = hash(v.ix, v.iy, v.iz + 37);
+    const r4 = hash(v.ix + 5, v.iy + 7, v.iz + 3);
+    m.tgt.set([v.x, v.y, v.z], i * 3);
+
+    // Posición de "nube flotante": empujada hacia fuera del centro y hacia arriba
+    d.set(v.x, v.y, v.z).sub(CENTER);
+    if (d.lengthSq() < 1e-3) d.set(0, 1, 0);
+    d.normalize().multiplyScalar(8 + r1 * 15);
+    const sx = v.x + d.x + (r2 - 0.5) * 6;
+    const sy = Math.max(1.5 + r3 * 6, v.y + d.y + 7 + r4 * 11);
+    const sz = v.z + d.z * 1.4 + (r3 - 0.5) * 7;
+    m.st.set([sx, sy, sz], i * 3);
+
+    // Retraso escalonado por altura (Y) + un poco de ruido para que no se vea en capas rígidas
+    const delay = INTRO + ((v.y - minY) / (maxY - minY)) * STAGGER + r2 * 0.22;
+    m.del[i] = delay;
+    maxDelay = Math.max(maxDelay, delay);
+
+    m.rot[i * 2] = (r1 - 0.5) * Math.PI * 2.2;
+    m.rot[i * 2 + 1] = (r4 - 0.5) * Math.PI * 2.2;
+    m.ph[i] = r3 * Math.PI * 2;
+  });
+}
+const SETTLE = 1.8;
+const TOTAL = maxDelay + SETTLE;
+
+function writeMatrix(arr, o, px, py, pz, s, a, b) {
+  // R = Ry(b)·Rx(a), escalado uniforme, column-major
+  const ca = Math.cos(a), sa = Math.sin(a), cb = Math.cos(b), sb = Math.sin(b);
+  arr[o]      = cb * s;      arr[o + 1]  = 0;          arr[o + 2]  = -sb * s;     arr[o + 3]  = 0;
+  arr[o + 4]  = sb * sa * s; arr[o + 5]  = ca * s;     arr[o + 6]  = cb * sa * s; arr[o + 7]  = 0;
+  arr[o + 8]  = sb * ca * s; arr[o + 9]  = -sa * s;    arr[o + 10] = cb * ca * s; arr[o + 11] = 0;
+  arr[o + 12] = px;          arr[o + 13] = py;         arr[o + 14] = pz;          arr[o + 15] = 1;
+}
+
+function updateVoxels(t) {
+  const appear = Math.min(1, t / 0.5);
+  const appearE = appear * appear * (3 - 2 * appear);
+  for (const m of meshes) {
+    const arr = m.mesh.instanceMatrix.array;
+    const { tgt, st, del, rot, ph } = m;
+    for (let i = 0, n = m.list.length; i < n; i++) {
+      const i3 = i * 3, tau = t - del[i];
+      const spinA = rot[i * 2], spinB = rot[i * 2 + 1];
+      let px, py, pz, s, a, b;
+      if (tau <= 0) {
+        // Flotación: la nube de voxels respira antes de ensamblarse
+        px = st[i3];
+        py = st[i3 + 1] + Math.sin(t * BOB_F + ph[i]) * BOB_A;
+        pz = st[i3 + 2];
+        s = CLOUD_S * appearE;
+        a = spinA + t * 0.7; b = spinB + t * 0.5;
+      } else {
+        const p = spring(tau, 9.5, 0.46);          // posición: rebote suave
+        const ps = spring(tau, 15, 0.38);          // escala: "pop" más rápido
+        const q = 1 - p;
+        const bob0 = Math.sin(del[i] * BOB_F + ph[i]) * BOB_A;
+        px = st[i3]     + (tgt[i3]     - st[i3])     * p;
+        py = st[i3 + 1] + (tgt[i3 + 1] - st[i3 + 1]) * p + bob0 * q;
+        pz = st[i3 + 2] + (tgt[i3 + 2] - st[i3 + 2]) * p;
+        s = CLOUD_S + (1 - CLOUD_S) * ps;
+        a = (spinA + del[i] * 0.7) * q;
+        b = (spinB + del[i] * 0.5) * q;
+      }
+      writeMatrix(arr, i * 16, px, py, pz, s, a, b);
+    }
+    m.mesh.instanceMatrix.needsUpdate = true;
+  }
+}
+
+function snapFinal() {
+  for (const m of meshes) {
+    const arr = m.mesh.instanceMatrix.array;
+    for (let i = 0, n = m.list.length; i < n; i++)
+      writeMatrix(arr, i * 16, m.tgt[i * 3], m.tgt[i * 3 + 1], m.tgt[i * 3 + 2], 1, 0, 0);
+    m.mesh.instanceMatrix.needsUpdate = true;
+  }
+}
+
+/* =========================================================================
+   5. LOOP, UI Y RESPONSIVE
+   ========================================================================= */
+
+const clock = new THREE.Clock();
+let animStart = 0, animating = true;
+
+const statsEl = document.getElementById('stats');
+statsEl.textContent = `${(body.length + glow.length).toLocaleString('es')} voxels · 2 InstancedMesh · ${TOTAL.toFixed(1)} s de ensamblaje`;
+
+function replay() {
+  animStart = clock.getElapsedTime();
+  animating = true;
+}
+document.getElementById('replay').addEventListener('click', replay);
+
+const spinBtn = document.getElementById('spin');
+spinBtn.addEventListener('click', () => {
+  controls.autoRotate = !controls.autoRotate;
+  spinBtn.setAttribute('aria-pressed', String(controls.autoRotate));
+});
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// Encuadre más abierto en pantallas verticales
+function fitCamera() {
+  const portrait = window.innerWidth / window.innerHeight < 0.9;
+  camera.fov = portrait ? 52 : 34;
+  camera.updateProjectionMatrix();
+}
+fitCamera();
+window.addEventListener('resize', fitCamera);
+
+updateVoxels(0);
+
+renderer.setAnimationLoop(() => {
+  const now = clock.getElapsedTime();
+  const t = now - animStart;
+
+  if (animating) {
+    if (t >= TOTAL) { snapFinal(); animating = false; }
+    else updateVoxels(t);
+  }
+
+  // Ojos: se encienden al completarse la cabeza y laten suavemente
+  const eyesOn = Math.min(1, Math.max(0, (t - maxDelay) / 0.6));
+  const pulse = 0.85 + 0.15 * Math.sin(now * 2.4);
+  glowMat.emissiveIntensity = 0.3 + 1.6 * eyesOn * pulse;
+  eyeLight.intensity = 140 * eyesOn * pulse;
+
+  // Respiración sutil cuando está ensamblado
+  const breathe = animating ? 0 : Math.sin(now * 1.6) * 0.006;
+  model.scale.set(1, 1 + breathe, 1 + breathe * 1.4);
+
+  controls.update();
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>
